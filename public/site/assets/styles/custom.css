@@ -1,0 +1,41 @@
+#menu{
+	margin: 0;
+	top: 0;
+	left: 0;
+	padding-top: 85px;
+}
+
+.profile__section:first-child{
+	margin-bottom: 0;
+}
+
+.profile__section{
+	margin-bottom: 20px;
+}
+
+.profile__section h2{
+	cursor: pointer;
+}
+
+.profile__section ul a{
+	text-decoration: none;
+	color: #666;
+}
+
+.dashboard{
+	margin-bottom: 20px;
+}
+
+/* Ajustar busca de profile */
+@media(max-width: 425px){
+	.search-job .search-input{
+		max-width: 100%;
+	}
+}
+
+/* Ajustar card */
+@media(max-width: 425px){
+	.dashboard__card{
+		max-width: 100%;
+	}
+}

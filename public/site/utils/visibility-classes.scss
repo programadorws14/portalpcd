@@ -1,0 +1,70 @@
+// --------------------------------------------------
+// Visibility Helper Classes
+// --------------------------------------------------
+
+$xs: 320px !default;
+$sm: 768px !default;
+$md: 992px !default;
+$lg: 1200px !default;
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.#{"hide-"} {
+  // Hide >= XS breakpoint
+  &xs {
+    @media screen and (min-width: $xs) {
+      display: none !important;
+    }
+  }
+  // Hide >= SM breakpoint
+  &sm {
+    @media screen and (min-width: $sm) {
+      display: none !important;
+    }
+  }
+  // Hide >= MD breakpoint
+  &md {
+    @media screen and (min-width: $md) {
+      display: none !important;
+    }
+  }
+  // Hide >= LG breakpoint
+  &lg {
+    @media screen and (min-width: $lg) {
+      display: none !important;
+    }
+  }
+}
+
+.#{"show-"} {
+  // Show >= XS breakpoint
+  &xs {
+    @media screen and (min-width: $xs) {
+      display: block !important;
+    }
+  }
+  // Show >= SM breakpoint
+  &sm {
+    @media screen and (min-width: $sm) {
+      display: block !important;
+    }
+  }
+  // Show >= MD breakpoint
+  &md {
+    @media screen and (min-width: $md) {
+      display: block !important;
+    }
+  }
+  // Show >= LG breakpoint
+  &lg {
+    @media screen and (min-width: $lg) {
+      display: block !important;
+    }
+  }
+}

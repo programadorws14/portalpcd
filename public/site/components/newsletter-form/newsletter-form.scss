@@ -1,0 +1,116 @@
+@import "./../../assets/styles/variables";
+@import "./../../utils/_rem";
+
+.newsletter-form {
+  background-color: $primary-color-variant;
+  padding: rem(24px) rem(30px);
+  color: #fff;
+  text-align: center;
+
+  &__wrapper {
+    position: relative;
+    border-radius: 25px;
+    background-color: rgb(255, 255, 255);
+    display: inline-block;
+    margin-bottom: rem(30px);
+    background-color: #fff;
+    width: 100%;
+
+    &::before {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+
+      display: block;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 20px;
+      height: 20px;
+      color: $primary-color;
+    }
+
+    &--user::before {
+      content: "\f007";
+    }
+
+    &--email:before {
+      content: "\f0e0";
+    }
+  }
+
+  input {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    padding: 10px 35px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    color: #999;
+
+    font-size: 14px;
+    display: block;
+    width: 100%;
+    font-family: $primary-font-family;
+  }
+  &__icon {
+    font-size: rem(40px);
+  }
+
+  &__title {
+    font-size: rem(16px);
+    line-height: 1.5;
+    margin: rem(16px 0 28px 0);
+  }
+
+  &__submit {
+    font-family: $primary-font-family;
+    border-radius: 25px;
+    background-color: $primary-color;
+    border: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: rem(14px);
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+    padding: 12px 0;
+    font-weight: 500;
+  }
+}
+
+@media (min-width: 1025px) {
+  .newsletter-form {
+    text-align: left;
+    margin-top: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__icon,
+    &__title {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: left;
+    }
+
+    &__title {
+      margin: 0 6px;
+    }
+
+    form {
+      display: inline;
+    }
+
+    &__wrapper {
+      width: 260px;
+      margin-left: 8px;
+      margin-bottom: 0;
+    }
+
+    &__submit {
+      display: inline-block;
+      margin-left: 8px;
+      width: 160px;
+    }
+  }
+}

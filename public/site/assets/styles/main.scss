@@ -1,0 +1,187 @@
+@import "./../../assets/styles/variables";
+@import "./../../utils/_rem";
+@import "./../../utils/visibility-classes.scss";
+@import "./../../utils/flexbox-grid-mixins";
+@import "./../../components/blog-post/blog-post.scss";
+@import "./../../components/jobs-card/jobs-card.scss";
+@import "./../../components/section-heading/section-heading.scss";
+@import "./../../components/main-navigation/main-navigation.scss";
+@import "./../../components/main-navigation/main-nav.scss";
+@import "./../../components/jobs-search-form/search-form.scss";
+@import "./../../components/newsletter-form/newsletter-form.scss";
+@import "./../../components/search-filter/search-filter.scss";
+@import "./../../components/profile/profile.scss";
+@import "./../../components/login/login.scss";
+@import "./../../components/abas-dados/abas-dados.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+input {
+  &:focus {
+    outline: none;
+  }
+}
+
+// html {
+//   font-size: 62.5%;
+// }
+
+body, textarea, input {
+  font-family: $primary-font-family;
+}
+
+.logo {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#container {
+}
+
+.pcd-container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/**
+  footer
+*/
+
+.footer {
+  background-color: $primary-color;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+  justify-content: space-around;
+  padding: 20px 0;
+  &-submenu {
+    img {
+      display: none;
+    }
+    &__title {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    ul {
+      display: none;
+      li {
+        list-style: none;
+        a {
+          text-decoration: none;
+          color: #fff;
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  .social-menu {
+    flex: 1 1 100%;
+    margin-top: 10px;
+    ul {
+      display: flex;
+      justify-content: center;
+
+      li {
+        margin-left: 30px;
+        list-style: none;
+
+        a {
+          color: #24d9ff;
+        }
+      }
+    }
+  }
+}
+
+.submit-cv-cta {
+  background: url("./../../assets/images/bg-submit-cv.png") no-repeat;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  padding: 40px 10px;
+
+  h1 {
+    font-size: rem(14px);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-weight: 500;
+    font-size: 14px;
+  }
+  a {
+    margin: 20px auto;
+    border-radius: 4px;
+    background-color: rgb(255, 108, 0);
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    width: 140px;
+    padding: 8px 0;
+    font-size: rem(14px);
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
+
+@media (min-width: 1025px) {
+  .logo {
+    text-align: left;
+  }
+  .submit-cv-cta {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    &__description {
+      margin-left: 30px;
+    }
+
+    a {
+      float: right;
+      margin: -42px 50px 0 0;
+    }
+  }
+
+  .footer {
+    flex-direction: row;
+    text-align: left;
+    padding: 100px 0 28px 0;
+    &-submenu {
+      img {
+        display: block;
+      }
+      ul {
+        display: block;
+      }
+    }
+
+    .social-menu {
+      margin-top: 55px;
+    }
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+  .pcd-container {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

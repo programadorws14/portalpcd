@@ -1,0 +1,141 @@
+@extends('layouts.app')
+@section('content')
+<section class="login">
+    <div class="login-container">
+        <header class="section-heading  pcd-container">
+            <h1><strong>Login</strong></h1>
+            <hr />
+        </header>
+        <div class="forms-area">
+            <form action="" class="default-form" id="candidato">
+                <h2 class="form-title">Sou candidato - Quero me logar</h2>
+                <input type="email" placeholder="Digite seu e-mail">
+                <input type="password" placeholder="Digite sua senha">
+                <input type="submit" value="Entrar">
+            </form>
+
+            <form action="{{ route('empresa.login') }}" class="default-form" id="empresa" method="POST">
+                @csrf
+                <h2 class="form-title">Sou empresa - Quero me logar</h2>
+                <input type="email" name="email" placeholder="Digite seu e-mail" required>
+                <input type="password" name="password" placeholder="Digite sua senha" required>
+                <input type="submit" value="Entrar">
+            </form>
+        </div>
+    </div>
+</section>
+
+<header class="section-heading  pcd-container">
+    <h2><strong>SEJA UM CANDIDATO - CADASTRE-SE</strong></h2>
+    <hr />
+</header>
+
+<section class="submit-cv-cta  pcd-container">
+    <div class="submit-cv-cta__description">
+        <h1>MAIS DE 25.000.000 VAGAS CADASTRADAS</h1>
+        <h2>
+            Encontre a sua
+        </h2>
+    </div>
+    <a href="#">Cadastre Aqui</a>
+</section>
+
+<section class="cadastro-vagas-curriculo">
+    <div class="cadastro-vagas-curriculo-container">
+        <div class="wrap-cards">
+            <div class="card">
+                <h2 class="card-title">Cadastro candidato</h2>
+                <h2 class="card-sub-title">Para candidatar-se a essa vaga anuncie seu CV</h2>
+
+                <ul>
+                    <li>Lorem, ipsum.</li>
+                    <li>Lorem, ipsum.</li>
+                    <li>Lorem, ipsum.</li>
+                    <li>Lorem, ipsum.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h2 class="card-title">Cadastro candidato</h2>
+                <form action="">
+                    <input type="text" placeholder="Digite seu nome*">
+                    <input type="text" placeholder="Digite seu sobrenome*">
+                    <input type="email" placeholder="Digite seu email*">
+                    <input type="password" placeholder="Digite sua senha*">
+                    <input type="text" placeholder="Digite seu CEP*">
+                    <input type="text" placeholder="Digite seu cargo desejado*">
+                    <div class="area-botao">
+                        <input type="submit" value="Continuar">
+                    </div>
+                    <p>Ao clicar em continuar, você aceita as <a href="#">Condições Legais</a> e a <a href="#">Política de Privacidade</a> da Busca PcD.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<header class="section-heading  pcd-container">
+    <h2><strong>Cadastre sua empresa</strong></h2>
+    <hr />
+</header>
+
+<section class="submit-cv-cta  pcd-container">
+    <div class="submit-cv-cta__description">
+        <h1>MAIS DE 25.000.000 DE CHANCES</h1>
+        <h1>DE CONTRATAR O CANDIDATO CERTO</h1>
+    </div>
+    <a href="#">Cadastre Aqui</a>
+</section>
+
+<section class="cadastro-vagas-curriculo">
+    <div class="cadastro-vagas-curriculo-container">
+        <div class="wrap-cards">
+            <div class="card">
+                <h2 class="card-title">Anuncie grátis suas vagas</h2>
+
+                @if(Session('success'))
+                <div class="alert alert-success" style="color:green; font-size:14px;">
+                    <b><i class="fas fa-check"></i> {{ Session('success') }}</b>
+                </div>
+                @elseif(Session('error'))
+                <div class="alert alert-danger" style="color:red; font-size:14px;">
+                    <b><i class="fas fa-minus"></i> {{ Session('error') }}</b>
+                </div>
+                @endif
+
+                <form action="{{ route('empresa.create.store') }}" method="POST">
+                    @csrf
+                    <input type="text" class="full" name="nome" placeholder="Nome Empresa" required>
+                    <input type="email" name="email" placeholder="E-mail corporativo" required>
+                    <input type="password" name="password" placeholder="Senha de acesso" required>
+                    <input type="text" placeholder="Cargo Vaga*" required>
+                    <input type="tel" name="telefone" class="telefone" placeholder="Telefone comercial" required>
+                    <div class="area-botao">
+                        <input type="submit" value="Anunciar vaga">
+                    </div>
+                    <p>Ao clicar em continuar, você aceita as <a href="#">Condições Legais</a> e a <a href="#">Política de Privacidade</a> da Busca PcD.</p>
+                </form>
+            </div>
+            <div class="card">
+                <h2 class="card-title">ENCONTRE CANDIDATOS EM TODAS AS REGIÕES</h2>
+                <div class="sides">
+                    <div class="l">
+                        <img src="{{ asset('site/assets/images/mapa-brasil.png') }}" alt="Mapa">
+                    </div>
+                    <div class="r">
+                        <h3>São Paulo: 8.308.581 candidatos</h3>
+                        <ul>
+                            <li>Lorem, ipsum.</li>
+                            <li>Lorem, ipsum.</li>
+                            <li>Lorem, ipsum.</li>
+                            <li>Lorem, ipsum.</li>
+                        </ul>
+                        <button>BUSCAR CANDIDATOS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@endsection

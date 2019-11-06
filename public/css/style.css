@@ -1,0 +1,43 @@
+*{ 
+    margin:0;
+    padding: 0;
+}
+
+a{
+    transition: 0.9s all;
+}
+
+.menu ul li a{
+    text-decoration: none;
+    color:#FFF;
+    margin:0 5px;
+}
+
+.menu ul li a:hover{
+    background: #069;
+    color:#FFF !important;
+}
+
+.menu .dropdown-item{
+    text-decoration: none;
+    margin:0 auto;
+    color:#333 !important;
+}
+
+.navbar-brand{
+    color:#FFF;
+    font-weight: bold;
+}
+
+table {
+    font-size: 12px;
+}
+
+.menu-categoria  li a{
+    text-decoration: none;
+    color:#333;
+}
+
+.menu-categoria li a:hover{
+    background: #EEE;
+}

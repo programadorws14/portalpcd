@@ -1,0 +1,9 @@
+.section-heading {
+  text-align: center; }
+  .section-heading h1 {
+    font-size: 1rem;
+    color: #00b7dd;
+    text-transform: uppercase; }
+  .section-heading h2 {
+    font-size: 0.875rem;
+    color: #00b7dd; }

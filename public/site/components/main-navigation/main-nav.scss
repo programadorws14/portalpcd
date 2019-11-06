@@ -1,0 +1,122 @@
+@import "./../../assets/styles/variables";
+@import "./../../utils/_rem";
+
+.main-menu {
+  background-color: $primary-color;
+  padding-left: rem(300px);
+  ul {
+    display: flex;
+    justify-content: center;
+  }
+
+  li {
+    list-style: none;
+    position: relative;
+
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+    &:after {
+      position: absolute;
+      right: -2px;
+      top: 18px;
+      display: block;
+      content: "";
+      width: 1px;
+      height: 12px;
+      background-color: #fff;
+    }
+    &.submit-cv {
+      align-self: flex-end;
+      margin-left: auto;
+      margin-right: 20px;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: block;
+      padding: 16px 20px;
+      font-size: rem(14px);
+
+      &.highlight {
+        background-color: $primary-color-variant;
+
+        &:before {
+          content: "";
+          position: absolute;
+
+          top: -13px;
+          display: block;
+          border-bottom: 13px solid #00b7dd;
+          border-left: 28px solid transparent;
+          border-right: 25px solid transparent;
+          height: 0;
+          width: 128px;
+          left: -18px;
+        }
+      }
+    }
+  }
+}
+
+.site-header {
+  align-items: center;
+
+  .logo {
+    flex: 1.5;
+  }
+
+  .secondary-nav {
+    flex: 1;
+    ul {
+      display: flex;
+      justify-content: space-between;
+
+      li {
+        position: relative;
+        list-style: none;
+
+        &:last-child {
+          &:after {
+            display: none;
+          }
+        }
+        &:after {
+          right: -20px;
+          position: absolute;
+          top: 3px;
+          display: block;
+          content: "";
+          width: 1px;
+          height: 12px;
+          background-color: #999;
+        }
+        a {
+          font-size: rem(16px);
+          text-transform: uppercase;
+          text-decoration: none;
+          color: $secondary-color;
+          &.login {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  .site-header {
+    display: flex;
+  }
+}
+
+@media (max-width: 1024px) {
+  .secondary-nav {
+    display: none;
+  }
+}

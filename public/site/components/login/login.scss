@@ -1,0 +1,256 @@
+section.login {
+	.login-container {
+		width: 1280px;
+		max-width: 95%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.forms-area {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		form.default-form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+			padding: 25px 0;
+			margin-bottom: 25px;
+
+			-webkit-box-shadow: 0px 0px 12px 1px rgba(240, 240, 240, 1);
+			-moz-box-shadow: 0px 0px 12px 1px rgba(240, 240, 240, 1);
+			box-shadow: 0px 0px 12px 1px rgba(240, 240, 240, 1);
+			.form-title {
+				color: #0086a5;
+				font-size: 0.8rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				margin-bottom: 25px;
+				text-align: center;
+			}
+
+			input:not([type="submit"]) {
+				width: calc(250px);
+				padding: 15px 20px;
+				border-radius: 40px;
+				border: 1px solid #eeeeee;
+				margin-bottom: 15px;
+
+				&::placeholder {
+					color: #b2b2b2;
+				}
+			}
+
+			input[type="submit"],
+			button {
+				width: 250px;
+				padding: 10px 0px;
+				border-radius: 40px;
+				text-align: center;
+				text-transform: uppercase;
+				font-weight: bold;
+				color: #fff;
+				background-color: #fe7711;
+				border: 0;
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	section.login {
+		.forms-area {
+			flex-direction: row;
+			flex-wrap: wrap;
+
+			form.default-form {
+				width: 48%;
+			}
+		}
+	}
+}
+
+section.cadastro-vagas-curriculo {
+	margin-top: 20px;
+	.cadastro-vagas-curriculo-container {
+		width: 1280px;
+		max-width: 95%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.wrap-cards {
+		display: flex;
+		flex-direction: column;
+		.card {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+
+			padding: 25px;
+			margin-bottom: 10px;
+			-webkit-box-shadow: 0px 0px 12px 1px rgba(240, 240, 240, 1);
+			-moz-box-shadow: 0px 0px 12px 1px rgba(240, 240, 240, 1);
+			box-shadow: 0px 0px 12px 1px rgba(240, 240, 240, 1);
+			.card-title {
+				color: #0086a5;
+				font-size: 1rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				margin-bottom: 5px;
+				text-align: center;
+			}
+			.card-sub-title {
+				color: #0086a5;
+				font-size: 0.8rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				margin-bottom: 10px;
+				text-align: center;
+				line-height: 1.6;
+			}
+			ul {
+				list-style-type: disc;
+				list-style-position: inside;
+				text-align: center;
+
+				li {
+					color: #666666;
+					line-height: 1.6;
+					margin-bottom: 5px;
+				}
+			}
+			form {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 100%;
+				margin-top: 20px;
+
+				input:not([type="submit"]) {
+					width: 100%;
+					padding: 15px 20px;
+					border-radius: 40px;
+					border: 1px solid #eeeeee;
+					margin-bottom: 15px;
+					font-size: 1rem;
+
+					&::placeholder {
+						color: #b2b2b2;
+					}
+				}
+
+				input[type="submit"],
+				button {
+					width: 250px;
+					padding: 10px 0px;
+					border-radius: 40px;
+					text-align: center;
+					text-transform: uppercase;
+					font-weight: bold;
+					color: #fff;
+					background-color: #fe7711;
+					border: 0;
+					cursor: pointer;
+				}
+				p {
+					margin-top: 10px;
+					color: #999999;
+					text-align: center;
+					line-height: 1.6;
+
+					a {
+						color: #0085a5;
+						text-decoration: none;
+					}
+				}
+			}
+			.sides {
+				display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+				.l,
+				.r {
+					width: 100%;
+					margin-top: 20px;
+
+                    ul{
+                        text-align: left;
+                    }
+
+					h2,
+					h3,
+					h4 {
+						color: #fe7711;
+						font-size: 0.8rem;
+						font-weight: 600;
+						text-transform: uppercase;
+						margin-bottom: 10px;
+						text-align: left;
+						line-height: 1.6;
+					}
+
+					img {
+						max-width: 100%;
+                    }
+                    
+                    button {
+                        width: 90%;
+                        padding: 10px 0px;
+                        border-radius: 40px;
+                        text-align: center;
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        color: #fff;
+                        background-color: #fe7711;
+                        border: 0;
+                        cursor: pointer;
+                    }
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	section.cadastro-vagas-curriculo {
+		.wrap-cards {
+			flex-direction: row;
+			justify-content: space-between;
+			.card {
+				width: 47%;
+
+				form {
+					flex-direction: row;
+					flex-wrap: wrap;
+					justify-content: space-between;
+
+					input:not([type="submit"]) {
+						width: 48%;
+
+						&.full {
+							width: calc(100%);
+						}
+					}
+
+					.area-botao {
+						width: 100%;
+						text-align: center;
+					}
+                }
+                
+                .sides {
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    .l,
+                    .r {
+                        width: 47%;
+                        margin-top: 20px;
+                    }
+                }
+			}
+		}
+	}
+}

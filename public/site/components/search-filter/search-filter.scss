@@ -1,0 +1,72 @@
+@import "./../../assets/styles/variables";
+@import "./../../utils/_rem";
+
+.search-filter {
+  margin-bottom: 20px;
+
+  padding: 18px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.13);
+
+  &__title {
+    font-size: rem(14px);
+    color: $secondary-color;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  ul {
+    height: 300px;
+  }
+  li {
+    margin: 10px 0;
+    list-style: none;
+  }
+
+  label {
+    display: inline-flex;
+    align-items: center;
+    color: #333;
+    cursor: pointer;
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      position: relative;
+      appearance: none;
+      font-size: 20px;
+      width: 1em;
+      margin: 0;
+      color: inherit;
+      outline: none;
+      font-family: "Font Awesome 5 Free";
+      transition: 300ms ease-out;
+
+      &::after {
+        content: "\f111"; // circle
+        display: inline-block;
+        text-align: center;
+        width: 1em;
+        cursor: pointer;
+      }
+
+      &:checked::after {
+        font-weight: 900;
+      }
+      &:active {
+        transform: scale(0.6);
+      }
+
+      + span {
+        margin-left: 5px;
+        font-size: 14px;
+      }
+    }
+
+    input[type="checkbox"]:after {
+      content: "\f0c8"; // square
+    }
+    input[type="checkbox"]:checked::after {
+      content: "\f14a"; // check-square
+    }
+  }
+}
