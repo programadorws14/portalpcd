@@ -84,7 +84,7 @@ $(document).on('click', '.meus-dados .links_social .more-link', function () {
 	if ($(this).hasClass('remove')) {
 		$(this).parent().remove();
 	} else {
-		$(this).parent().parent().append('<div class="link"><input type="text" name="links_social[]"><div class="more-link">+</div></div>');
+		$(this).parent().parent().append('<div class="link"><input type="text" name="links_social"><div class="more-link">+</div></div>');
 	}
 	$(this).addClass('remove');
 	$(this).text('x');
@@ -94,10 +94,26 @@ $(document).on('click', '.meus-dados .links_social .more-link', function () {
 $(document).ready(function () {
 	$('.dados #ramo').change(function () {
 		let ramo = $(this).val();
-		if(ramo == "outros"){
+		if (ramo == "outros") {
 			$('.dados input[name=ramo_outros]').prop("disabled", false);
-		} else{
+		} else {
 			$('.dados input[name=ramo_outros]').prop("disabled", true);
 		}
 	});
 });
+
+// Modal adicionar nova vaga / Alterar vaga
+$(document).ready(function () {
+
+	$('#nova-vaga').click(function () {
+		$('#shadow').fadeIn();
+		$('.modal-nova-vaga').fadeIn();
+	});
+	$('.close').click(function () {
+		$('#shadow').fadeOut();
+		$('.modal-nova-vaga').fadeOut();
+	});
+
+});
+
+

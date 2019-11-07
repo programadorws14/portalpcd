@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\LinksSociais;
 use App\Ramo;
+use App\Vaga;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,9 +23,10 @@ class EmpresaController extends Controller
     public function index()
     {
         $ramos = Ramo::all();
+        $vagas = Vaga::whereEmpresaId(Auth::guard('empresa')->user()->id)->get();
         $links = LinksSociais::whereEmpresaId(Auth::guard('empresa')->user()->id)->get();
 
-        return view('empresa.dashboard.index', compact('ramos', 'links'));
+        return view('empresa.dashboard.index', compact('ramos', 'links', 'vagas'));
     }
 
     public function StoreProfile(request $request)

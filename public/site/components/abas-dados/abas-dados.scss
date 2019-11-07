@@ -1,8 +1,9 @@
 section.dashboard-dados-vagas {
+	margin-top: 20px;
 	.abas-area {
 		display: flex;
 		a.aba {
-            text-decoration: none;
+			text-decoration: none;
 			font-size: 0.9375rem;
 			color: #fafafa;
 			text-transform: uppercase;
@@ -16,9 +17,8 @@ section.dashboard-dados-vagas {
 			cursor: pointer;
 
 			&.active {
-                background-color: #7f8c8d;
-                color: #fafafa;
-                
+				background-color: #7f8c8d;
+				color: #fafafa;
 			}
 		}
 	}
@@ -28,68 +28,13 @@ section.dashboard-dados-vagas {
 		box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.13);
 		padding: 1.75rem 1.25rem;
 
-        .content{
-            display: none;
+		.content {
+			display: none;
 
-            &.active{
-                display: block;
-            }
-        }
-
-		.vagas {
-			ul {
-				list-style: none;
-				li {
-					display: flex;
-					align-items: center;
-					justify-content: space-between;
-					flex-direction: column;
-					font-size: 14px;
-					color: #999999;
-					border-bottom: 1px solid #eeeeee;
-					margin: 15px 0;
-
-					&:first-child {
-						margin-top: 0;
-					}
-
-					.infos-vaga {
-						display: flex;
-						flex-direction: column;
-						align-items: center;
-						span {
-							margin-bottom: 10px;
-							&.nome-vaga {
-								color: #0086a5;
-								font-size: 18px;
-							}
-							&.n-candidatos {
-								background-color: #0086a5;
-								color: #fafafa;
-								border-radius: 20px;
-								padding: 5px 15px;
-							}
-							&.localidade {
-								color: #999999;
-							}
-						}
-					}
-
-					a.ver-candidatos {
-						background-color: #fe7711;
-						color: #fafafa;
-						text-decoration: none;
-						padding: 5px 15px;
-						border-radius: 20px;
-						text-transform: uppercase;
-						font-size: 13px;
-						margin-bottom: 15px;
-					}
-				}
+			&.active {
+				display: block;
 			}
-		}
 
-		.meus-dados {
 			form.dados {
 				display: flex;
 				flex-direction: column;
@@ -97,17 +42,33 @@ section.dashboard-dados-vagas {
 				width: 100%;
 				padding: 25px 0;
 				margin-bottom: 25px;
+				background-color: #fff;
 
 				-webkit-box-shadow: 0px 0px 12px 1px rgba(240, 240, 240, 1);
 				-moz-box-shadow: 0px 0px 12px 1px rgba(240, 240, 240, 1);
 				box-shadow: 0px 0px 12px 1px rgba(240, 240, 240, 1);
-				.form-title {
-					color: #0086a5;
-					font-size: 0.8rem;
-					font-weight: 600;
-					text-transform: uppercase;
+
+				.header {
+					width: 100%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					flex-direction: column-reverse;
 					margin-bottom: 25px;
-					text-align: center;
+
+					.form-title {
+						color: #0086a5;
+						font-size: 0.8rem;
+						font-weight: 600;
+						text-transform: uppercase;
+						text-align: center;
+					}
+
+					.delete {
+						text-decoration: none;
+						color: #e74c3c;
+						font-size: 0.8rem;
+					}
 				}
 
 				textarea:focus,
@@ -137,18 +98,35 @@ section.dashboard-dados-vagas {
 					border-radius: 30px;
 				}
 
-				.campo{
+				.campo {
 					width: 250px;
 					display: flex;
 					flex-direction: column;
+
+					&.checkbox {
+						flex-direction: row-reverse;
+						align-items: center;
+						justify-content: flex-end;
+						margin-bottom: 15px;
+
+						input {
+							width: auto;
+							margin-right: 5px;
+							margin-bottom: 0;
+						}
+
+						label {
+							margin-bottom: 0;
+						}
+					}
 				}
 
-				label{
+				label {
 					margin-bottom: 5px;
-					font-size: .9rem;
+					font-size: 0.9rem;
 				}
 
-				.area-botao{
+				.area-botao {
 					width: 100%;
 				}
 
@@ -172,8 +150,8 @@ section.dashboard-dados-vagas {
 					text-transform: uppercase;
 					position: relative;
 					font-weight: normal;
-                    margin-bottom: 15px;
-                    width: 100%;
+					margin-bottom: 15px;
+					width: 100%;
 				}
 
 				.links_social {
@@ -184,7 +162,7 @@ section.dashboard-dados-vagas {
 					flex-wrap: wrap;
 					margin-bottom: 15px;
 
-					.link{
+					.link {
 						display: flex;
 						justify-content: space-between;
 						align-items: center;
@@ -198,7 +176,7 @@ section.dashboard-dados-vagas {
 						margin-bottom: 0;
 						margin-top: 15px;
 
-						&:first-child{
+						&:first-child {
 							margin-top: 0;
 						}
 					}
@@ -216,12 +194,146 @@ section.dashboard-dados-vagas {
 						align-items: center;
 						cursor: pointer;
 
-						&.remove{
+						&.remove {
 							background-color: #e74c3c;
 						}
 					}
 				}
 			}
+		}
+
+		.vagas {
+			ul {
+				list-style: none;
+				li {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					flex-direction: column;
+					font-size: 14px;
+					color: #999999;
+					border-bottom: 1px solid #eeeeee;
+					margin: 15px 0;
+
+					&:first-child {
+						margin-top: 0;
+					}
+
+					.infos-vaga {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						span {
+							margin-bottom: 10px;
+							&.edit {
+								cursor: pointer;
+							}
+							&.nome-vaga {
+								color: #0086a5;
+								font-size: 18px;
+							}
+							&.n-candidatos {
+								background-color: #0086a5;
+								color: #fafafa;
+								border-radius: 20px;
+								padding: 5px 15px;
+							}
+							&.localidade {
+								color: #999999;
+							}
+							&.ativa{
+								background-color: #2ecc71;
+								color: #fafafa;
+								border-radius: 20px;
+								padding: 5px 15px;
+							}
+							&.pausada{
+								background-color: #95a5a6;
+								color: #fafafa;
+								border-radius: 20px;
+								padding: 5px 15px;
+							}
+						}
+					}
+
+					a.ver-candidatos {
+						background-color: #fe7711;
+						color: #fafafa;
+						text-decoration: none;
+						padding: 5px 10px;
+						border-radius: 20px;
+						text-transform: uppercase;
+						font-size: 10px;
+						margin-bottom: 15px;
+					}
+				}
+			}
+			.area-botao {
+				text-align: center;
+				#nova-vaga {
+					background-color: #fe7711;
+					color: #fafafa;
+					font-weight: bold;
+					text-decoration: none;
+					padding: 10px 15px;
+					border-radius: 20px;
+					text-transform: uppercase;
+					font-size: 13px;
+					margin-bottom: 15px;
+					border: 0;
+					outline: none;
+				}
+			}
+
+			.modal-nova-vaga {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				z-index: 150;
+				margin-top: 40px;
+				max-width: 95%;
+				max-height: 80vh;
+				overflow-y: auto;
+
+				.close {
+					width: 20px;
+					height: 20px;
+					position: absolute;
+					right: 5px;
+					top: 5px;
+					cursor: pointer;
+
+					span {
+						display: block;
+						background-color: #e74c3c;
+						height: 1.5px;
+						width: 100%;
+						border-radius: 2px;
+						position: relative;
+						top: 50%;
+
+						&:first-child {
+							transform: rotate(45deg);
+							top: 12px;
+							left: 1px;
+						}
+
+						&:last-child {
+							transform: rotate(-45deg);
+						}
+					}
+				}
+
+				.dados {
+					padding: 20px;
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		.meus-dados {
 		}
 	}
 }
@@ -234,6 +346,7 @@ section.dashboard-dados-vagas {
 					li {
 						.infos-vaga {
 							flex-direction: row;
+							width: 70%;
 
 							span {
 								margin-right: 10px;
@@ -246,6 +359,9 @@ section.dashboard-dados-vagas {
 						flex-direction: row;
 					}
 				}
+				.area-botao {
+					text-align: left;
+				}
 			}
 		}
 	}
@@ -254,14 +370,22 @@ section.dashboard-dados-vagas {
 @media (min-width: 425px) {
 	section.dashboard-dados-vagas {
 		.content-aba {
-			.meus-dados {
+			.content {
 				form.dados {
-                    flex-direction: row;
+					flex-direction: row;
 					flex-wrap: wrap;
-                    justify-content: space-between;
+					justify-content: space-between;
 					padding: 25px 25px;
-					
-					.campo{
+
+					.header {
+						flex-direction: row;
+
+						a{
+							line-height: 1.6;
+						}
+					}
+
+					.campo {
 						width: 48%;
 
 						&.full {
@@ -273,25 +397,31 @@ section.dashboard-dados-vagas {
 					select,
 					textarea {
 						width: 100%;
+					}
 
-						
-                    }
-                    
-                    .links_social {
-                        max-width: 100%;
-                        width: 100%;
-    
-                        input {
-                            width: calc(100% - 40px);
-                            margin-bottom: 0;
-                        }
-                    }
+					.links_social {
+						max-width: 100%;
+						width: 100%;
 
-                    h3{
-                        margin-top: 10px;
-                    }
+						input {
+							width: calc(100% - 40px);
+							margin-bottom: 0;
+						}
+					}
+
+					h3 {
+						margin-top: 10px;
+					}
 				}
 			}
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	section.dashboard-dados-vagas {
+		&.negative {
+			margin-top: -205px;
 		}
 	}
 }

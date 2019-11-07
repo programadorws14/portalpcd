@@ -69,11 +69,11 @@ Route::group(['prefix' => 'empresa/'], function () {
 
     Route::post('login', 'Empresa\LoginController@login')->name('empresa.login');
     Route::post('sair', 'Empresa\LoginController@sair')->name('empresa.sair');
-
     Route::get('dashboard', 'Empresa\EmpresaController@index')->name('empresa.dashboard');
     Route::post('dashboard', 'Empresa\EmpresaController@StoreProfile')->name('empresa.store.perfil');
-
     Route::get('dashboard/delLinks/{idlinks}', 'Empresa\EmpresaController@delLinks')->name('empresa.delLinks');
+
+    Route::post('dashboard/vaga/store', 'Empresa\EmpresaVagaController@store')->name('empresa.vaga.store');
 
 
 

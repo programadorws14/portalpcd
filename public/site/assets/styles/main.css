@@ -1346,205 +1346,300 @@ section.cadastro-vagas-curriculo {
           width: 47%;
           margin-top: 20px; } }
 
-section.dashboard-dados-vagas .abas-area {
-  display: flex; }
-  section.dashboard-dados-vagas .abas-area a.aba {
-    text-decoration: none;
-    font-size: 0.9375rem;
-    color: #fafafa;
-    text-transform: uppercase;
-    font-weight: 700;
-    padding: 5px 10px;
-    background-color: #bdc3c7;
-    border-radius: 5px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    margin-right: 5px;
-    cursor: pointer; }
-    section.dashboard-dados-vagas .abas-area a.aba.active {
-      background-color: #7f8c8d;
-      color: #fafafa; }
-
-section.dashboard-dados-vagas .content-aba {
-  border-radius: 4px;
-  box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.13);
-  padding: 1.75rem 1.25rem; }
-  section.dashboard-dados-vagas .content-aba .content {
-    display: none; }
-    section.dashboard-dados-vagas .content-aba .content.active {
-      display: block; }
-  section.dashboard-dados-vagas .content-aba .vagas ul {
-    list-style: none; }
-    section.dashboard-dados-vagas .content-aba .vagas ul li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-direction: column;
-      font-size: 14px;
-      color: #999999;
-      border-bottom: 1px solid #eeeeee;
-      margin: 15px 0; }
-      section.dashboard-dados-vagas .content-aba .vagas ul li:first-child {
-        margin-top: 0; }
-      section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga {
+section.dashboard-dados-vagas {
+  margin-top: 20px; }
+  section.dashboard-dados-vagas .abas-area {
+    display: flex; }
+    section.dashboard-dados-vagas .abas-area a.aba {
+      text-decoration: none;
+      font-size: 0.9375rem;
+      color: #fafafa;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 5px 10px;
+      background-color: #bdc3c7;
+      border-radius: 5px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      margin-right: 5px;
+      cursor: pointer; }
+      section.dashboard-dados-vagas .abas-area a.aba.active {
+        background-color: #7f8c8d;
+        color: #fafafa; }
+  section.dashboard-dados-vagas .content-aba {
+    border-radius: 4px;
+    box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.13);
+    padding: 1.75rem 1.25rem; }
+    section.dashboard-dados-vagas .content-aba .content {
+      display: none; }
+      section.dashboard-dados-vagas .content-aba .content.active {
+        display: block; }
+      section.dashboard-dados-vagas .content-aba .content form.dados {
         display: flex;
         flex-direction: column;
-        align-items: center; }
-        section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span {
-          margin-bottom: 10px; }
-          section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span.nome-vaga {
+        align-items: center;
+        width: 100%;
+        padding: 25px 0;
+        margin-bottom: 25px;
+        background-color: #fff;
+        -webkit-box-shadow: 0px 0px 12px 1px #f0f0f0;
+        -moz-box-shadow: 0px 0px 12px 1px #f0f0f0;
+        box-shadow: 0px 0px 12px 1px #f0f0f0; }
+        section.dashboard-dados-vagas .content-aba .content form.dados .header {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column-reverse;
+          margin-bottom: 25px; }
+          section.dashboard-dados-vagas .content-aba .content form.dados .header .form-title {
             color: #0086a5;
-            font-size: 18px; }
-          section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span.n-candidatos {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center; }
+          section.dashboard-dados-vagas .content-aba .content form.dados .header .delete {
+            text-decoration: none;
+            color: #e74c3c;
+            font-size: 0.8rem; }
+        section.dashboard-dados-vagas .content-aba .content form.dados textarea:focus,
+        section.dashboard-dados-vagas .content-aba .content form.dados input:focus,
+        section.dashboard-dados-vagas .content-aba .content form.dados select:focus {
+          box-shadow: 0 0 0 0;
+          outline: 0; }
+        section.dashboard-dados-vagas .content-aba .content form.dados input:not([type="submit"]),
+        section.dashboard-dados-vagas .content-aba .content form.dados select,
+        section.dashboard-dados-vagas .content-aba .content form.dados textarea {
+          width: calc(250px);
+          padding: 15px 20px;
+          border-radius: 40px;
+          border: 1px solid #eeeeee;
+          margin-bottom: 15px;
+          resize: none; }
+          section.dashboard-dados-vagas .content-aba .content form.dados input:not([type="submit"])::placeholder,
+          section.dashboard-dados-vagas .content-aba .content form.dados select::placeholder,
+          section.dashboard-dados-vagas .content-aba .content form.dados textarea::placeholder {
+            color: #b2b2b2; }
+        section.dashboard-dados-vagas .content-aba .content form.dados textarea {
+          height: 150px;
+          border-radius: 30px; }
+        section.dashboard-dados-vagas .content-aba .content form.dados .campo {
+          width: 250px;
+          display: flex;
+          flex-direction: column; }
+          section.dashboard-dados-vagas .content-aba .content form.dados .campo.checkbox {
+            flex-direction: row-reverse;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 15px; }
+            section.dashboard-dados-vagas .content-aba .content form.dados .campo.checkbox input {
+              width: auto;
+              margin-right: 5px;
+              margin-bottom: 0; }
+            section.dashboard-dados-vagas .content-aba .content form.dados .campo.checkbox label {
+              margin-bottom: 0; }
+        section.dashboard-dados-vagas .content-aba .content form.dados label {
+          margin-bottom: 5px;
+          font-size: 0.9rem; }
+        section.dashboard-dados-vagas .content-aba .content form.dados .area-botao {
+          width: 100%; }
+        section.dashboard-dados-vagas .content-aba .content form.dados input[type="submit"],
+        section.dashboard-dados-vagas .content-aba .content form.dados button {
+          width: 100%;
+          padding: 10px 0px;
+          border-radius: 40px;
+          text-align: center;
+          text-transform: uppercase;
+          font-weight: bold;
+          color: #fff;
+          background-color: #fe7711;
+          border: 0;
+          cursor: pointer; }
+        section.dashboard-dados-vagas .content-aba .content form.dados h3 {
+          font-size: 1.2rem;
+          color: #0086a5;
+          text-transform: uppercase;
+          position: relative;
+          font-weight: normal;
+          margin-bottom: 15px;
+          width: 100%; }
+        section.dashboard-dados-vagas .content-aba .content form.dados .links_social {
+          max-width: 250px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          margin-bottom: 15px; }
+          section.dashboard-dados-vagas .content-aba .content form.dados .links_social .link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+            margin-bottom: 15px; }
+          section.dashboard-dados-vagas .content-aba .content form.dados .links_social input {
+            max-width: calc(100% - 60px);
+            margin-bottom: 0;
+            margin-top: 15px; }
+            section.dashboard-dados-vagas .content-aba .content form.dados .links_social input:first-child {
+              margin-top: 0; }
+          section.dashboard-dados-vagas .content-aba .content form.dados .links_social .more-link {
+            width: 40px;
+            height: 40px;
             background-color: #0086a5;
-            color: #fafafa;
-            border-radius: 20px;
-            padding: 5px 15px; }
-          section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span.localidade {
-            color: #999999; }
-      section.dashboard-dados-vagas .content-aba .vagas ul li a.ver-candidatos {
+            border-radius: 50%;
+            color: #fff;
+            font-weight: bold;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer; }
+            section.dashboard-dados-vagas .content-aba .content form.dados .links_social .more-link.remove {
+              background-color: #e74c3c; }
+    section.dashboard-dados-vagas .content-aba .vagas ul {
+      list-style: none; }
+      section.dashboard-dados-vagas .content-aba .vagas ul li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        font-size: 14px;
+        color: #999999;
+        border-bottom: 1px solid #eeeeee;
+        margin: 15px 0; }
+        section.dashboard-dados-vagas .content-aba .vagas ul li:first-child {
+          margin-top: 0; }
+        section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga {
+          display: flex;
+          flex-direction: column;
+          align-items: center; }
+          section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span {
+            margin-bottom: 10px; }
+            section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span.edit {
+              cursor: pointer; }
+            section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span.nome-vaga {
+              color: #0086a5;
+              font-size: 18px; }
+            section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span.n-candidatos {
+              background-color: #0086a5;
+              color: #fafafa;
+              border-radius: 20px;
+              padding: 5px 15px; }
+            section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span.localidade {
+              color: #999999; }
+            section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span.ativa {
+              background-color: #2ecc71;
+              color: #fafafa;
+              border-radius: 20px;
+              padding: 5px 15px; }
+            section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span.pausada {
+              background-color: #95a5a6;
+              color: #fafafa;
+              border-radius: 20px;
+              padding: 5px 15px; }
+        section.dashboard-dados-vagas .content-aba .vagas ul li a.ver-candidatos {
+          background-color: #fe7711;
+          color: #fafafa;
+          text-decoration: none;
+          padding: 5px 10px;
+          border-radius: 20px;
+          text-transform: uppercase;
+          font-size: 10px;
+          margin-bottom: 15px; }
+    section.dashboard-dados-vagas .content-aba .vagas .area-botao {
+      text-align: center; }
+      section.dashboard-dados-vagas .content-aba .vagas .area-botao #nova-vaga {
         background-color: #fe7711;
         color: #fafafa;
+        font-weight: bold;
         text-decoration: none;
-        padding: 5px 15px;
+        padding: 10px 15px;
         border-radius: 20px;
         text-transform: uppercase;
         font-size: 13px;
-        margin-bottom: 15px; }
-  section.dashboard-dados-vagas .content-aba .meus-dados form.dados {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 25px 0;
-    margin-bottom: 25px;
-    -webkit-box-shadow: 0px 0px 12px 1px #f0f0f0;
-    -moz-box-shadow: 0px 0px 12px 1px #f0f0f0;
-    box-shadow: 0px 0px 12px 1px #f0f0f0; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados .form-title {
-      color: #0086a5;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      margin-bottom: 25px;
-      text-align: center; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados textarea:focus,
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados input:focus,
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados select:focus {
-      box-shadow: 0 0 0 0;
-      outline: 0; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados input:not([type="submit"]),
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados select,
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados textarea {
-      width: calc(250px);
-      padding: 15px 20px;
-      border-radius: 40px;
-      border: 1px solid #eeeeee;
-      margin-bottom: 15px;
-      resize: none; }
-      section.dashboard-dados-vagas .content-aba .meus-dados form.dados input:not([type="submit"])::placeholder,
-      section.dashboard-dados-vagas .content-aba .meus-dados form.dados select::placeholder,
-      section.dashboard-dados-vagas .content-aba .meus-dados form.dados textarea::placeholder {
-        color: #b2b2b2; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados textarea {
-      height: 150px;
-      border-radius: 30px; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados .campo {
-      width: 250px;
-      display: flex;
-      flex-direction: column; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados label {
-      margin-bottom: 5px;
-      font-size: .9rem; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados .area-botao {
-      width: 100%; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados input[type="submit"],
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados button {
-      width: 100%;
-      padding: 10px 0px;
-      border-radius: 40px;
-      text-align: center;
-      text-transform: uppercase;
-      font-weight: bold;
-      color: #fff;
-      background-color: #fe7711;
-      border: 0;
-      cursor: pointer; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados h3 {
-      font-size: 1.2rem;
-      color: #0086a5;
-      text-transform: uppercase;
-      position: relative;
-      font-weight: normal;
-      margin-bottom: 15px;
-      width: 100%; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados .links_social {
-      max-width: 250px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 15px; }
-      section.dashboard-dados-vagas .content-aba .meus-dados form.dados .links_social .link {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        width: 100%;
-        margin-bottom: 15px; }
-      section.dashboard-dados-vagas .content-aba .meus-dados form.dados .links_social input {
-        max-width: calc(100% - 60px);
-        margin-bottom: 0;
-        margin-top: 15px; }
-        section.dashboard-dados-vagas .content-aba .meus-dados form.dados .links_social input:first-child {
-          margin-top: 0; }
-      section.dashboard-dados-vagas .content-aba .meus-dados form.dados .links_social .more-link {
-        width: 40px;
-        height: 40px;
-        background-color: #0086a5;
-        border-radius: 50%;
-        color: #fff;
-        font-weight: bold;
-        font-size: 24px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        margin-bottom: 15px;
+        border: 0;
+        outline: none; }
+    section.dashboard-dados-vagas .content-aba .vagas .modal-nova-vaga {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 150;
+      margin-top: 40px;
+      max-width: 95%;
+      max-height: 80vh;
+      overflow-y: auto; }
+      section.dashboard-dados-vagas .content-aba .vagas .modal-nova-vaga .close {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
         cursor: pointer; }
-        section.dashboard-dados-vagas .content-aba .meus-dados form.dados .links_social .more-link.remove {
-          background-color: #e74c3c; }
+        section.dashboard-dados-vagas .content-aba .vagas .modal-nova-vaga .close span {
+          display: block;
+          background-color: #e74c3c;
+          height: 1.5px;
+          width: 100%;
+          border-radius: 2px;
+          position: relative;
+          top: 50%; }
+          section.dashboard-dados-vagas .content-aba .vagas .modal-nova-vaga .close span:first-child {
+            transform: rotate(45deg);
+            top: 12px;
+            left: 1px; }
+          section.dashboard-dados-vagas .content-aba .vagas .modal-nova-vaga .close span:last-child {
+            transform: rotate(-45deg); }
+      section.dashboard-dados-vagas .content-aba .vagas .modal-nova-vaga .dados {
+        padding: 20px;
+        margin-bottom: 0; }
 
 @media (min-width: 715px) {
   section.dashboard-dados-vagas .content-aba .vagas ul li {
     flex-direction: row; }
     section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga {
-      flex-direction: row; }
+      flex-direction: row;
+      width: 70%; }
       section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span {
         margin-right: 10px; }
         section.dashboard-dados-vagas .content-aba .vagas ul li .infos-vaga span.nome-vaga {
-          max-width: 50%; } }
+          max-width: 50%; }
+  section.dashboard-dados-vagas .content-aba .vagas .area-botao {
+    text-align: left; } }
 
 @media (min-width: 425px) {
-  section.dashboard-dados-vagas .content-aba .meus-dados form.dados {
+  section.dashboard-dados-vagas .content-aba .content form.dados {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 25px 25px; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados .campo {
+    section.dashboard-dados-vagas .content-aba .content form.dados .header {
+      flex-direction: row; }
+      section.dashboard-dados-vagas .content-aba .content form.dados .header a {
+        line-height: 1.6; }
+    section.dashboard-dados-vagas .content-aba .content form.dados .campo {
       width: 48%; }
-      section.dashboard-dados-vagas .content-aba .meus-dados form.dados .campo.full {
+      section.dashboard-dados-vagas .content-aba .content form.dados .campo.full {
         width: calc(100%); }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados input:not([type="submit"]),
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados select,
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados textarea {
+    section.dashboard-dados-vagas .content-aba .content form.dados input:not([type="submit"]),
+    section.dashboard-dados-vagas .content-aba .content form.dados select,
+    section.dashboard-dados-vagas .content-aba .content form.dados textarea {
       width: 100%; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados .links_social {
+    section.dashboard-dados-vagas .content-aba .content form.dados .links_social {
       max-width: 100%;
       width: 100%; }
-      section.dashboard-dados-vagas .content-aba .meus-dados form.dados .links_social input {
+      section.dashboard-dados-vagas .content-aba .content form.dados .links_social input {
         width: calc(100% - 40px);
         margin-bottom: 0; }
-    section.dashboard-dados-vagas .content-aba .meus-dados form.dados h3 {
+    section.dashboard-dados-vagas .content-aba .content form.dados h3 {
       margin-top: 10px; } }
+
+@media (min-width: 992px) {
+  section.dashboard-dados-vagas.negative {
+    margin-top: -205px; } }
 
 * {
   margin: 0;
@@ -1561,6 +1656,16 @@ body, textarea, input {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 10px; }
+
+#shadow {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  z-index: 100;
+  display: none; }
 
 .pcd-container {
   max-width: 1280px;

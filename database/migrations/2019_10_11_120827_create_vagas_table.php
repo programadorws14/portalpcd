@@ -15,24 +15,22 @@ class CreateVagasTable extends Migration
     {
         Schema::create('vagas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
-            $table->dateTime('data_abertura');
-            $table->dateTime('data_vencimento');
+            $table->bigInteger('empresa_id');
             $table->string('titulo');
-            $table->bigInteger('status');
-            $table->longText('descricao');
-            $table->bigInteger('estado_id');
-            $table->bigInteger('municipio_id');
+            $table->string('salario_de');
+            $table->string('salario_ate');
+            $table->string('pausar_vaga')->nullable();
+            $table->string('salario_acombinar')->nullable();
+            $table->string('tipo_emprego');
+            $table->string('numero_vagas');
+            $table->mediumText('descricao_vaga');
             $table->string('cep');
-            $table->string('endereco');
-            $table->string('beneficios')->nullable();
-            $table->bigInteger('salario')->nullable();
-            $table->bigInteger('qtd_vagas');
-            $table->string('horario');
-            $table->bigInteger('profissao_id');
-            $table->string('info_adicionais')->nullable();
-            $table->bigInteger('aprovacao_user_id')->nullable();
-            $table->longText('info_aprovacao_user_id')->nullable();
+            $table->string('rua');
+            $table->string('numero');
+            $table->string('complemento')->nullable();
+            $table->string('bairro');
+            $table->string('cidade');
+            $table->string('estado');
             $table->timestamps();
             $table->softDeletes();
         });

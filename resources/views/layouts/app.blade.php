@@ -15,6 +15,8 @@
     <script src="{{ asset('site/utils/jquery-3.4.1.min.js') }}"></script>
     <script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
 
+    <link rel="stylesheet" href="{{ asset('site/assets/styles/custom.css') }}" />
+
     <script src="{{ asset('site/assets/scripts/main.js') }}"></script>
     <title>Portal PCD</title>
 </head>
