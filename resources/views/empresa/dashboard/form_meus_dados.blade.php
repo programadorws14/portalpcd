@@ -77,7 +77,7 @@
 
 	<div class="campo">
 		<label for="site_empresa">Seu Link Portal PCD</label>
-		<input id="link-portal-pcd" type="text" name="nome_url" value="{{ ( Auth::guard('empresa')->user()->nome_url ? Auth::guard('empresa')->user()->nome_url : old('nome_url'))  }}" disabled>
+		<input  type="text" name="nome_url" value="{{ ( Auth::guard('empresa')->user()->nome_url ? Auth::guard('empresa')->user()->nome_url : old('nome_url'))  }}" disabled>
 	</div>
 
 	<div class="campo">
