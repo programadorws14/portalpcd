@@ -1444,6 +1444,7 @@ section.dashboard-dados-vagas {
         section.dashboard-dados-vagas .content-aba .content form.dados .area-botao {
           width: 100%; }
         section.dashboard-dados-vagas .content-aba .content form.dados input[type="submit"],
+        section.dashboard-dados-vagas .content-aba .content form.dados input[type="button"],
         section.dashboard-dados-vagas .content-aba .content form.dados button {
           width: 100%;
           padding: 10px 0px;
@@ -1596,6 +1597,68 @@ section.dashboard-dados-vagas {
       section.dashboard-dados-vagas .content-aba .vagas .modal-nova-vaga .dados {
         padding: 20px;
         margin-bottom: 0; }
+
+
+
+
+        section.dashboard-dados-vagas .content-aba .vagas .modal-edit {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 150;
+          margin-top: 40px;
+          max-width: 95%;
+          max-height: 80vh;
+          overflow-y: auto; }
+          section.dashboard-dados-vagas .content-aba .vagas .modal-edit .close-edit {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 5px; 
+            top: 5px;
+            cursor: pointer; }
+            section.dashboard-dados-vagas .content-aba .vagas .modal-edit .close-edit span {
+              display: block;
+              background-color: #e74c3c;
+              height: 1.5px;
+              width: 100%;
+              border-radius: 2px;
+              position: relative;
+              top: 50%; }
+              section.dashboard-dados-vagas .content-aba .vagas .modal-edit .close-edit span:first-child {
+                transform: rotate(45deg);
+                top: 12px;
+                left: 1px; }
+              section.dashboard-dados-vagas .content-aba .vagas .modal-edit .close-edit span:last-child {
+                transform: rotate(-45deg); }
+          section.dashboard-dados-vagas .content-aba .vagas .modal-edit .dados {
+            padding: 20px;
+            margin-bottom: 0; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (min-width: 715px) {
   section.dashboard-dados-vagas .content-aba .vagas ul li {

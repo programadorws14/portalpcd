@@ -15,8 +15,8 @@ class CreateLinksSociaisTable extends Migration
     {
         Schema::create('links_sociais', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('link');
-            $table->bigInteger('empresa_id');
+            $table->string('link')->nullable();
+            $table->bigInteger('empresa_id')->nullable();
             $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->timestamps();
             $table->softDeletes();

@@ -17,7 +17,7 @@
 			@endif
 			<h2 class="profile__title">{{ Auth::guard('empresa')->user()->nome ?? null }} </h2>
 			<p></p>
-			<p class="profile__username">{{ '@'.Auth::guard('empresa')->user()->nome_url ?? null}}</p>
+			<p class="profile__username">{{ '/empresa/'.Auth::guard('empresa')->user()->nome_url ?? null}}</p>
 		</div>
 	</div>
 	<div class="row">
@@ -72,7 +72,7 @@
 							@foreach($vagas as $vaga)
 							<li>
 								<div class="infos-vaga">
-									<span class="edit"><i class="fas fa-edit"></i></span>
+									<span class="edit" onclick="modal_edit({{ $vaga->id }})"><i class="fas fa-edit"></i></span>
 									<span class="nome-vaga">{{ $vaga->titulo ?? 'N/I' }}</span>
 									<span class="n-candidatos">10 <i class="fas fa-user"></i></span>
 									@if(!$vaga->pausar_vaga)
@@ -88,8 +88,6 @@
 							@else
 							<p>Ainda não há vagas!</p>
 							@endif
-
-
 						</ul>
 						<div class="area-botao">
 							<button id="nova-vaga">Adicionar nova vaga</button>
@@ -97,6 +95,9 @@
 
 						<!---MODAL NOVA VAGA--->
 						@include('empresa.dashboard.modal_nova_vaga')
+
+						<!--- MODAL EDIT--->
+						@include('empresa.dashboard.modal_edit_vaga')
 
 					</div>
 
@@ -112,6 +113,8 @@
 
 @section('scripts')
 <script>
+	$("#");
+
 	$("#cep").change(function() {
 		var cep = $("#cep").val();
 		if (cep != '') {
@@ -165,6 +168,35 @@
 			$("#estado_vaga").val('');
 		}
 	});
+
+	$("#cep_edit_vaga").change(function() {
+		var cep = $("#cep_edit_vaga").val();
+		if (cep != '') {
+			$.get('https://viacep.com.br/ws/' + cep + '/json/', function(data) {
+				if (data != '') {
+					$("#rua_edit_vaga").val(data['logradouro']);
+					$("#complemento_edit_vaga").val(data['complemento']);
+					$("#cidade_edit_vaga").val(data['localidade']);
+					$("#bairro_edit_vaga").val(data['bairro']);
+					$("#estado_edit_vaga").val(data['uf']);
+				} else {
+					$("#rua_edit_vaga").val('');
+					$("#complemento_edit_vaga").val('');
+					$("#cidade_edit_vaga").val('');
+					$("#bairro_edit_vaga").val('');
+					$("#estado_edit_vaga").val('');
+				}
+			});
+		} else {
+			$("#rua_edit_vaga").val('');
+			$("#complemento_edit_vaga").val('');
+			$("#cidade_edit_vaga").val('');
+			$("#bairro_edit_vaga").val('');
+			$("#estado_edit_vaga").val('');
+		}
+	});
+
+
 
 	function delLinks(id) {
 		$.get('/empresa/dashboard/delLinks/' + id, function(data) {

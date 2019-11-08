@@ -29,7 +29,48 @@ class EmpresaVagaController extends Controller
             Vaga::create($data);
             return redirect()->back()->with('success', 'Cadastrado com sucesso!');
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao cadastrar '. $e->getMessage());
+            return redirect()->back()->with('error', 'Erro ao cadastrar ' . $e->getMessage());
+        }
+    }
+
+    public function edit($id)
+    {
+        try {
+            $vaga = Vaga::find($id);
+            return response(array(
+                'vaga' => $vaga,
+                'status' => 'success'
+            ));
+        } catch (Exception $e) {
+            return response(array(
+                'error' => $e->getMessage(),
+                'status' => 'error'
+            ));
+        }
+    }
+
+
+    public function update(request $request)
+    {
+
+        try {
+            $data = $request->except("_token", 'vaga_id');
+            $data['pausar_vaga'] = (!empty($data['pausar_vaga']) ? $data['pausar_vaga'] : '');
+            $data['salario_acombinar'] = (!empty($data['salario_acombinar']) ? $data['salario_acombinar'] : '');
+            Vaga::whereId($request['vaga_id'])->update($data);
+            return redirect()->back()->with('success', 'Atualizado com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao atualizar ' . $e->getMessage());
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            Vaga::whereId($id)->delete();
+            return redirect()->back()->with('success', 'Deletado com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao deletar ' . $e->getMessage());
         }
     }
 

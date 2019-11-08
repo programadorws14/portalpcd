@@ -3,7 +3,7 @@
 		<span></span>
 		<span></span>
 	</div>
-	<form action="{{ route('empresa.vaga.store') }}" class="dados" method="POST">
+	<form action="{{ route('empresa.vaga.store') }}" id="form-nova-vaga" class="dados" method="POST">
 		@csrf
 		<input type="hidden" name="empresa_id" value="{{ Auth::guard('empresa')->user()->id }}">
 

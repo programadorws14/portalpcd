@@ -71,9 +71,15 @@ Route::group(['prefix' => 'empresa/'], function () {
     Route::post('sair', 'Empresa\LoginController@sair')->name('empresa.sair');
     Route::get('dashboard', 'Empresa\EmpresaController@index')->name('empresa.dashboard');
     Route::post('dashboard', 'Empresa\EmpresaController@StoreProfile')->name('empresa.store.perfil');
+   
+
+
     Route::get('dashboard/delLinks/{idlinks}', 'Empresa\EmpresaController@delLinks')->name('empresa.delLinks');
 
     Route::post('dashboard/vaga/store', 'Empresa\EmpresaVagaController@store')->name('empresa.vaga.store');
+    Route::get('dashboard/vaga/edit/{id}', 'Empresa\EmpresaVagaController@edit')->name('empresa.vaga.edit');
+    Route::post('dashboard/vaga/update', 'Empresa\EmpresaVagaController@update')->name('empresa.vaga.update');
+    Route::get('dashboard/vaga/delete/{id}', 'Empresa\EmpresaVagaController@delete')->name('empresa.vaga.delete');
 
 
 
