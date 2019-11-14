@@ -94,6 +94,7 @@ class EmpresaController extends Controller
         }
     }
 
+    /**PRIVATE */
     private function slug($string)
     {
         $string = preg_replace('/[\t\n]/', ' ', $string);

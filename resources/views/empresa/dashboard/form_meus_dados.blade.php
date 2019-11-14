@@ -3,7 +3,7 @@
 	<input type="hidden" name="id" value="{{ Auth::guard('empresa')->user()->id }}">
 	<div class="campo">
 		<label for="nome">Nome</label>
-		<input type="text" name="nome" id="dados" value="{{ ( Auth::guard('empresa')->user()->nome ? Auth::guard('empresa')->user()->nome  : old('nome'))  }}">
+		<input type="text" name="nome" id="dados" value="{{ ( Auth::guard('empresa')->user()->nome ? Auth::guard('empresa')->user()->nome  : old('nome'))  }}" required>
 	</div>
 
 	<div class="campo">
@@ -12,26 +12,24 @@
 	</div>
 
 	<div class="campo">
-		<label for="email">E-mail</label>
-
-		<input type="email" name="email" value="{{ ( Auth::guard('empresa')->user()->email ? Auth::guard('empresa')->user()->email  : old('email'))  }}">
+		<label for="email">E-mail <small style="font-size:10px; color:red; display:none;" id="msgErroEmail"></small></label>
+		<input type="email" name="email" id="emailPerfil" value="{{ ( Auth::guard('empresa')->user()->email ? Auth::guard('empresa')->user()->email  : old('email'))  }}" required>
 	</div>
 
 	<div class="campo">
 		<label for="telefone">Telefone da Empresa</label>
-		<input type="text" name="telefone" class="telefone" value="{{ ( Auth::guard('empresa')->user()->telefone ? Auth::guard('empresa')->user()->telefone : old('telefone'))  }}">
+		<input type="text" name="telefone" class="telefone" value="{{ ( Auth::guard('empresa')->user()->telefone ? Auth::guard('empresa')->user()->telefone : old('telefone'))  }}" >
 	</div>
 
 	<div class="campo">
 		<label for="ramo">Ramo de Atuação</label>
 		<select name="ramo_atuacao" id="ramo">
-			<option value="">Selecione um ramo</option>
+		<option value="">Selecione o ramo</option>
 			@if(count($ramos) >= 1)
 			@foreach($ramos as $ramo)
 			<option @if(Auth::guard('empresa')->user()->ramo_atuacao == $ramo->id) selected @endif value="{{ $ramo->id }}">{{ $ramo->descricao ?? null }}</option>
 			@endforeach
 			@endif
-
 			<option value="outros">Outros</option>
 		</select>
 	</div>
@@ -77,7 +75,7 @@
 
 	<div class="campo">
 		<label for="site_empresa">Seu Link Portal PCD</label>
-		<input  type="text" name="nome_url" value="{{ ( Auth::guard('empresa')->user()->nome_url ? Auth::guard('empresa')->user()->nome_url : old('nome_url'))  }}" disabled>
+		<input type="text" name="nome_url" value="{{ ( Auth::guard('empresa')->user()->nome_url ? Auth::guard('empresa')->user()->nome_url : old('nome_url'))  }}" disabled>
 	</div>
 
 	<div class="campo">
@@ -117,17 +115,17 @@
 
 	<div class="campo full">
 		<label for="cep">CEP</label>
-		<input type="text" class="cep" maxlength="8" name="cep" id="cep" value="{{ ( Auth::guard('empresa')->user()->cep ? Auth::guard('empresa')->user()->cep : old('cep'))  }}">
+		<input type="text" class="cep" maxlength="8" name="cep" id="cep" value="{{ ( Auth::guard('empresa')->user()->cep ? Auth::guard('empresa')->user()->cep : old('cep'))  }}" required>
 	</div>
 
 	<div class="campo">
 		<label for="rua">Rua</label>
-		<input type="text" name="rua" id="rua" value="{{ ( Auth::guard('empresa')->user()->rua ? Auth::guard('empresa')->user()->rua : old('rua'))  }}">
+		<input type="text" name="rua" id="rua" value="{{ ( Auth::guard('empresa')->user()->rua ? Auth::guard('empresa')->user()->rua : old('rua'))  }}" required>
 	</div>
 
 	<div class="campo">
 		<label for="numero">Número</label>
-		<input type="text" name="numero" value="{{ ( Auth::guard('empresa')->user()->numero ? Auth::guard('empresa')->user()->numero : old('numero'))  }}">
+		<input type="text" name="numero" value="{{ ( Auth::guard('empresa')->user()->numero ? Auth::guard('empresa')->user()->numero : old('numero'))  }}" required>
 	</div>
 
 	<div class="campo">
@@ -137,22 +135,22 @@
 
 	<div class="campo">
 		<label for="bairro">Bairro</label>
-		<input type="text" name="bairro" id="bairro" value="{{ ( Auth::guard('empresa')->user()->bairro ? Auth::guard('empresa')->user()->bairro : old('bairro'))  }}">
+		<input type="text" name="bairro" id="bairro" value="{{ ( Auth::guard('empresa')->user()->bairro ? Auth::guard('empresa')->user()->bairro : old('bairro'))  }}" required>
 	</div>
 
 	<div class="campo">
 		<label for="cidade">Cidade</label>
-		<input type="text" name="cidade" id="cidade" value="{{ ( Auth::guard('empresa')->user()->cidade ? Auth::guard('empresa')->user()->cidade : old('cidade')) }}">
+		<input type="text" name="cidade" id="cidade" value="{{ ( Auth::guard('empresa')->user()->cidade ? Auth::guard('empresa')->user()->cidade : old('cidade')) }}" required>
 	</div>
 
 	<div class="campo">
 		<label for="estado">Estado</label>
-		<input type="text" name="estado" id="estado" value="{{ ( Auth::guard('empresa')->user()->estado ? Auth::guard('empresa')->user()->estado : old('estado')) }}">
+		<input type="text" name="estado" id="estado" value="{{ ( Auth::guard('empresa')->user()->estado ? Auth::guard('empresa')->user()->estado : old('estado')) }}" required>
 	</div>
 
 	<div class="area-botao">
 		<div class="campo">
-			<input type="submit" id="atualizar-perfil-empresa" value="Atualizar">
+			<input type="submit" id="atualizar-perfil-empresa" value="Atualizar" id="atualizarPerfil">
 		</div>
 	</div>
 </form>

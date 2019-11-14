@@ -113,7 +113,22 @@
 
 @section('scripts')
 <script>
-	$("#");
+	$("#emailPerfil").change(function() {
+		var email = $("#emailPerfil").val();
+		if (email != '') {
+			$.get('http://homolog.agenciagrowthhouse.com.br/portal-pcd/portal/public/dashboard/email/' + email, function(data) {
+				if (data.status == 'sucesso') {
+					$("#emailPerfil").css('border', '1px solid red')
+					$("#msgErroEmail").html('E-mail já existe, tente outro').fadeIn('slow');
+					$("#atualizarPerfil").prop('disabled', true);
+				} else {
+					$("#emailPerfil").css('border', '1px solid #eeeeee')
+					$("#msgErroEmail").fadeOut('slow');
+					$("#atualizarPerfil").prop('disabled', false);
+				}
+			});
+		}
+	});
 
 	$("#cep").change(function() {
 		var cep = $("#cep").val();
@@ -196,14 +211,29 @@
 		}
 	});
 
-
-
 	function delLinks(id) {
-		$.get('/empresa/dashboard/delLinks/' + id, function(data) {
+		// 
+		$.get('http://homolog.agenciagrowthhouse.com.br/portal-pcd/portal/public//empresa/dashboard/delLinks/' + id, function(data) {
 			if (data.status == 'success') {
 				$("#" + id).hide();
 			}
 		});
 	}
+
+	/** Validação salario de, salario ate */
+	$("#combinar_salario").click(function() {
+		if ($("#combinar_salario").is(':checked')) {
+			$("#faixa_de").prop('disabled', true);
+			$("#faixa_ate").prop('disabled', true);
+			$("#faixa_de").prop('required', false);
+			$("#faixa_ate").prop('required', false);
+		} else {
+			$("#faixa_de").prop('disabled', false);
+			$("#faixa_ate").prop('disabled', false);
+
+			$("#faixa_de").prop('required', true);
+			$("#faixa_ate").prop('required', true);
+		}
+	});
 </script>
 @endsection

@@ -22,8 +22,10 @@ class EmpresaVagaController extends Controller
     public function store(request $request)
     {
         $data = $request->except('_token');
-        $data['pausar_vaga'] = ($data['pausar_vaga'] ? 1 : '');
-        $data['salario_acombinar'] = ($data['salario_acombinar'] ? 1 : '');
+        $data['pausar_vaga'] = (!empty($data['pausar_vaga']) ? 1 : '');
+        $data['salario_acombinar'] = (!empty($data['salario_acombinar']) ? 1 : '');
+        $data['salario_de'] = (!empty($data['salario_de']) ? $data['salario_de'] : '');
+        $data['salario_ate'] = (!empty($data['salario_ate']) ? $data['salario_ate'] : '');
 
         try {
             Vaga::create($data);

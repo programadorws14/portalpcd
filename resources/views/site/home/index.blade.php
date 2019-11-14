@@ -38,55 +38,50 @@
 <section class="jobs-card__container  pcd-container">
     <div class="row search-form__row">
 
-        @if(count($empresas) <= 0) 
-        <div class="alert alert-warning">
+        @if(count($vagas) <= 0) <div class="alert alert-warning">
             <p>Ainda não temos vagas cadastradas!</p>
     </div>
+
     @else
-    
-    
-    @foreach($empresas as $empresa)
-    
-    @foreach($empresa->vagas as $vaga)
+    @foreach($vagas as $vaga)
     <div class="col-xs-12 col-md-4" style="margin-top:25px;">
         <article class="jobs-card">
             <section class="jobs-card__header">
                 <div class="jobs-card__image">
-                    @if(!empty($empresa->logo))
-                    <img src="{{ asset($empresa->logo) ?? null }}" width="90" height="90" alt="{{ $empresa->nome ?? null }}" />
+
+                    @if(!empty($vaga->empresa->logo_empresa))
+                    <img src="{{ asset($vaga->empresa->logo_empresa) }}" width="90" height="90" alt="{{ $vaga->empresa->nome ?? null }}" />
                     @else
-                    <img src="{{ asset('img/img-empresa.png') }}" width="90" height="90" alt="{{ $empresa->nome ?? null }}" />
+                    <img src="{{ asset('img/img-empresa.png') }}" width="90" height="90" alt="{{ $vaga->empresa->nome ?? null }}" />
                     @endif
+
                 </div>
                 <div class="jobs-card__description">
-                    <a href="{{ route('site.vagas.index', $empresa->id) }}" class="jobs-card__openings">{{ count($empresa->vagas) }}</a>
-                    @if(!empty(Auth::user()))
+                    <a href="#" class="jobs-card__openings">{{ $vaga->numero_vagas ?? null }}</a>
+
                     <div class="jobs-card__favorite">
                         Favoritar
                         <button class="jobs-card__star">
                             <i class="fas fa-star"></i>
                         </button>
                     </div>
-                    @endif
-                    <h2 class="jobs-card__title">{{ substr($vaga->titulo, 0, 30) ?? null }}</h2>
-                    <h4 class="jobs-card__subtitle">{{ $vaga->profissao[0]->descricao ?? null }}</h4>
+
+                    <h2 class="jobs-card__title">{{ substr($vaga->titulo, 0, 20) ?? null }}</h2>
+                    <h4 class="jobs-card__subtitle">{{ substr($vaga->descricao_vaga, 0, 65) ?? null }}</h4>
                 </div>
             </section>
             <footer class="jobs-card__footer">
                 <p class="jobs-card__location">
-                    <i class="fas fa-location-arrow"></i>&nbsp;{{ $vaga->estado[0]->nome ?? null }}
+                    <i class="fas fa-location-arrow"></i>&nbsp; {{ $vaga->cidade ?? null }} - {{ $vaga->estado ?? null }}
                 </p>
                 <p class="jobs-card__date">
-                    <i class="fas fa-calendar"></i>&nbsp;{{ date('d/m/Y H:i:s', strtotime($vaga->created_at)) ?? null }}
+                    <i class="fas fa-calendar"></i>&nbsp; {{ date('d/m/Y', strtotime($vaga->created_at)) ?? null }}
                 </p>
             </footer>
         </article>
     </div>
     @endforeach
-    @endforeach
     @endif
-
-
     </div>
 
     <div class="row ">

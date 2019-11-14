@@ -12,6 +12,9 @@ Route::get('/vagas/{idempresa}', 'Site\VagasController@index')->name('site.vagas
 Route::get('/login', 'Site\LoginController@index')->name('site.login');
 Route::post('/login', 'Site\CadEmpresaController@store')->name('empresa.create.store');
 
+/**Verifica e-mail para saber se empresa existe  */
+Route::get('/dashboard/email/{email}', 'Site\LoginController@VerificaEmail')->name('empres.verifica.email');
+
 
 //Rotas ADM / EMPRESA / USUARIO
 Route::group(['prefix' => 'admin/'], function () {
@@ -71,8 +74,6 @@ Route::group(['prefix' => 'empresa/'], function () {
     Route::post('sair', 'Empresa\LoginController@sair')->name('empresa.sair');
     Route::get('dashboard', 'Empresa\EmpresaController@index')->name('empresa.dashboard');
     Route::post('dashboard', 'Empresa\EmpresaController@StoreProfile')->name('empresa.store.perfil');
-   
-
 
     Route::get('dashboard/delLinks/{idlinks}', 'Empresa\EmpresaController@delLinks')->name('empresa.delLinks');
 
@@ -80,10 +81,6 @@ Route::group(['prefix' => 'empresa/'], function () {
     Route::get('dashboard/vaga/edit/{id}', 'Empresa\EmpresaVagaController@edit')->name('empresa.vaga.edit');
     Route::post('dashboard/vaga/update', 'Empresa\EmpresaVagaController@update')->name('empresa.vaga.update');
     Route::get('dashboard/vaga/delete/{id}', 'Empresa\EmpresaVagaController@delete')->name('empresa.vaga.delete');
-
-
-
-
 
 
     // Route::get('vaga', 'Empresa\EmpresaVagaController@index')->name('empresa.vaga.index');

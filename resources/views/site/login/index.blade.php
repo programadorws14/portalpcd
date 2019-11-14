@@ -104,13 +104,16 @@
 
                 <form action="{{ route('empresa.create.store') }}" method="POST">
                     @csrf
+
+                    <small style="font-size:13px; color:red; display:none; margin:10px 0;" id="msgErroEmail"></small>
+
                     <input type="text" class="full" name="nome" placeholder="Nome Empresa" required>
-                    <input type="email" name="email" placeholder="E-mail corporativo" required>
+                    <input type="email" name="email" placeholder="E-mail corporativo" id="emailPerfil" required>
                     <input type="password" name="password" placeholder="Senha de acesso" required>
                     <input type="text" placeholder="Cargo Vaga*" required>
                     <input type="tel" name="telefone" class="telefone" placeholder="Telefone comercial" required>
                     <div class="area-botao">
-                        <input type="submit" value="Anunciar vaga">
+                        <input type="submit" value="Anunciar vaga" id="atualizarPerfil">
                     </div>
                     <p>Ao clicar em continuar, você aceita as <a href="#">Condições Legais</a> e a <a href="#">Política de Privacidade</a> da Busca PcD.</p>
                 </form>
@@ -136,6 +139,27 @@
         </div>
     </div>
 </section>
+@endsection
 
 
+@section('scripts')
+<script>
+    $("#emailPerfil").change(function() {
+        var email = $("#emailPerfil").val();
+
+        if (email != '') {
+            $.get('http://homolog.agenciagrowthhouse.com.br/portal-pcd/portal/public//dashboard/email/' + email, function(data) {
+                if (data.status == 'sucesso') {
+                    $("#emailPerfil").css('border', '1px solid red')
+                    $("#msgErroEmail").html('E-mail já existe, tente outro').fadeIn('slow');
+                    $("#atualizarPerfil").prop('disabled', true);
+                } else if (data.status == 'error') {
+                    $("#emailPerfil").css('border', '1px solid #eeeeee')
+                    $("#msgErroEmail").fadeOut('slow');
+                    $("#atualizarPerfil").prop('disabled', false);
+                }
+            });
+        }
+    });
+</script>
 @endsection

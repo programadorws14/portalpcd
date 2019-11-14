@@ -115,18 +115,36 @@ $(document).ready(function () {
 		$('#shadow').fadeOut();
 		$('.modal-nova-vaga').fadeOut();
 	});
+
+
+	$("#salario_acombinar_vaga").click(function () {
+		if ($("#salario_acombinar_vaga").is(':checked')) {
+			$("#salario_de_vaga").val('').prop('disabled', true);
+			$("#salario_ate_vaga").val('').prop('disabled', true);
+			$("#salario_de_vaga").prop('required', false);
+			$("#salario_ate_vaga").prop('required', false);
+		} else {
+			$("#salario_de_vaga").prop('disabled', false);
+			$("#salario_ate_vaga").prop('disabled', false);
+
+			$("#salario_de_vaga").prop('required', true);
+			$("#salario_ate_vaga").prop('required', true);
+		}
+	});
 });
+
 
 
 
 function modal_edit(id) {
 	var id = id;
 	document.getElementById('form-edit-vaga').reset();
-	$("#excluir_vaga").prop("href", "/empresa/dashboard/vaga/delete/" + id)
+	$("#excluir_vaga").prop("href", "http://homolog.agenciagrowthhouse.com.br/portal-pcd/portal/public/empresa/dashboard/vaga/delete/" + id)
 
 	if (id != '') {
-		$.get('/empresa/dashboard/vaga/edit/' + id, function (data) {
+		$.get('http://homolog.agenciagrowthhouse.com.br/portal-pcd/portal/public/empresa/dashboard/vaga/edit/' + id, function (data) {
 			if (data.status == 'success') {
+
 				$("#vaga_id").val(data.vaga.id);
 				$("#titulo_vaga_vaga").val(data.vaga.titulo);
 				$("#salario_de_vaga").val(data.vaga.salario_de);
@@ -136,7 +154,18 @@ function modal_edit(id) {
 				}
 				if (data.vaga.salario_acombinar != '') {
 					$("#salario_acombinar_vaga").prop('checked', true);
+					$("#salario_de_vaga").prop('disabled', true);
+					$("#salario_ate_vaga").prop('disabled', true);
+					$("#salario_de_vaga").prop('required', false);
+					$("#salario_ate_vaga").prop('required', false);
+				} else {
+					$("#salario_de_vaga").prop('disabled', false);
+					$("#salario_ate_vaga").prop('disabled', false);
+
+					$("#salario_de_vaga").prop('required', true);
+					$("#salario_ate_vaga").prop('required', true);
 				}
+
 				$('#tipo_emprego_vaga option').each((indice, elementos) => {
 					if (elementos.textContent == data.vaga.tipo_emprego) {
 						elementos.selected = true;
@@ -174,47 +203,4 @@ $(document).ready(function () {
 });
 
 
-/**Atualizar via Ajax. */
-
-// $(document).ready(function () {
-
-// 	$("#atualizar-vaga").click(function () {
-
-// 		var dados = $("#form-edit-vaga").serializeArray();
-
-// 		$.ajaxSetup({
-// 			headers: {
-// 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-// 			}
-// 		});
-
-// 		$.ajax({
-// 			url: "/empresa/dashboard/vaga/update",
-// 			type: 'post',
-// 			data: dados,
-// 			beforeSend: function () {
-// 				$("#atualizar-vaga").val('Aguarde Atualizando...').prop('disabled', true);
-// 			},
-// 			success: function (data) {
-// 				$("#atualizar-vaga").val('Atualizar').prop('disabled', false);
-// 				if (data.status == 'success') {
-// 					$("#vaga-atualizar-msg").fadeIn('slow', function () {
-// 						setTimeout(function () {
-// 							$("#vaga-atualizar-msg").fadeOut('slow');
-// 						}, 1500);
-// 					});
-// 				} else if (data.status == 'error') {
-// 					console.log(data);
-// 				}
-
-// 			},
-// 			fail: function (jqXHR, textStatus, msg) {
-// 				alert(msg);
-// 			}
-// 		});
-// 	});
-
-// 	return false;
-
-// });
 

@@ -19,9 +19,11 @@
 
     <script src="{{ asset('site/assets/scripts/main.js') }}"></script>
     <title>Portal PCD</title>
+    @routes()
 </head>
 
 <body>
+    <div id="shadow" style="display: none;"></div>
     <main id="container">
         <div class="wrapper container-fluid">
             <header class="site-header">

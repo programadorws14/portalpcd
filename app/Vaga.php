@@ -28,23 +28,8 @@ class Vaga extends Model
         'estado',
     ];
 
-    // public function estado()
-    // {
-    //     return $this->hasMany(Estado::class, 'id', 'estado_id');
-    // }
-
-    // public function municipio()
-    // {
-    //     return $this->hasMany(Municipio::class, 'id', 'municipio_id');
-    // }
-
-    // public function user()
-    // {
-    //     return $this->hasMany(Empresa::class, 'id', 'user_id');
-    // }
-
-    // public function profissao()
-    // {
-    //     return $this->hasMany(profissao::class, 'id', 'profissao_id');
-    // }
+    public function empresa()
+    {
+        return $this->hasOne(Empresa::class, 'id', 'empresa_id');
+    }
 }

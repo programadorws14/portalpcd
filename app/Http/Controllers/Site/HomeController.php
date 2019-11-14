@@ -11,10 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-
-        $empresas = Empresa::whereStatus(1)->get();
-        dd($empresas);
-        
-        return view('site.home.index', compact('empresas'));
+        $vagas = Vaga::with('empresa')->wherePausarVaga('')->get();
+        return view('site.home.index', compact('vagas'));
     }
 }
