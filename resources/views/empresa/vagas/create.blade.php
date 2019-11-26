@@ -208,28 +208,5 @@
             $("#endereco").val('');
         }
     });
-
-    $("#estado").change(function() {
-        if ($("#estado").val() != '') {
-            $.ajax({
-                type: 'get',
-                url: '/empresa/vaga/getEstado/' + $("#estado").val(),
-                beforeSend: function() {
-                    $("#municipio").attr('disabled', false);
-                    $("#municipio").append('<option selected>Carregando...</option>');
-                },
-                success: function(data) {
-                    $("#municipio").empty();
-                    data.forEach(function(valor, chave) {
-                        $("#municipio").append("<option value='" + valor['id'] + "'>" + valor['nome'] + "</option>");
-                    });
-                }
-            });
-        } else {
-            $("#municipio").empty();
-            $("#municipio").append('<option selected>Selecione um estado</option>');
-            $("#municipio").attr('disabled', true);
-        }
-    });
 </script>
 @endsection

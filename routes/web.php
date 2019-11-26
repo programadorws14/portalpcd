@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 //Site
 Route::get('/', 'Site\HomeController@index')->name('site.home');
 Route::get('/cadastrar-cv', 'Site\CadUsuarioController@CadastrarUsuario')->name('site.cadastrar.usuario');
+
 Route::get('/vagas/{idempresa}', 'Site\VagasController@index')->name('site.vagas.index');
 
 Route::get('/login', 'Site\LoginController@index')->name('site.login');
@@ -97,4 +98,11 @@ Route::group(['prefix' => 'empresa/'], function () {
     // Route::get('vaga/edit/{id}', 'Empresa\EmpresaVagaController@edit')->name('empresa.vaga.edit');
     // Route::post('vaga/update', 'Empresa\EmpresaVagaController@update')->name('empresa.vaga.update');
     // Route::get('vaga/delete/{id}', 'Empresa\EmpresaVagaController@delete')->name('empresa.vaga.delete');
+});
+
+
+Route::group(['prefix' => 'usuario/'], function () { 
+
+        Route::get('dashboard/', 'UsuarioController@dashboard')->name('usuario.dashboard');
+
 });

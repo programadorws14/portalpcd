@@ -19,6 +19,7 @@
 
     <script src="{{ asset('site/assets/scripts/main.js') }}"></script>
     <title>Portal PCD</title>
+    @routes
 </head>
 
 <body>

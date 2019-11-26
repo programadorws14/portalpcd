@@ -213,7 +213,7 @@
 
 	function delLinks(id) {
 		// 
-		$.get('http://homolog.agenciagrowthhouse.com.br/portal-pcd/portal/public//empresa/dashboard/delLinks/' + id, function(data) {
+		$.get(route('empresa.delLinks', id), function(data) {
 			if (data.status == 'success') {
 				$("#" + id).hide();
 			}

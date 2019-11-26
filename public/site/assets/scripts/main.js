@@ -139,10 +139,10 @@ $(document).ready(function () {
 function modal_edit(id) {
 	var id = id;
 	document.getElementById('form-edit-vaga').reset();
-	$("#excluir_vaga").prop("href", "http://homolog.agenciagrowthhouse.com.br/portal-pcd/portal/public/empresa/dashboard/vaga/delete/" + id)
+	$("#excluir_vaga").prop("href", route('empresa.vaga.delete', id))
 
 	if (id != '') {
-		$.get('http://homolog.agenciagrowthhouse.com.br/portal-pcd/portal/public/empresa/dashboard/vaga/edit/' + id, function (data) {
+		$.get(route('empresa.vaga.edit', id), function (data) {
 			if (data.status == 'success') {
 
 				$("#vaga_id").val(data.vaga.id);
