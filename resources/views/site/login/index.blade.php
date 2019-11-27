@@ -7,10 +7,11 @@
             <hr />
         </header>
         <div class="forms-area">
-            <form action="" class="default-form" id="candidato">
+            <form action="{{ route('usuario.login') }}" class="default-form" id="candidato" method="POST">
+                @csrf
                 <h2 class="form-title">Sou candidato - Quero me logar</h2>
-                <input type="email" placeholder="Digite seu e-mail">
-                <input type="password" placeholder="Digite sua senha">
+                <input type="email" placeholder="Digite seu e-mail" name="email">
+                <input type="password" placeholder="Digite sua senha" name="password">
                 <input type="submit" value="Entrar">
             </form>
 
@@ -56,13 +57,20 @@
             </div>
             <div class="card">
                 <h2 class="card-title">Cadastro candidato</h2>
-                <form action="">
-                    <input type="text" placeholder="Digite seu nome*">
-                    <input type="text" placeholder="Digite seu sobrenome*">
-                    <input type="email" placeholder="Digite seu email*">
-                    <input type="password" placeholder="Digite sua senha*">
-                    <input type="text" placeholder="Digite seu CEP*">
-                    <input type="text" placeholder="Digite seu cargo desejado*">
+                <form action="{{ route('usuario.create.store') }}" method="POST">
+                    @csrf
+                    <input type="text" placeholder="Digite seu nome*" name="nome" required>
+                    <input type="text" placeholder="Digite seu sobrenome*" required>
+                    <input type="email" placeholder="Digite seu email*" name="email" required>
+                    <input type="password" placeholder="Digite sua senha*" name="password" required>
+                    <input type="text" placeholder="Digite seu CEP*" name="cep" id="cep_candidato" required>
+                    <input type="hidden" name="rua" value="" id="rua_candidato" />
+                    <input type="hidden" name="complemento" value="" id="complemento_candidato" />
+                    <input type="hidden" name="bairro" value="" id="bairro_candidato" />
+                    <input type="hidden" name="cidade" value="" id="cidade_candidato" />
+                    <input type="hidden" name="estado" value="" id="estado_candidato" />
+
+                    <input type="text" placeholder="Digite seu cargo desejado*" required>
                     <div class="area-botao">
                         <input type="submit" value="Continuar">
                     </div>
@@ -146,7 +154,6 @@
 <script>
     $("#emailPerfil").change(function() {
         var email = $("#emailPerfil").val();
-
         if (email != '') {
             $.get(route('empres.verifica.email', email), function(data) {
                 if (data.status == 'sucesso') {
@@ -159,6 +166,33 @@
                     $("#atualizarPerfil").prop('disabled', false);
                 }
             });
+        }
+    });
+
+    $("#cep_candidato").change(function() {
+        var cep = $("#cep_candidato").val();
+        if (cep != '') {
+            $.get('https://viacep.com.br/ws/' + cep + '/json/', function(data) {
+                if (data != '') {
+                    $("#rua_candidato").val(data['logradouro']);
+                    $("#complemento_candidato").val(data['complemento']);
+                    $("#cidade_candidato").val(data['localidade']);
+                    $("#bairro_candidato").val(data['bairro']);
+                    $("#estado_candidato").val(data['uf']);
+                } else {
+                    $("#rua_candidato").val('');
+                    $("#complemento_candidato").val('');
+                    $("#cidade_candidato").val('');
+                    $("#bairro_candidato").val('');
+                    $("#estado_candidato").val('');
+                }
+            });
+        } else {
+            $("#rua_candidato").val('');
+            $("#complemento_candidato").val('');
+            $("#cidade_candidato").val('');
+            $("#bairro_candidato").val('');
+            $("#estado_candidato").val('');
         }
     });
 </script>
