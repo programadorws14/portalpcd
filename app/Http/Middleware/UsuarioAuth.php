@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioAuth
 {
@@ -16,7 +17,7 @@ class UsuarioAuth
     public function handle($request, Closure $next)
     {
         if (!Auth::guard('usuario')->check()) {
-            return redirect('/login');
+            return redirect()->route('site.login');
         }
         return $next($request);
     }

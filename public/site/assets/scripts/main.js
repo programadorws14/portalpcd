@@ -65,26 +65,27 @@ $(function () {
 
 // Abas da página empresa
 $(document).ready(function () {
-	$('.dashboard-dados-vagas .abas-area .aba').click(function () {
-		$('.dashboard-dados-vagas .abas-area .aba').removeClass('active');
+	$('.dashboard-dados-vagas .abas-area .aba, .dashboard-dados .abas-area .aba').click(function () {
+		$('.dashboard-dados-vagas .abas-area .aba, .dashboard-dados .abas-area .aba').removeClass('active');
 		$(this).addClass('active');
 
 		let open = $(this).attr('data-open');
 
-		$('.dashboard-dados-vagas .content-aba .content').fadeOut(400);
+		$('.dashboard-dados-vagas .content-aba .content, .dashboard-dados .content-aba .content').fadeOut(400);
 
 		setTimeout(() => {
-			$('.dashboard-dados-vagas .content-aba .content.' + open).fadeIn(400);
+			$('.dashboard-dados-vagas .content-aba .content.' + open + ', .dashboard-dados .content-aba .content.' + open).fadeIn(400);
 		}, 400);
 	})
 });
+
 
 // Adicionar novos input de link social
 $(document).on('click', '.meus-dados .links_social .more-link', function () {
 	if ($(this).hasClass('remove')) {
 		$(this).parent().remove();
 	} else {
-		$(this).parent().parent().append('<div class="link"><input type="text" name="links_social"><div class="more-link">+</div></div>');
+		$(this).parent().parent().append('<div class="link"><input type="text" name="links_social[]"><div class="more-link">+</div></div>');
 	}
 	$(this).addClass('remove');
 	$(this).text('x');
@@ -108,7 +109,8 @@ $(document).ready(function () {
 		$('#shadow').fadeIn();
 		$('.modal-nova-vaga').fadeIn();
 	});
-	$('.close').click(function () {
+
+	$('.close-nova-vaga').click(function () {
 		//Quando fechar modal, limpa form de nova vaga e form de editar
 		document.getElementById('form-edit-vaga').reset();
 		document.getElementById('form-nova-vaga').reset();
@@ -141,7 +143,6 @@ function modal_edit(id) {
 	if (id != '') {
 		$.get(route('empresa.vaga.edit', id), function (data) {
 			if (data.status == 'success') {
-
 				$("#vaga_id").val(data.vaga.id);
 				$("#titulo_vaga_vaga").val(data.vaga.titulo);
 				$("#salario_de_vaga").val(data.vaga.salario_de);
@@ -186,7 +187,7 @@ function modal_edit(id) {
 		$("#msgerro").css('display', 'block').fadeIn('slow');
 	}
 	$('#shadow').fadeIn();
-	$('.modal-edit').fadeIn('slow');
+	$('.modal-editar').fadeIn('slow');
 }
 
 $(document).ready(function () {
@@ -195,9 +196,26 @@ $(document).ready(function () {
 		document.getElementById('form-edit-vaga').reset();
 		document.getElementById('form-nova-vaga').reset();
 		$('#shadow').fadeOut();
-		$('.modal-edit').fadeOut();
+		$('.modal-editar').fadeOut();
 	});
 });
+
+$(document).ready(function () {
+
+	$('.dashboard-dados #new, .dashboard-dados .infos .edit').click(function () {
+		let openModal = $(this).attr('data-modal');
+		$('#shadow').fadeIn();
+		$('.modal-' + openModal).fadeIn();
+	});
+
+	$('#shadow, .modal-new .close').click(function () {
+		console.log('teste');
+		$('#shadow').fadeOut();
+		$('.modal-new').fadeOut();
+	});
+});
+
+
 
 
 

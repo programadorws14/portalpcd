@@ -1,4 +1,4 @@
-<div class="modal-edit">
+<div class="modal-editar" style="display: none">
 	<div class="close-edit">
 		<span></span>
 		<span></span>

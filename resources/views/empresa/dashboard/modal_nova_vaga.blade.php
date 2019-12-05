@@ -7,16 +7,15 @@
 </style>
 
 <div class="modal-nova-vaga">
-	<div class="close">
+	<div class="close close-nova-vaga">
 		<span></span>
 		<span></span>
 	</div>
 	<form action="{{ route('empresa.vaga.store') }}" id="form-nova-vaga" class="dados" method="POST">
 		@csrf
 		<input type="hidden" name="empresa_id" value="{{ Auth::guard('empresa')->user()->id }}">
-
 		<div class="header">
-			<!-- <a href="#" class="delete">Excluir</a> -->
+			<!-- <a href="#" class="delete">Exclauir</a> -->
 			<h3 class="form-title">Informações da Vaga</h3>
 		</div>
 

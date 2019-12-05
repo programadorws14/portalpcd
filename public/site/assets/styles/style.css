@@ -1,0 +1,83 @@
+.select2-selection__arrow {
+   display:none  !important;
+ }
+
+ .select2-container--default .select2-selection--single{
+ border:none !important;
+ }
+
+ .select2-container .select2-selection--single{
+   height: auto !important;
+   /* margin:0 0 5px 0 !important; */
+ }
+
+ .select2-container--default .select2-selection--single .select2-selection__rendered{
+   line-heig1ht: normal !important;
+ }
+
+ .search-form{
+     width:676px !important;
+ }
+
+.select2 ,
+  .search-form select {
+    border-radius: 4px;
+    background-color: white;
+    border: none;
+    padding: 10px;
+    text-transform: uppercase;
+    color: #999;
+    display: inline-block;
+    font-size: 14px;
+    width: auto;
+    font-family: "Montserrat", sans-serif; }
+
+    .search-form__submit{
+        padding:13px !important;
+        height: 47px !important;
+    }
+  
+    .jobs-card__title a {
+        color: #00b7dd;
+        text-decoration: none;
+    }
+
+    .jobs-card__title a:hover{
+        text-decoration: underline;
+    }
+
+    section.dashboard-dados-vagas .content-aba .vagas .modal-editar {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 150;
+        margin-top: 40px;
+        max-width: 95%;
+        max-height: 80vh;
+        overflow-y: auto; }
+        section.dashboard-dados-vagas .content-aba .vagas .modal-editar .close-edit {
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          right: 5px; 
+          top: 5px;
+          cursor: pointer; }
+          section.dashboard-dados-vagas .content-aba .vagas .modal-editar .close-edit span {
+            display: block;
+            background-color: #e74c3c;
+            height: 1.5px;
+            width: 100%;
+            border-radius: 2px;
+            position: relative;
+            top: 50%; }
+            section.dashboard-dados-vagas .content-aba .vagas .modal-editar .close-edit span:first-child {
+              transform: rotate(45deg);
+              top: 12px;
+              left: 1px; }
+            section.dashboard-dados-vagas .content-aba .vagas .modal-editar .close-edit span:last-child {
+              transform: rotate(-45deg); }
+        section.dashboard-dados-vagas .content-aba .vagas .modal-editar .dados {
+          padding: 20px;
+          margin-bottom: 0; }
