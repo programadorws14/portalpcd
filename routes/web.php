@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 //Site
 Route::get('/', 'Site\HomeController@index')->name('site.home');
-Route::get('/vagas/{idempresa}', 'Site\VagasController@index')->name('site.vagas.index');
+Route::get('/vaga/{id}', 'Site\VagasController@show')->name('site.vagas.show');
 
 //Cadastro de empresas home
 Route::get('/login', 'Site\LoginController@index')->name('site.login');

@@ -133,9 +133,6 @@ $(document).ready(function () {
 	});
 });
 
-
-
-
 function modal_edit(id) {
 	var id = id;
 	document.getElementById('form-edit-vaga').reset();

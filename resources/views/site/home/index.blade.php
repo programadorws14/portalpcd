@@ -7,22 +7,25 @@
         <strong>AQUI FICA MAIS PERTO DO SEU OBJETIVO</strong>
     </h1>
     <form action="#" class="search-form">
-        <input type="text" name="job-title" placeholder="Digite o Cargo ou Área Profissional" />
+        <!-- <input type="text" name="job-title" placeholder="Digite o Cargo ou Área Profissional" /> -->
+        <select class="select2" name="" placeholder="Vagas" place style=" height: auto !important;">
+            <option>Selecione</option>
+        </select>
         <p class="search-form__helper-text">Exemplos: Gerente, UX, Telefonista</p>
 
         <div class="search-form__breaker"></div>
 
-        <input type="text" name="job-city" placeholder="Cidade" />
+        <!-- <input type="text" name="job-title" placeholder="Digite o Cargo ou Área Profissional" /> -->
+        <select class="select2" name="" placeholder="Cidades" style=" height: auto !important;">
+            <option>Selecione</option>
+        </select>
         <p class="search-form__helper-text">
             Exemplos: Ribeirão Preto, São Paulo, Rio de Janeiro
         </p>
 
         <div class="search-form__breaker"></div>
 
-        <select name="job-state" id="" class="select-css">
-            <option value="">Região</option>
-            <option value=""></option>
-        </select>
+
 
         <div class="search-form__breaker"></div>
         <button class="search-form__submit">Buscar Vagas</button>
@@ -57,16 +60,7 @@
 
                 </div>
                 <div class="jobs-card__description">
-                    <a href="#" class="jobs-card__openings">{{ $vaga->numero_vagas ?? null }}</a>
-
-                    <div class="jobs-card__favorite">
-                        Favoritar
-                        <button class="jobs-card__star">
-                            <i class="fas fa-star"></i>
-                        </button>
-                    </div>
-
-                    <h2 class="jobs-card__title">{{ substr($vaga->titulo, 0, 20) ?? null }}</h2>
+                    <h2 class="jobs-card__title"><a href="{{ route('site.vagas.show', $vaga->id) }}">{{ substr($vaga->titulo, 0, 20) ?? null }}</a></h2>
                     <h4 class="jobs-card__subtitle">{{ substr($vaga->descricao_vaga, 0, 65) ?? null }}</h4>
                 </div>
             </section>
@@ -75,7 +69,7 @@
                     <i class="fas fa-location-arrow"></i>&nbsp; {{ $vaga->cidade ?? null }} - {{ $vaga->estado ?? null }}
                 </p>
                 <p class="jobs-card__date">
-                    <i class="fas fa-calendar"></i>&nbsp; {{ date('d/m/Y', strtotime($vaga->created_at)) ?? null }}
+                    <i class="fas fa-calendar"></i>&nbsp; Publicado em: {{ date('d/m/Y', strtotime($vaga->created_at)) ?? null }}
                 </p>
             </footer>
         </article>
@@ -129,10 +123,6 @@
                         <a href="#" class="blog-post__read-more">Leia Mais...</a>
                     </div>
                 </section>
-                <section class="blog-post__comments">
-                    <i class="fas fa-user"></i>
-                    comentários
-                </section>
                 <footer class="blog-post__tags">
                     <ul>
                         <li><a href="#" class="blog-post__tag">dicas</a></li>
@@ -162,10 +152,6 @@
                         <a href="#" class="blog-post__read-more">Leia Mais...</a>
                     </div>
                 </section>
-                <section class="blog-post__comments">
-                    <i class="fas fa-user"></i>
-                    comentários
-                </section>
                 <footer class="blog-post__tags">
                     <ul>
                         <li><a href="#" class="blog-post__tag">dicas</a></li>
@@ -194,10 +180,6 @@
 
                         <a href="#" class="blog-post__read-more">Leia Mais...</a>
                     </div>
-                </section>
-                <section class="blog-post__comments">
-                    <i class="fas fa-user"></i>
-                    comentários
                 </section>
                 <footer class="blog-post__tags">
                     <ul>
