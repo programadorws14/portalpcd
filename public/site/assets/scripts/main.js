@@ -106,14 +106,12 @@ $(document).ready(function () {
 // Modal adicionar nova vaga / Alterar vaga
 $(document).ready(function () {
 	$('#nova-vaga').click(function () {
+		document.getElementById('form-nova-vaga').reset();
 		$('#shadow').fadeIn();
 		$('.modal-nova-vaga').fadeIn();
 	});
 
-	$('.close-nova-vaga').click(function () {
-		//Quando fechar modal, limpa form de nova vaga e form de editar
-		document.getElementById('form-edit-vaga').reset();
-		document.getElementById('form-nova-vaga').reset();
+	$('#shadow, .close-nova-vaga').click(function () {
 		$('#shadow').fadeOut();
 		$('.modal-nova-vaga').fadeOut();
 	});
@@ -121,16 +119,15 @@ $(document).ready(function () {
 
 	$("#salario_acombinar_vaga").click(function () {
 		if ($("#salario_acombinar_vaga").is(':checked')) {
-			$("#salario_de_vaga").val('').prop('disabled', true);
-			$("#salario_ate_vaga").val('').prop('disabled', true);
-			$("#salario_de_vaga").prop('required', false);
-			$("#salario_ate_vaga").prop('required', false);
+			$("#salario_de_vaga").empty();
+			$("#salario_ate_vaga").empty();
+
+			$("#salario_de_vaga").prop('disabled', true);
+			$("#salario_ate_vaga").prop('disabled', true);
+
 		} else {
 			$("#salario_de_vaga").prop('disabled', false);
 			$("#salario_ate_vaga").prop('disabled', false);
-
-			$("#salario_de_vaga").prop('required', true);
-			$("#salario_ate_vaga").prop('required', true);
 		}
 	});
 });
@@ -139,7 +136,6 @@ function modal_edit(id) {
 	var id = id;
 	document.getElementById('form-edit-vaga').reset();
 	$("#excluir_vaga").prop("href", route('empresa.vaga.delete', id))
-
 	if (id != '') {
 		$.get(route('empresa.vaga.edit', id), function (data) {
 			if (data.status == 'success') {
@@ -191,10 +187,7 @@ function modal_edit(id) {
 }
 
 $(document).ready(function () {
-	$('.close-edit').click(function () {
-		//Quando fechar modal, limpa form de nova vaga e form de editar
-		document.getElementById('form-edit-vaga').reset();
-		document.getElementById('form-nova-vaga').reset();
+	$('#shadow, .close-edit').click(function () {
 		$('#shadow').fadeOut();
 		$('.modal-editar').fadeOut();
 	});

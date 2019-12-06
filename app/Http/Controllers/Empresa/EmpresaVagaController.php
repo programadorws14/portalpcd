@@ -18,10 +18,10 @@ class EmpresaVagaController extends Controller
         $this->middleware('EmpresaAuth');
     }
 
-
     public function store(request $request)
     {
         $data = $request->except('_token');
+
         $data['pausar_vaga'] = (!empty($data['pausar_vaga']) ? 1 : '');
         $data['salario_acombinar'] = (!empty($data['salario_acombinar']) ? 1 : '');
         $data['salario_de'] = (!empty($data['salario_de']) ? $data['salario_de'] : '');
@@ -54,11 +54,12 @@ class EmpresaVagaController extends Controller
 
     public function update(request $request)
     {
-
         try {
             $data = $request->except("_token", 'vaga_id');
             $data['pausar_vaga'] = (!empty($data['pausar_vaga']) ? $data['pausar_vaga'] : '');
             $data['salario_acombinar'] = (!empty($data['salario_acombinar']) ? $data['salario_acombinar'] : '');
+
+
             Vaga::whereId($request['vaga_id'])->update($data);
             return redirect()->back()->with('success', 'Atualizado com sucesso!');
         } catch (Exception $e) {
