@@ -14,7 +14,7 @@ class UsuarioController extends Controller
     }
 
     public function dashboard()
-    {
+    {   
         return view('usuario.dashboard.index');
     }
 
