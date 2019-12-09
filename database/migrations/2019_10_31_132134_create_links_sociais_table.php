@@ -18,6 +18,8 @@ class CreateLinksSociaisTable extends Migration
             $table->string('link')->nullable();
             $table->bigInteger('empresa_id')->nullable();
             $table->foreign('empresa_id')->references('id')->on('empresas');
+            $table->bigInteger('usuario_id')->nullable();
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->timestamps();
             $table->softDeletes();
         });

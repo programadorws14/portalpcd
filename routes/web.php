@@ -16,8 +16,9 @@ Route::post('/login/empresa', 'Site\CadEmpresaController@store')->name('empresa.
 Route::post('/login/usuario', 'Site\CadUsuarioController@store')->name('usuario.create.store');
 
 
-/**Verifica e-mail para saber se empresa existe  */
-Route::get('/dashboard/email/{email}', 'Site\LoginController@VerificaEmail')->name('empres.verifica.email');
+/**Verifica e-mail */
+Route::get('/dashboard/email/empresa/{email}', 'Site\LoginController@VerificaEmailEmpresa')->name('empres.verifica.email');
+Route::get('/dashboard/email/usuario/{email}', 'Site\LoginController@VerificaEmailUsuario')->name('usuario.verifica.email');
 
 
 // //Rotas ADM / EMPRESA / USUARIO
@@ -109,6 +110,8 @@ Route::group(['prefix' => 'usuario/'], function () {
     Route::post('login', 'Usuario\LoginController@login')->name('usuario.login');
     Route::post('sair', 'Usuario\LoginController@sair')->name('usuario.sair');
 
-    Route::get('dashboard/', 'Usuario\UsuarioController@dashboard')->name('usuario.dashboard');
+    Route::get('dashboard/delLinks/{idlinks}', 'Usuario\UsuarioController@delLinks')->name('usuario.delLinks');
 
+    Route::get('dashboard/', 'Usuario\UsuarioController@dashboard')->name('usuario.dashboard');
+    Route::post('dashboard/', 'Usuario\UsuarioController@StoreProfile')->name('usuario.store.perfil');
 });

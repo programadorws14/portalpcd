@@ -9,5 +9,5 @@ class LinksSociais extends Model
 {
     use SoftDeletes;
     protected $table = 'links_sociais';
-    protected $fillable = ['link', 'empresa_id'];
+    protected $fillable = ['link', 'empresa_id', 'usuario_id'];
 }

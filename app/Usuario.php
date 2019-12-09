@@ -33,6 +33,4 @@ class Usuario extends Authenticatable
         'cidade',
         'estado',
     ];
-
-  
 }

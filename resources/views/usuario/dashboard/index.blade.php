@@ -9,9 +9,13 @@
 <div class="wrapper container-fluid">
 	<div class="row">
 		<div class="col-xs-12 col-md-3 profile__info">
-			<img src="{{ asset('site/assets/images/profile-image.png') }}" alt="" />
+			@if(!empty(Auth::guard('usuario')->user()->foto))
+				<img src="{{ asset(Auth::guard('usuario')->user()->foto) }}" width="191" height="191" style="border-radius:100%;" alt="" />
+			@else
+				<img src="{{ asset('site/assets/images/profile-image.png') }}" alt="" />
+			@endif
 			<h2 class="profile__title">Lorem Ipsum sit dolor amet</h2>
-			<p class="profile__username">@Loremipsum</p>
+			{{-- <p class="profile__username">@Loremipsum</p> --}}
 		</div>
 	</div>
 	<div class="row">
@@ -60,6 +64,17 @@
 					<a class="aba" data-open="meus-dados">Meus dados</a>
 				</div>
 				<div class="content-aba">
+
+					@if(Session('success'))
+						<div class="alert alert-success" style="margin:20px 0; color:green;">
+							<b><i class="fas fa-check"></i> {{ Session('success') }}</b>
+						</div>
+					@elseif(Session('error'))
+						<div class="alert alert-danger" style="margin:20px 0; color:red;">
+							<b><i class="fas fa-times-circle"></i> {{ Session('error') }}</b>
+						</div>
+					@endif
+
 					<div class="content vagas active">
 						<ul>
 							<li>
@@ -81,26 +96,27 @@
 					</div>
 
 					<div class="content meus-dados">
-						<form action="#" class="dados">
-							<div class="campo">
+						
+						<form action="{{ route('usuario.store.perfil') }}" method="POST" enctype="multipart/form-data" class="dados">
+							@csrf
+							<div class="campo"> 
 								<label for="nome">Nome</label>
 								<input type="text" name="nome" id="dados" value="{{ Auth::guard('usuario')->user()->nome ?? null }}">
 							</div>
 
 							<div class="campo">
 								<label for="senha">Senha de acesso</label>
-								<input type="password" name="senha">
+								<input type="password" name="password">
 							</div>
 
 							<div class="campo">
-								<label for="email">E-mail</label>
-
-								<input type="email" name="email" value="{{ Auth::guard('usuario')->user()->email ?? null }}">
+								<label for="email">E-mail <small style="font-size:12px; color:red; display:none;" id="msgErroEmail"></small></label> </label>
+								<input type="email" id="emailPerfil" name="email" value="{{ Auth::guard('usuario')->user()->email ?? null }}" required>
 							</div>
 
 							<div class="campo">
-								<label for="data_nasc">Data de Nascimento</label>
-								<input type="date" name="data_nascimento " value="{{ Auth::guard('usuario')->user()->data_nascimento ?? null }}">
+								<label for="data_nascimento">Data de Nascimento</label>
+								<input type="date" name="data_nascimento" value="{{ Auth::guard('usuario')->user()->data_nascimento ?? null }}">
 							</div>
 
 							<div class="campo">
@@ -113,27 +129,27 @@
 
 							<div class="campo">
 								<label for="cpf">CPF</label>
-								<input type="text" name="cpf" value="{{ Auth::guard('usuario')->user()->cpf ?? null }}">
+								<input type="text" name="cpf" class="cpf" value="{{ Auth::guard('usuario')->user()->cpf ?? null }}">
 							</div>
 
 							<div class="campo full">
-								<label for="descricao_candidato">Texto sobre você (Resumo)</label>
+								<label for="texto_sobre_voce">Texto sobre você (Resumo)</label>
 								<textarea name="texto_sobre_voce">{{ Auth::guard('usuario')->user()->texto_sobre_voce ?? null }}</textarea>
 							</div>
 
 							<div class="campo">
 								<label for="telefone_residencial">Telefone Residencial</label>
-								<input type="text" name="telefone_residencial" value="{{ Auth::guard('usuario')->user()->telefone_residencial ?? null }}">
+								<input type="text" name="telefone_residencial" class="telefone" value="{{ Auth::guard('usuario')->user()->telefone_residencial ?? null }}">
 							</div>
 
 							<div class="campo">
 								<label for="telefone_comercial">Telefone Comercial</label>
-								<input type="text" name="telefone_comercial" value="{{ Auth::guard('usuario')->user()->telefone_comercial ?? null }}">
+								<input type="text" name="telefone_comercial" class="telefone" value="{{ Auth::guard('usuario')->user()->telefone_comercial ?? null }}">
 							</div>
 
 							<div class="campo">
 								<label for="telefone_celular">Telefone Celular</label>
-								<input type="text" name="telefone_celular" value="{{ Auth::guard('usuario')->user()->telefone_celular ?? null }}" >
+								<input type="text" name="telefone_celular" class="telefone" value="{{ Auth::guard('usuario')->user()->telefone_celular ?? null }}" >
 							</div>
 
 							<div class="campo">
@@ -144,10 +160,23 @@
 							<div class="links_social">
 								<label for="links_social">Link de rede social</label>
 								<div class="link">
-									<input type="text" name="links_social">
+									<input type="text" name="links_social[]">
 									<div class="more-link">+</div>
 								</div>
 							</div>
+
+							@if(!empty($links))
+								@foreach($links as $link)
+									<div class="links_social" id="{{ $link->id }}">
+										<div class="link">
+											<input type="text" value="{{ $link->link }}" disabled>
+											<div class="">
+												<button type="button" onclick="delLinks({{ $link->id }})" style="text-decoration:none; background: #e74c3c; width: 40px; height: 40px; border-radius: 50%; color: #fff; font-weight: bold; font-size: 24px; display: flex; justify-content: center; align-items: center; cursor: pointer;">x</button>
+											</div>
+										</div>
+									</div> 
+								@endforeach
+							@endif
 
 							<h3>Endereço</h3>
 
@@ -491,4 +520,34 @@
 		</div>
 	</div>
 </section>
+@endsection
+
+@section('scripts')
+	<script>
+		$("#emailPerfil").change(function() {
+			var email = $("#emailPerfil").val();
+			if (email != '') {
+				$.get(route('usuario.verifica.email', email), function(data) {
+					if (data.status == 'sucesso') {
+						$("#emailPerfil").css('border', '1px solid red')
+						$("#msgErroEmail").html('E-mail já existe, tente outro').fadeIn('slow');
+						$("#atualizarPerfil").prop('disabled', true);
+					} else {
+						$("#emailPerfil").css('border', '1px solid #eeeeee')
+						$("#msgErroEmail").fadeOut('slow');
+						$("#atualizarPerfil").prop('disabled', false);
+					}
+				});
+			}
+		});
+
+		function delLinks(id) {
+			$.get(route('usuario.delLinks', id), function(data) {
+				if (data.status == 'success') {
+					$("#" + id).hide();
+				}
+			});
+		}
+
+	</script>
 @endsection

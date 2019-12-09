@@ -12,7 +12,7 @@
 	</div>
 
 	<div class="campo">
-		<label for="email">E-mail <small style="font-size:10px; color:red; display:none;" id="msgErroEmail"></small></label>
+		<label for="email">E-mail <small style="font-size:12px; color:red; display:none;" id="msgErroEmail"></small></label>
 		<input type="email" name="email" id="emailPerfil" value="{{ ( Auth::guard('empresa')->user()->email ? Auth::guard('empresa')->user()->email  : old('email'))  }}" required>
 	</div>
 

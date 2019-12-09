@@ -116,7 +116,7 @@
 	$("#emailPerfil").change(function() {
 		var email = $("#emailPerfil").val();
 		if (email != '') {
-			$.get('http://homolog.agenciagrowthhouse.com.br/portal-pcd/portal/public/dashboard/email/' + email, function(data) {
+			$.get(route('empres.verifica.email', email), function(data) {
 				if (data.status == 'sucesso') {
 					$("#emailPerfil").css('border', '1px solid red')
 					$("#msgErroEmail").html('E-mail já existe, tente outro').fadeIn('slow');
@@ -129,6 +129,7 @@
 			});
 		}
 	});
+
 
 	$("#cep").change(function() {
 		var cep = $("#cep").val();
