@@ -226,60 +226,22 @@
 							<h3 class="title-content">Experiência</h3>
 							<div class="list-items">
 								<ul>
-									<li>
-										<div class="infos">
-											<span class="edit" data-modal="nova-experiencia"><i class="fas fa-edit"></i></span>
-											<span class="cargo">EntregadorEntregadorEntregador</span>
-											<span class="empresa">Pastelaria</span>
-										</div>
-									</li>
+									@if (count($experiencias) >= 1)
+										@foreach ($experiencias as $ex)
+											<li>
+												<div class="infos">
+												<span class="edit" data-modal="nova-experiencia"><i class="fas fa-edit"></i></span>
+													<span class="cargo">{{ $ex->cargo ?? null }}</span>
+													<span class="empresa">{{ $ex->nome_empresa ?? null }}</span>
+												</div>
+											</li>
+										@endforeach
+									@endif
 								</ul>
 								<div class="area-botao">
 									<button id="new" data-modal="nova-experiencia">Adicionar experiência</button>
 								</div>
-
-								<div class="modal-new modal-nova-experiencia">
-									<div class="close">
-										<span></span>
-										<span></span>
-									</div>
-									<form action="#" class="dados">
-										<div class="header">
-											<a href="#" class="delete">Excluir</a>
-											<h3 class="form-title">Informações da Experiência</h3>
-										</div>
-										<div class="campo">
-											<label for="nome_empresa">Nome Empresa</label>
-											<input type="text" name="nome_empresa">
-										</div>
-										<div class="campo">
-											<label for="cargo">Cargo</label>
-											<input type="text" name="cargo">
-										</div>
-										<div class="campo">
-											<label for="data_inicio">Data início</label>
-											<input type="date" name="data_inicio">
-										</div>
-										<div class="campo">
-											<label for="data_termino">Data término/previsão</label>
-											<input type="date" name="data_termino">
-										</div>
-										<div class="campo">
-											<label for="cidade">Cidade</label>
-											<input type="text" name="cidade">
-										</div>
-										<div class="campo full">
-											<label for="descricao">Descrição</label>
-											<textarea name="descricao"></textarea>
-										</div>
-
-										<div class="area-botao">
-											<div class="campo">
-												<input type="submit" value="Adicionar">
-											</div>
-										</div>
-									</form>
-								</div>
+								@include('usuario.dashboard.modal_nova_experiencia')
 							</div>
 						</div>
 
@@ -287,60 +249,22 @@
 							<h3 class="title-content">Formação</h3>
 							<div class="list-items">
 								<ul>
-									<li>
-										<div class="infos">
-											<span class="edit" data-modal="nova-formacao"><i class="fas fa-edit"></i></span>
-											<span class="formacao">Análista de dados</span>
-											<span class="instituicao">USP</span>
-										</div>
-									</li>
+								@if (count($formacoes) >= 1)
+									@foreach ($formacoes as $formacao)
+										<li>
+											<div class="infos">
+											<span class="edit" data-modal="nova-experiencia"><i class="fas fa-edit"></i></span>
+												<span class="formacao">{{ $formacao->formacao ?? null }}</span>
+												<span class="instituicao">{{ $formacao->nome_instituicao ?? null }}</span>
+											</div>
+										</li>
+									@endforeach
+								@endif
 								</ul>
 								<div class="area-botao">
 									<button id="new" data-modal="nova-formacao">Adicionar formação</button>
 								</div>
-								<div class="modal-new modal-nova-formacao">
-									<div class="close">
-										<span></span>
-										<span></span>
-									</div>
-									<form action="#" class="dados">
-										<div class="header">
-											<a href="#" class="delete">Excluir</a>
-											<h3 class="form-title">Informações da Formação</h3>
-										</div>
-										<div class="campo">
-											<label for="nome_instituicao">Nome instituição</label>
-											<input type="text" name="nome_instituicao">
-										</div>
-										<div class="campo">
-											<label for="formacao">Formação</label>
-											<input type="text" name="formacao">
-										</div>
-										<div class="campo">
-											<label for="data_inicio">Data início</label>
-											<input type="date" name="data_inicio">
-										</div>
-										<div class="campo">
-											<label for="data_termino">Data término/previsão</label>
-											<input type="date" name="data_termino">
-										</div>
-										<div class="campo full">
-											<label for="descricao_formacao">Descrição</label>
-											<textarea name="descricao_formacao"></textarea>
-										</div>
-										<div class="campo full">
-											<label for="recomendacoes_premiacoes">Recomendações ou
-												premiações</label>
-											<input type="text" name="recomendacoes_premiacoes">
-										</div>
-
-										<div class="area-botao">
-											<div class="campo">
-												<input type="submit" value="Adicionar">
-											</div>
-										</div>
-									</form>
-								</div>
+								@include('usuario.dashboard.modal_nova_formacao')
 							</div>
 						</div>
 
@@ -348,60 +272,22 @@
 							<h3 class="title-content">Voluntário</h3>
 							<div class="list-items">
 								<ul>
-									<li>
-										<div class="infos">
-											<span class="edit" data-modal="nova-voluntario"><i class="fas fa-edit"></i></span>
-											<span class="cargo">Entregador</span>
-											<span class="instituicao">Marmitas do bem</span>
-										</div>
-									</li>
+								@if (count($voluntarios) >= 1)
+									@foreach ($voluntarios as $voluntario)
+										<li>
+											<div class="infos">
+											<span class="edit" data-modal="nova-experiencia"><i class="fas fa-edit"></i></span>
+												<span class="formacao">{{ $voluntario->cargo_voluntario ?? null }}</span>
+												<span class="instituicao">{{ $voluntario->nome_instituicao_voluntario ?? null }}</span>
+											</div>
+										</li>
+									@endforeach
+								@endif
 								</ul>
 								<div class="area-botao">
 									<button id="new" data-modal="nova-voluntario">Adicionar Voluntariado</button>
 								</div>
-								<div class="modal-new modal-nova-voluntario">
-									<div class="close">
-										<span></span>
-										<span></span>
-									</div>
-									<form action="#" class="dados">
-										<div class="header">
-											<a href="#" class="delete">Excluir</a>
-											<h3 class="form-title">Informações do Voluntariado</h3>
-										</div>
-										<div class="campo">
-											<label for="nome_instituicao_voluntario">Nome da Institução</label>
-											<input type="text" name="nome_instituicao_voluntario">
-										</div>
-										<div class="campo">
-											<label for="cargo_voluntario">Cargo</label>
-											<input type="text" name="cargo_voluntario">
-										</div>
-										<div class="campo">
-											<label for="data_inicio">Data início</label>
-											<input type="date" name="data_inicio">
-										</div>
-										<div class="campo">
-											<label for="data_termino">Data término/previsão</label>
-											<input type="date" name="data_termino">
-										</div>
-										<div class="campo full">
-											<label for="recomendacoes_premiacoes">Recomendações ou
-												premiações</label>
-											<input type="text" name="recomendacoes_premiacoes">
-										</div>
-										<div class="campo full">
-											<label for="descricao">Descrição</label>
-											<textarea name="descricao"></textarea>
-										</div>
-
-										<div class="area-botao">
-											<div class="campo">
-												<input type="submit" value="Adicionar">
-											</div>
-										</div>
-									</form>
-								</div>
+								@include('usuario.dashboard.modal_nova_voluntario')
 							</div>
 						</div>
 					</div>
@@ -524,6 +410,7 @@
 
 @section('scripts')
 	<script>
+
 		$("#emailPerfil").change(function() {
 			var email = $("#emailPerfil").val();
 			if (email != '') {

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Usuario;
 
+use App\Experiencia;
+use App\Formacao;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\LinksSociais;
 use App\Usuario;
+use App\Voluntario;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +22,10 @@ class UsuarioController extends Controller
     public function dashboard()
     {
         $links = LinksSociais::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
-        return view('usuario.dashboard.index', compact('links'));
+        $experiencias = Experiencia::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
+        $formacoes = Formacao::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
+        $voluntarios = Formacao::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
+        return view('usuario.dashboard.index', compact('links', 'experiencias', 'formacoes', 'voluntarios'));
     }
 
     public function StoreProfile(request $request)
@@ -71,6 +77,39 @@ class UsuarioController extends Controller
                 'status' => 'error',
                 'erro' => $e->getMessage()
             ));
+        }
+    }
+
+    public function AdicionaExperiencia(request $request)
+    {
+        try {
+            $data = $request->except('_token');
+            Experiencia::create($data);
+            return redirect()->back()->with('success', 'Cadastrado com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
+        }
+    }
+
+    public function AdicionaFormacao(request $request)
+    {
+        try {
+            $data = $request->except('_token');
+            Formacao::create($data);
+            return redirect()->back()->with('success', 'Cadastrado com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
+        }
+    }
+
+    public function AdicionaVoluntario(request $request)
+    {
+        try {
+            $data = $request->except('_token');
+            Voluntario::create($data);
+            return redirect()->back()->with('success', 'Cadastrado com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
         }
     }
 }
