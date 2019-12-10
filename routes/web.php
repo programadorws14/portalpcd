@@ -32,7 +32,7 @@ Route::group(['prefix' => 'empresa/'], function () {
     Route::get('dashboard/delLinks/{idlinks}', 'Empresa\EmpresaController@delLinks')->name('empresa.delLinks');
 
     Route::post('dashboard/vaga/store', 'Empresa\EmpresaVagaController@store')->name('empresa.vaga.store');
-    Route::get('dashboard/vaga/edit/{id}', 'Empresa\EmpresaVagaController@edit')->name('empresa.vaga.edit');
+        Route::get('dashboard/vaga/edit/{id}', 'Empresa\EmpresaVagaController@edit')->name('empresa.vaga.edit');
     Route::post('dashboard/vaga/update', 'Empresa\EmpresaVagaController@update')->name('empresa.vaga.update');
     Route::get('dashboard/vaga/delete/{id}', 'Empresa\EmpresaVagaController@delete')->name('empresa.vaga.delete');
 });
@@ -49,4 +49,10 @@ Route::group(['prefix' => 'usuario/'], function () {
     Route::post('dashboard/add/formacao', 'Usuario\UsuarioController@AdicionaFormacao')->name('usuario.add.formacao');
     Route::post('dashboard/add/voluntario', 'Usuario\UsuarioController@AdicionaVoluntario')->name('usuario.add.voluntario');
 
+    Route::get('dashboard/get/experiencia/{id}', 'Usuario\UsuarioController@getExperiencia')->name('usuario.get.experiencia');
+    Route::post('dashboard/edit/experiencia/update', 'Usuario\UsuarioController@UpdateExperiencie')->name('usuario.update.experiencia');
+    Route::get('dashboard/get/formacao/{id}', 'Usuario\UsuarioController@getFormacao')->name('usuario.get.formacao');
+    Route::post('dashboard/edit/formacao/update', 'Usuario\UsuarioController@UpdateFormacao')->name('usuario.update.formacao');
+    Route::get('dashboard/get/voluntario/{id}', 'Usuario\UsuarioController@getVoluntario')->name('usuario.get.voluntario');
+    Route::post('dashboard/edit/voluntario/update', 'Usuario\UsuarioController@UpdateVoluntario')->name('usuario.update.voluntario');
 });

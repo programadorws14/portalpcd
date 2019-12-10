@@ -10,9 +10,9 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-3 profile__info">
 			@if(!empty(Auth::guard('usuario')->user()->foto))
-				<img src="{{ asset(Auth::guard('usuario')->user()->foto) }}" width="191" height="191" style="border-radius:100%;" alt="" />
+			<img src="{{ asset(Auth::guard('usuario')->user()->foto) }}" width="191" height="191" style="border-radius:100%;" alt="" />
 			@else
-				<img src="{{ asset('site/assets/images/profile-image.png') }}" alt="" />
+			<img src="{{ asset('site/assets/images/profile-image.png') }}" alt="" />
 			@endif
 			<h2 class="profile__title">Lorem Ipsum sit dolor amet</h2>
 			{{-- <p class="profile__username">@Loremipsum</p> --}}
@@ -51,7 +51,7 @@
 							</div>
 						</div>
 					</section>
-					<button class="update-resume">
+					<button class="update-resume" id="atualizar-cv">
 						<i class="fas fa-pencil-alt"></i> Atualizar Currículo
 					</button>
 				</div>
@@ -60,22 +60,22 @@
 		<div class="col-md-8 col-md-offset-1 col-xs-12">
 			<section class="dashboard-dados negative">
 				<div class="abas-area">
-					<a class="aba active" data-open="vagas">Minhas candidaturas</a>
-					<a class="aba" data-open="meus-dados">Meus dados</a>
+					<a class="aba active" data-open="vagas" id="aba-vagas">Minhas candidaturas</a>
+					<a class="aba" data-open="meus-dados" id="aba-meus-dados">Meus dados</a>
 				</div>
 				<div class="content-aba">
 
 					@if(Session('success'))
-						<div class="alert alert-success" style="margin:20px 0; color:green;">
-							<b><i class="fas fa-check"></i> {{ Session('success') }}</b>
-						</div>
+					<div class="alert alert-success" style="margin:20px 0; color:green;">
+						<b><i class="fas fa-check"></i> {{ Session('success') }}</b>
+					</div>
 					@elseif(Session('error'))
-						<div class="alert alert-danger" style="margin:20px 0; color:red;">
-							<b><i class="fas fa-times-circle"></i> {{ Session('error') }}</b>
-						</div>
+					<div class="alert alert-danger" style="margin:20px 0; color:red;">
+						<b><i class="fas fa-times-circle"></i> {{ Session('error') }}</b>
+					</div>
 					@endif
 
-					<div class="content vagas active">
+					<div class="content vagas active" id="minhas-candidaturas">
 						<ul>
 							<li>
 								<div class="infos-vaga">
@@ -95,11 +95,11 @@
 						</ul>
 					</div>
 
-					<div class="content meus-dados">
-						
+					<div class="content meus-dados" id="meus-dados">
+
 						<form action="{{ route('usuario.store.perfil') }}" method="POST" enctype="multipart/form-data" class="dados">
 							@csrf
-							<div class="campo"> 
+							<div class="campo">
 								<label for="nome">Nome</label>
 								<input type="text" name="nome" id="dados" value="{{ Auth::guard('usuario')->user()->nome ?? null }}">
 							</div>
@@ -149,7 +149,7 @@
 
 							<div class="campo">
 								<label for="telefone_celular">Telefone Celular</label>
-								<input type="text" name="telefone_celular" class="telefone" value="{{ Auth::guard('usuario')->user()->telefone_celular ?? null }}" >
+								<input type="text" name="telefone_celular" class="telefone" value="{{ Auth::guard('usuario')->user()->telefone_celular ?? null }}">
 							</div>
 
 							<div class="campo">
@@ -166,43 +166,43 @@
 							</div>
 
 							@if(!empty($links))
-								@foreach($links as $link)
-									<div class="links_social" id="{{ $link->id }}">
-										<div class="link">
-											<input type="text" value="{{ $link->link }}" disabled>
-											<div class="">
-												<button type="button" onclick="delLinks({{ $link->id }})" style="text-decoration:none; background: #e74c3c; width: 40px; height: 40px; border-radius: 50%; color: #fff; font-weight: bold; font-size: 24px; display: flex; justify-content: center; align-items: center; cursor: pointer;">x</button>
-											</div>
-										</div>
-									</div> 
-								@endforeach
+							@foreach($links as $link)
+							<div class="links_social" id="{{ $link->id }}">
+								<div class="link">
+									<input type="text" value="{{ $link->link }}" disabled>
+									<div class="">
+										<button type="button" onclick="delLinks({{ $link->id }})" style="text-decoration:none; background: #e74c3c; width: 40px; height: 40px; border-radius: 50%; color: #fff; font-weight: bold; font-size: 24px; display: flex; justify-content: center; align-items: center; cursor: pointer;">x</button>
+									</div>
+								</div>
+							</div>
+							@endforeach
 							@endif
 
 							<h3>Endereço</h3>
 
 							<div class="campo full">
 								<label for="cep">CEP</label>
-								<input type="text" name="cep"  value="{{ Auth::guard('usuario')->user()->cep ?? null }}" >
+								<input type="text" name="cep" value="{{ Auth::guard('usuario')->user()->cep ?? null }}">
 							</div>
 
 							<div class="campo">
 								<label for="rua">Rua</label>
-								<input type="text" name="rua"  value="{{ Auth::guard('usuario')->user()->rua ?? null }}">
+								<input type="text" name="rua" value="{{ Auth::guard('usuario')->user()->rua ?? null }}">
 							</div>
 
 							<div class="campo">
 								<label for="numero">Número</label>
-								<input type="text" name="numero"  value="{{ Auth::guard('usuario')->user()->numero ?? null }}">
+								<input type="text" name="numero" value="{{ Auth::guard('usuario')->user()->numero ?? null }}">
 							</div>
 
 							<div class="campo">
 								<label for="complemento">Complemento</label>
-								<input type="text" name="complemento"  value="{{ Auth::guard('usuario')->user()->complemento ?? null }}">
+								<input type="text" name="complemento" value="{{ Auth::guard('usuario')->user()->complemento ?? null }}">
 							</div>
 
 							<div class="campo">
 								<label for="bairro">Bairro</label>
-								<input type="text" name="bairro"  value="{{ Auth::guard('usuario')->user()->bairro ?? null }}">
+								<input type="text" name="bairro" value="{{ Auth::guard('usuario')->user()->bairro ?? null }}">
 							</div>
 
 							<div class="campo">
@@ -227,21 +227,22 @@
 							<div class="list-items">
 								<ul>
 									@if (count($experiencias) >= 1)
-										@foreach ($experiencias as $ex)
-											<li>
-												<div class="infos">
-												<span class="edit" data-modal="nova-experiencia"><i class="fas fa-edit"></i></span>
-													<span class="cargo">{{ $ex->cargo ?? null }}</span>
-													<span class="empresa">{{ $ex->nome_empresa ?? null }}</span>
-												</div>
-											</li>
-										@endforeach
+									@foreach ($experiencias as $ex)
+									<li>
+										<div class="infos">
+											<span class="edit" data-modal="edit-experiencia" onclick="editar_experiencia({{ $ex->id }})"><i class="fas fa-edit"></i></span>
+											<span class="cargo">{{ $ex->cargo ?? null }}</span>
+											<span class="empresa">{{ $ex->nome_empresa ?? null }}</span>
+										</div>
+									</li>
+									@endforeach
 									@endif
 								</ul>
 								<div class="area-botao">
 									<button id="new" data-modal="nova-experiencia">Adicionar experiência</button>
 								</div>
 								@include('usuario.dashboard.modal_nova_experiencia')
+								@include('usuario.dashboard.modal_nova_experiencia_edit')
 							</div>
 						</div>
 
@@ -249,22 +250,23 @@
 							<h3 class="title-content">Formação</h3>
 							<div class="list-items">
 								<ul>
-								@if (count($formacoes) >= 1)
+									@if (count($formacoes) >= 1)
 									@foreach ($formacoes as $formacao)
-										<li>
-											<div class="infos">
-											<span class="edit" data-modal="nova-experiencia"><i class="fas fa-edit"></i></span>
-												<span class="formacao">{{ $formacao->formacao ?? null }}</span>
-												<span class="instituicao">{{ $formacao->nome_instituicao ?? null }}</span>
-											</div>
-										</li>
+									<li>
+										<div class="infos">
+											<span class="edit" data-modal="edit-formacao" onclick="editar_formacao({{ $formacao->id }})"><i class="fas fa-edit"></i></span>
+											<span class="formacao">{{ $formacao->formacao ?? null }}</span>
+											<span class="instituicao">{{ $formacao->nome_instituicao ?? null }}</span>
+										</div>
+									</li>
 									@endforeach
-								@endif
+									@endif
 								</ul>
 								<div class="area-botao">
 									<button id="new" data-modal="nova-formacao">Adicionar formação</button>
 								</div>
 								@include('usuario.dashboard.modal_nova_formacao')
+								@include('usuario.dashboard.modal_nova_formacao_edit')
 							</div>
 						</div>
 
@@ -272,22 +274,23 @@
 							<h3 class="title-content">Voluntário</h3>
 							<div class="list-items">
 								<ul>
-								@if (count($voluntarios) >= 1)
+									@if (count($voluntarios) >= 1)
 									@foreach ($voluntarios as $voluntario)
-										<li>
-											<div class="infos">
-											<span class="edit" data-modal="nova-experiencia"><i class="fas fa-edit"></i></span>
-												<span class="formacao">{{ $voluntario->cargo_voluntario ?? null }}</span>
-												<span class="instituicao">{{ $voluntario->nome_instituicao_voluntario ?? null }}</span>
-											</div>
-										</li>
+									<li>
+										<div class="infos">
+											<span class="edit" data-modal="edit-voluntario" onclick="editar_voluntario({{ $voluntario->id }})"><i class="fas fa-edit"></i></span>
+											<span class="formacao">{{ $voluntario->cargo_voluntario ?? null }}</span>
+											<span class="instituicao">{{ $voluntario->nome_instituicao_voluntario ?? null }}</span>
+										</div>
+									</li>
 									@endforeach
-								@endif
+									@endif
 								</ul>
 								<div class="area-botao">
 									<button id="new" data-modal="nova-voluntario">Adicionar Voluntariado</button>
 								</div>
 								@include('usuario.dashboard.modal_nova_voluntario')
+								@include('usuario.dashboard.modal_nova_voluntario_edit')
 							</div>
 						</div>
 					</div>
@@ -409,32 +412,88 @@
 @endsection
 
 @section('scripts')
-	<script>
-
-		$("#emailPerfil").change(function() {
-			var email = $("#emailPerfil").val();
-			if (email != '') {
-				$.get(route('usuario.verifica.email', email), function(data) {
-					if (data.status == 'sucesso') {
-						$("#emailPerfil").css('border', '1px solid red')
-						$("#msgErroEmail").html('E-mail já existe, tente outro').fadeIn('slow');
-						$("#atualizarPerfil").prop('disabled', true);
-					} else {
-						$("#emailPerfil").css('border', '1px solid #eeeeee')
-						$("#msgErroEmail").fadeOut('slow');
-						$("#atualizarPerfil").prop('disabled', false);
-					}
-				});
-			}
-		});
-
-		function delLinks(id) {
-			$.get(route('usuario.delLinks', id), function(data) {
-				if (data.status == 'success') {
-					$("#" + id).hide();
+<script>
+	function editar_experiencia(id) {
+		if (id != '') {
+			$.get(route('usuario.get.experiencia', id), function(data) {
+				if (data.length >= 1) {
+					$("#id").val(data[0].id);
+					$("#nome_empresa").val(data[0].nome_empresa);
+					$("#cargo").val(data[0].cargo);
+					$("#data_inicio").val(data[0].data_inicio);
+					$("#data_termino").val(data[0].data_termino);
+					$("#cidade").val(data[0].cidade);
+					$("#descricao").val(data[0].descricao);
 				}
 			});
 		}
+	}
 
-	</script>
+	function editar_formacao(id) {
+		if (id != '') {
+			$.get(route('usuario.get.formacao', id), function(data) {
+				if (data.length >= 1) {
+					$("#id_formacao").val(data[0].id);
+					$("#nome_instituicao_formacao").val(data[0].nome_instituicao);
+					$("#formacao").val(data[0].formacao);
+					$("#data_inicio_formacao").val(data[0].data_inicio);
+					$("#data_termino_formacao").val(data[0].data_termino);
+					$("#descricao_formacao").val(data[0].descricao_formacao);
+					$("#recomendacoes_premiacoes").val(data[0].recomendacoes_premiacoes);
+				}
+			});
+		}
+	}
+
+	function editar_voluntario(id) {
+		if (id != '') {
+			$.get(route('usuario.get.voluntario', id), function(data) {
+				if (data.length >= 1) {
+					$("#id_voluntario").val(data[0].id);
+					$("#nome_instituicao_voluntario").val(data[0].nome_instituicao_voluntario);
+					$("#cargo_voluntario").val(data[0].cargo_voluntario);
+					$("#data_inicio_voluntario").val(data[0].data_inicio);
+					$("#data_termino_voluntario").val(data[0].data_termino);
+					$("#recomendacoes_premiacoes_voluntario").val(data[0].recomendacoes_premiacoes);
+					$("#descricao_voluntario").val(data[0].descricao_voluntario);
+				}
+			});
+		}
+	}
+
+	$("#emailPerfil").change(function() {
+		var email = $("#emailPerfil").val();
+		if (email != '') {
+			$.get(route('usuario.verifica.email', email), function(data) {
+				if (data.status == 'sucesso') {
+					$("#emailPerfil").css('border', '1px solid red')
+					$("#msgErroEmail").html('E-mail já existe, tente outro').fadeIn('slow');
+					$("#atualizarPerfil").prop('disabled', true);
+				} else {
+					$("#emailPerfil").css('border', '1px solid #eeeeee')
+					$("#msgErroEmail").fadeOut('slow');
+					$("#atualizarPerfil").prop('disabled', false);
+				}
+			});
+		}
+	});
+
+	function delLinks(id) {
+		$.get(route('usuario.delLinks', id), function(data) {
+			if (data.status == 'success') {
+				$("#" + id).hide();
+			}
+		});
+	}
+
+	$(function() {
+		$("#atualizar-cv").click(function() {
+			$("#aba-vagas").removeClass('active');
+			$("#aba-meus-dados").addClass('active');
+
+			$("#minhas-candidaturas").removeClass('active');
+			$("#meus-dados").addClass('active');
+		});
+	});
+</script>
 @endsection

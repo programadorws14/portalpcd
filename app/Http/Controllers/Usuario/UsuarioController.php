@@ -24,7 +24,7 @@ class UsuarioController extends Controller
         $links = LinksSociais::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
         $experiencias = Experiencia::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
         $formacoes = Formacao::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
-        $voluntarios = Formacao::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
+        $voluntarios = Voluntario::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
         return view('usuario.dashboard.index', compact('links', 'experiencias', 'formacoes', 'voluntarios'));
     }
 
@@ -106,10 +106,61 @@ class UsuarioController extends Controller
     {
         try {
             $data = $request->except('_token');
-            Voluntario::create($data);
+                Voluntario::create($data);
             return redirect()->back()->with('success', 'Cadastrado com sucesso!');
+
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
         }
     }
+
+
+    public function getExperiencia($id)
+    {   
+        return Experiencia::whereId($id)->get();
+    }
+
+    public function getFormacao($id)
+    {
+        return Formacao::whereId($id)->get();
+    }
+
+    public function getVoluntario($id)
+    {
+        return Voluntario::whereId($id)->get();
+    }
+
+    public function UpdateExperiencie(request $request)
+    {
+        try {
+            $data = $request->except('_token');
+            Experiencia::whereId($data['id'])->update($data);
+            return redirect()->back()->with('success', 'Atualizado com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
+        }
+    }
+
+    public function UpdateFormacao(request $request)
+    {
+        try {
+            $data = $request->except('_token');
+            Formacao::whereId($data['id'])->update($data);
+            return redirect()->back()->with('success', 'Atualizado com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
+        }
+    }
+
+    public function UpdateVoluntario(request $request)
+    {
+        try {
+            $data = $request->except('_token');
+            Voluntario::whereId($data['id'])->update($data);
+            return redirect()->back()->with('success', 'Atualizado com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
+        }
+    }
+
 }

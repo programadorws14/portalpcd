@@ -197,12 +197,16 @@ $(document).ready(function () {
 
 	$('.dashboard-dados #new, .dashboard-dados .infos .edit').click(function () {
 		let openModal = $(this).attr('data-modal');
+
+		$('form').each(function () {
+			this.reset();
+		});
+
 		$('#shadow').fadeIn();
 		$('.modal-' + openModal).fadeIn();
 	});
 
 	$('#shadow, .modal-new .close').click(function () {
-		console.log('teste');
 		$('#shadow').fadeOut();
 		$('.modal-new').fadeOut();
 	});

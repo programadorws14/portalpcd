@@ -14,6 +14,8 @@ class CreateFormacaosTable extends Migration
     public function up()
     {
         Schema::create('formacoes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('usuario_id');
             $table->string('nome_instituicao');
             $table->string('formacao');
             $table->date('data_inicio');
