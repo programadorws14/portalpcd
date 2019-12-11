@@ -15,7 +15,10 @@ class LoginController extends Controller
     {
         if (!empty(Auth::guard('empresa')->user())) {
             return redirect()->route('empresa.dashboard');
+        } elseif (!empty(Auth::guard('usuario')->user())) {
+            return redirect()->route('usuario.dashboard');
         }
+
 
         return view('site.login.index');
     }
@@ -79,4 +82,21 @@ class LoginController extends Controller
             );
         }
     }
+
+    public function indexCandidato()
+    {
+        if (!empty(Auth::guard('usuario')->user())) {
+            return redirect()->route('usuario.dashboard');
+        }
+        return view('site.login.index_candidato');
+    }
+
+    public function indexEmpresa()
+    {
+        if (!empty(Auth::guard('empresa')->user())) {
+            return redirect()->route('empresa.dashboard');
+        }
+        return view('site.login.index_empresa');
+    }
+    
 }

@@ -6,10 +6,14 @@ use Illuminate\Support\Facades\Route;
 
 //Site
 Route::get('/', 'Site\HomeController@index')->name('site.home');
+
 Route::get('/vaga/{id}', 'Site\VagasController@show')->name('site.vagas.show');
 
 //Cadastro de empresas home
 Route::get('/login', 'Site\LoginController@index')->name('site.login');
+Route::get('/candidato/login', 'Site\LoginController@indexCandidato')->name('site.login.candidato');
+Route::get('/empresa/login', 'Site\LoginController@indexEmpresa')->name('site.login.empresa');
+
 Route::post('/login/empresa', 'Site\CadEmpresaController@store')->name('empresa.create.store');
 
 //Cadastro de Usuário home

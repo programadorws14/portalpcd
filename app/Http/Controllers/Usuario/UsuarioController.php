@@ -25,6 +25,7 @@ class UsuarioController extends Controller
         $experiencias = Experiencia::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
         $formacoes = Formacao::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
         $voluntarios = Voluntario::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
+        
         return view('usuario.dashboard.index', compact('links', 'experiencias', 'formacoes', 'voluntarios'));
     }
 

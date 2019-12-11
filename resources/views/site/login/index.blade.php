@@ -55,7 +55,7 @@
                     <li>Lorem, ipsum.</li>
                 </ul>
             </div>
-            <div class="card">
+            <div class="card" id="bloc_cad_candidato">
                 <h2 class="card-title">Cadastro candidato</h2>
                 <form action="{{ route('usuario.create.store') }}" method="POST">
                     @csrf
@@ -94,10 +94,10 @@
     <a href="#">Cadastre Aqui</a>
 </section>
 
-<section class="cadastro-vagas-curriculo">
+<section class="cadastro-vagas-curriculo" >
     <div class="cadastro-vagas-curriculo-container">
         <div class="wrap-cards">
-            <div class="card">
+            <div class="card" id="bloc_cad_vaga_empresa">
                 <h2 class="card-title">Anuncie grátis suas vagas</h2>
 
                 @if(Session('success'))

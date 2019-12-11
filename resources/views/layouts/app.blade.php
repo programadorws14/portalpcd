@@ -40,8 +40,8 @@
                 <nav class="secondary-nav">
                     <ul>
                         @if(!Auth::guard('empresa')->user() || !Auth::guard('usuario')->user())
-                        <li><a href="#">Cadastrar Curriculo</a></li>
-                        <li><a href="#">Cadastre Vaga</a></li>
+                        <li><a href="{{ route('site.login') }}#bloc_cad_candidato">Cadastrar Curriculo</a></li>
+                        <li><a href="{{ route('site.login') }}#bloc_cad_vaga_empresa">Cadastre Vaga</a></li>
                         @endif
                         <li>
                             @if(Auth::guard('empresa')->user() || Auth::guard('usuario')->user())
@@ -80,16 +80,16 @@
         but hey, it's pure CSS magic.
         -->
                 <ul id="menu">
-                    <a href="#">
+                    <a href="{{ route('site.login') }}">
                         <li> Login</li>
                     </a>
-                    <a href="#">
+                    <a href="{{ route('site.login') }}#bloc_cad_candidato">
                         <li> Cadastrar Curriculo</li>
                     </a>
-                    <a href="#">
+                    <a href="{{ route('site.login') }}#bloc_cad_vaga_empresa">
                         <li> Cadastrar Vaga</li>
                     </a>
-                    <a href="#">
+                    <a href=" #">
                         <li> Todas as Vagas</li>
                     </a>
                     <a href="#">
@@ -107,17 +107,13 @@
         </nav>
 
         <nav class="main-menu hide show-md">
-            <ul>
+            <ul style="justify-content:normal !important;">
                 <li><a href="#">Todas as Vagas</a></li>
                 <li><a href="#">Empresas</a></li>
                 <li><a href="#">Blog</a></li>
                 <li><a href="#">Sobre</a></li>
 
-                <li class="submit-cv">
-                    @if(!Auth::guard('empresa')->user())
-                    <a href="#" class="highlight">Cadastrar CV</a>
-                    @endif
-                </li>
+
             </ul>
         </nav>
     </main>
