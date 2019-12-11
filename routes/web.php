@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 //Site
 Route::get('/', 'Site\HomeController@index')->name('site.home');
-
 Route::get('/vaga/{id}', 'Site\VagasController@show')->name('site.vagas.show');
+Route::get('/vagas', 'Site\VagasController@vagas')->name('site.vagas');
+
 
 //Cadastro de empresas home
 Route::get('/login', 'Site\LoginController@index')->name('site.login');
@@ -36,7 +37,7 @@ Route::group(['prefix' => 'empresa/'], function () {
     Route::get('dashboard/delLinks/{idlinks}', 'Empresa\EmpresaController@delLinks')->name('empresa.delLinks');
 
     Route::post('dashboard/vaga/store', 'Empresa\EmpresaVagaController@store')->name('empresa.vaga.store');
-        Route::get('dashboard/vaga/edit/{id}', 'Empresa\EmpresaVagaController@edit')->name('empresa.vaga.edit');
+    Route::get('dashboard/vaga/edit/{id}', 'Empresa\EmpresaVagaController@edit')->name('empresa.vaga.edit');
     Route::post('dashboard/vaga/update', 'Empresa\EmpresaVagaController@update')->name('empresa.vaga.update');
     Route::get('dashboard/vaga/delete/{id}', 'Empresa\EmpresaVagaController@delete')->name('empresa.vaga.delete');
 });
@@ -59,4 +60,6 @@ Route::group(['prefix' => 'usuario/'], function () {
     Route::post('dashboard/edit/formacao/update', 'Usuario\UsuarioController@UpdateFormacao')->name('usuario.update.formacao');
     Route::get('dashboard/get/voluntario/{id}', 'Usuario\UsuarioController@getVoluntario')->name('usuario.get.voluntario');
     Route::post('dashboard/edit/voluntario/update', 'Usuario\UsuarioController@UpdateVoluntario')->name('usuario.update.voluntario');
+
+    Route::get('dashboard/candidatarse/vaga/{id}', 'Usuario\UsuarioController@candidatar')->name('usuario.candidatar.vaga');
 });

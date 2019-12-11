@@ -69,24 +69,21 @@
 					<div class="content vagas active">
 						<ul>
 							@if(count($vagas) >= 1)
-							@foreach($vagas as $vaga)
-							<li>
-								<div class="infos-vaga">
-									<span class="edit" onclick="modal_edit({{ $vaga->id }})"><i class="fas fa-edit"></i></span>
-									<span class="nome-vaga">{{ $vaga->titulo ?? 'N/I' }}</span>
-									<span class="n-candidatos">10 <i class="fas fa-user"></i></span>
-									@if(!$vaga->pausar_vaga)
-									<span class="ativa">Ativa</span>
-									@else
-									<span class="pausada">Pausada</span>
-									@endif
-								</div>
-								<a href="#" onclick="abrir_modal_editar({{ $vaga->id }})" class="cta ver-candidatos">Ver candidatos</a>
-							</li>
-
-							@endforeach
-							@else
-							<p>Ainda não há vagas!</p>
+								@foreach($vagas as $vaga)
+									<li>
+										<div class="infos-vaga">
+											<span class="edit" onclick="modal_edit({{ $vaga->id }})"><i class="fas fa-edit"></i></span>
+											<span class="nome-vaga">{{ $vaga->titulo ?? 'N/I' }}</span>
+											<span class="n-candidatos">10 <i class="fas fa-user"></i></span>
+											@if(!$vaga->pausar_vaga)
+												<span class="ativa">Ativa</span>
+											@else
+												<span class="pausada">Pausada</span>
+											@endif
+										</div>
+										<a href="#" onclick="abrir_modal_editar({{ $vaga->id }})" class="cta ver-candidatos">Ver candidatos</a>
+									</li>
+								@endforeach
 							@endif
 						</ul>
 						<div class="area-botao">

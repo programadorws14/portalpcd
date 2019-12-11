@@ -8,7 +8,7 @@
     </h1>
     <form action="#" class="search-form">
         <!-- <input type="text" name="job-title" placeholder="Digite o Cargo ou Área Profissional" /> -->
-        <select class="select2" name="" placeholder="Vagas" place style=" height: auto !important;">
+        <select class="select2" name="" placeholder="Vagas" place style="width:35%; height: auto !important;">
             <option>Selecione</option>
         </select>
         <p class="search-form__helper-text">Exemplos: Gerente, UX, Telefonista</p>
@@ -16,7 +16,7 @@
         <div class="search-form__breaker"></div>
 
         <!-- <input type="text" name="job-title" placeholder="Digite o Cargo ou Área Profissional" /> -->
-        <select class="select2" name="" placeholder="Cidades" style=" height: auto !important;">
+        <select class="select2" name="" placeholder="Cidades" style=" width:35%; height: auto !important;">
             <option>Selecione</option>
         </select>
         <p class="search-form__helper-text">
@@ -25,9 +25,6 @@
 
         <div class="search-form__breaker"></div>
 
-
-
-        <div class="search-form__breaker"></div>
         <button class="search-form__submit">Buscar Vagas</button>
     </form>
 </section>
@@ -41,10 +38,10 @@
 <section class="jobs-card__container  pcd-container">
     <div class="row search-form__row">
 
-        @if(count($vagas) <= 0) <div class="alert alert-warning">
+    @if(count($vagas) <= 0) 
+        <div class="alert alert-warning" >
             <p>Ainda não temos vagas cadastradas!</p>
-    </div>
-
+        </div>
     @else
     @foreach($vagas as $vaga)
     <div class="col-xs-12 col-md-4" style="margin-top:25px;">

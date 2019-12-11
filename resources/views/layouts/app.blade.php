@@ -39,12 +39,21 @@
                 </div>
                 <nav class="secondary-nav">
                     <ul>
-                        @if(!Auth::guard('empresa')->user() || !Auth::guard('usuario')->user())
-                        <li><a href="{{ route('site.login') }}#bloc_cad_candidato">Cadastrar Curriculo</a></li>
-                        <li><a href="{{ route('site.login') }}#bloc_cad_vaga_empresa">Cadastre Vaga</a></li>
+
+                        @if(Auth::guard('empresa')->user())
+                            <li><a href="{{ route('site.login') }}#bloc_cad_vaga_empresa">Cadastre Vaga</a></li>
+                            <li><a href="{{ route('empresa.dashboard') }}"><b>Meu Perfil</b></a></li>
+                        @elseif(Auth::guard('usuario')->user())
+                            <li><a href="{{ route('site.login') }}#bloc_cad_candidato">Cadastrar Curriculo</a></li>
+                            <li><a href="{{ route('usuario.dashboard') }}"><b>Meu Perfil</b></a></li>
+                        @else
+                            <li><a href="{{ route('site.login') }}#bloc_cad_vaga_empresa">Cadastre Vaga</a></li>
+                            <li><a href="{{ route('site.login') }}#bloc_cad_candidato">Cadastrar Curriculo</a></li>
                         @endif
+
                         <li>
                             @if(Auth::guard('empresa')->user() || Auth::guard('usuario')->user())
+                            
                             <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="#" class="login"><i class="fas fa-user-circle"></i>&nbsp;Sair</a>
                             <form id="logout-form" action="@if(Auth::guard('empresa')->check()) {{ route('empresa.sair') }} @else {{ route('usuario.sair') }}  @endif" method="POST" style="display: none;">
                                 @csrf
@@ -89,7 +98,7 @@
                     <a href="{{ route('site.login') }}#bloc_cad_vaga_empresa">
                         <li> Cadastrar Vaga</li>
                     </a>
-                    <a href=" #">
+                <a href="{{ route('site.vagas') }}">
                         <li> Todas as Vagas</li>
                     </a>
                     <a href="#">
@@ -108,12 +117,10 @@
 
         <nav class="main-menu hide show-md">
             <ul style="justify-content:normal !important;">
-                <li><a href="#">Todas as Vagas</a></li>
+                <li><a href="{{ route('site.vagas') }}">Todas as Vagas</a></li>
                 <li><a href="#">Empresas</a></li>
                 <li><a href="#">Blog</a></li>
                 <li><a href="#">Sobre</a></li>
-
-
             </ul>
         </nav>
     </main>
@@ -213,6 +220,7 @@
             $('.date_time').mask('00/00/0000 00:00:00');
             $('.cep').mask('00000000');
             $('.telefone').mask('(00) 0000-0000');
+            $('.celular').mask('(00) 00000-0000');
             $('.phone_us').mask('(000) 000-0000');
             $('.mixed').mask('AAA 000-S0S');
             $('.cpf').mask('000.000.000-00', {

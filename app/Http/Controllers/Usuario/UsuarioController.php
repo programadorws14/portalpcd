@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Usuario;
 
+use App\Candidatura;
 use App\Experiencia;
 use App\Formacao;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class UsuarioController extends Controller
         $experiencias = Experiencia::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
         $formacoes = Formacao::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
         $voluntarios = Voluntario::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
-        
+
         return view('usuario.dashboard.index', compact('links', 'experiencias', 'formacoes', 'voluntarios'));
     }
 
@@ -107,9 +108,8 @@ class UsuarioController extends Controller
     {
         try {
             $data = $request->except('_token');
-                Voluntario::create($data);
+            Voluntario::create($data);
             return redirect()->back()->with('success', 'Cadastrado com sucesso!');
-
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
         }
@@ -117,7 +117,7 @@ class UsuarioController extends Controller
 
 
     public function getExperiencia($id)
-    {   
+    {
         return Experiencia::whereId($id)->get();
     }
 
@@ -164,4 +164,15 @@ class UsuarioController extends Controller
         }
     }
 
+    public function candidatar($id_vaga)
+    {
+        // try {
+        //     $data['vaga_id'] = $id_vaga;
+        //     $data['usuario_id'] = Auth::guard('usuario')->user()->id;
+        //     Candidatura::create($data);
+        //     return redirect()->back()->with('success', 'Candidatado com sucesso');
+        // } catch (Exception $e) {
+        //     return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
+        // }
+    }
 }

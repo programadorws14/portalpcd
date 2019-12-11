@@ -26,9 +26,8 @@
                             <li>Vagas disponíveis: {{ $vaga->numero_vaga ?? null }}</li>
                             <li>Data de publicação: {{ date('d/m/Y H:i:s', strtotime($vaga->created_at)) ?? null }}</li>
                             <li>Local: {{ $vaga->cidade. ' | '. $vaga->estado ?? null }}</li>
-                            <li>Setor: Vendas, Marketing & Varejo</li>
                             <li>Tipo de emprego: {{ $vaga->tipo_emprego ?? null }}</li>
-                            <li>Salário: @if(!empty($vaga->salario_de) && !empty($vaga->salario_ate)) {{ $vaga->salario_de . ' - '. $vaga->salario_ate }} @endif</li>
+                            <li>Salário: {{ ( $vaga->salario_de ? number_format($vaga->salario_de,2,",",".") : 'A Combinar' ) }}  {{ ( $vaga->salario_ate ? ' - '.number_format($vaga->salario_ate,2,",",".") : 'A Combinar' ) }} </li>
                         </ul>
                     </section>
                 </div>
@@ -41,22 +40,27 @@
                 </div>
                 <div class="content-descricao-vaga">
                     <div class="content">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum nobis iure dolorem quis asperiores est soluta perferendis mollitia id ipsam rerum ullam iste at nisi reprehenderit, aperiam explicabo dicta facere?</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum nobis iure dolorem quis asperiores est soluta perferendis mollitia id ipsam rerum ullam iste at nisi reprehenderit, aperiam explicabo dicta facere?</p>
-                        <p>Lorem ipsum dolor sit <a href="#">amet consectetur adipisicing</a> elit. Nostrum nobis iure dolorem quis asperiores est soluta perferendis mollitia id ipsam rerum ullam iste at nisi reprehenderit, aperiam explicabo dicta facere?</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum nobis iure dolorem quis asperiores est soluta perferendis mollitia id ipsam rerum ullam iste at nisi reprehenderit, aperiam explicabo dicta facere?</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum nobis iure dolorem quis asperiores est soluta perferendis mollitia id ipsam rerum ullam iste at nisi reprehenderit, aperiam explicabo dicta facere?</p>
-                        <ul>
-                            <li>Lorem ipsum dolor sit amet.</li>
-                            <li>Eius tempore repellendus dolores voluptas?</li>
-                            <li>Officia saepe perferendis debitis cum!</li>
-                            <li>Quisquam deserunt tempora ullam est!</li>
-                            <li>A, sit neque! Exercitationem, natus.</li>
-                        </ul>
-                        <p><strong>Lorem ipsum dolor sit amet consectetur adipisicing elit.</strong> Nostrum nobis iure dolorem quis asperiores est soluta perferendis mollitia id ipsam rerum ullam iste at nisi reprehenderit, aperiam explicabo dicta facere?</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum nobis iure dolorem quis asperiores est soluta perferendis mollitia id ipsam rerum ullam iste at nisi reprehenderit, aperiam explicabo dicta facere?</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum nobis iure dolorem quis asperiores est soluta perferendis mollitia id ipsam rerum ullam iste at nisi reprehenderit, aperiam explicabo dicta facere?</p>
+                        <p>{{ $vaga->descricao_vaga ?? 'Descrição não informada pela empresa.' }}</p>
                     </div>
+                    @if(Session('success'))
+                    <div class="alert alert-success" style="margin:20px 0; color:green;">
+                        <b><i class="fas fa-check"></i> {{ Session('success') }}</b>
+                    </div>
+                    @elseif(Session('error'))
+                    <div class="alert alert-danger" style="margin:20px 0; color:red;">
+                        <b><i class="fas fa-times-circle"></i> {{ Session('error') }}</b>
+                    </div>
+                    @endif
+
+                    @if(!Auth::guard('usuario')->user())
+                        <div class="col-md-12" style="margin:40px 0;">
+                            <a class="botao-link" style="background:#00b7dd !important; text-decoration:none; color:#FFF; font-size:16px !important; padding:10px;" href="{{ route('site.login.candidato') }}">Logar para Candidatar-se</a>
+                        </div>
+                    @else
+                        <div class="col-md-12" style="margin:40px 0;">
+                            <a class="botao-link" style="text-decoration:none; color:#FFF; font-size:16px !important; padding:10px;" href="{{ route('usuario.candidatar.vaga', $vaga->id) }}">Candidatar-se</a>
+                        </div>
+                    @endif
                 </div>
             </section>
         </div>
@@ -71,183 +75,46 @@
 
 <section class="jobs-card__container  pcd-container">
     <div class="row search-form__row">
-        <div class="col-xs-12 col-md-4">
-            <article class="jobs-card">
-                <section class="jobs-card__header">
-                    <div class="jobs-card__image">
-                        <img src="{{ asset('site/assets/images/placeholder-job.png') }}" alt="Nome da Empresa" />
-                    </div>
-                    <div class="jobs-card__description">
-                        <a href="#" class="jobs-card__openings">10 vagas</a>
-                        <div class="jobs-card__favorite">
-                            Favoritar
-                            <button class="jobs-card__star">
-                                <i class="fas fa-star"></i>
-                            </button>
+        
+        @foreach($vagas as $v)
+            @if($v->id != $vaga->id)
+            <div class="col-xs-12 col-md-4" style="margin-top:25px;">
+                <article class="jobs-card">
+                    <section class="jobs-card__header">
+                        <div class="jobs-card__image">
+        
+                            @if(!empty($v->empresa->logo_empresa))
+                            <img src="{{ asset($v->empresa->logo_empresa) }}" width="90" height="90" alt="{{ $v->empresa->nome ?? null }}" />
+                            @else
+                            <img src="{{ asset('img/img-empresa.png') }}" width="90" height="90" alt="{{ $v->empresa->nome ?? null }}" />
+                            @endif
+        
                         </div>
-                        <h2 class="jobs-card__title">Lorem ipsum sit amet.</h2>
-                        <h4 class="jobs-card__subtitle">Lorem Ipsum sit dolor amet.</h4>
-                    </div>
-                </section>
-                <footer class="jobs-card__footer">
-                    <p class="jobs-card__location">
-                        <i class="fas fa-location-arrow"></i>&nbsp;São Paulo
-                    </p>
-                    <p class="jobs-card__date">
-                        <i class="fas fa-calendar"></i>&nbsp;26/05/2019
-                    </p>
-                </footer>
-            </article>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <article class="jobs-card">
-                <section class="jobs-card__header">
-                    <div class="jobs-card__image">
-                        <img src="{{ asset('site/assets/images/placeholder-job.png') }}" alt="Nome da Empresa" />
-                    </div>
-                    <div class="jobs-card__description">
-                        <a href="#" class="jobs-card__openings">10 vagas</a>
-                        <div class="jobs-card__favorite">
-                            Favoritar
-                            <button class="jobs-card__star">
-                                <i class="fas fa-star"></i>
-                            </button>
+                        <div class="jobs-card__description">
+                            <h2 class="jobs-card__title"><a href="{{ route('site.vagas.show', $v->id) }}">{{ substr($v->titulo, 0, 20) ?? null }}</a></h2>
+                            <h4 class="jobs-card__subtitle">{{ substr($v->descricao_vaga, 0, 65) ?? null }}</h4>
                         </div>
-                        <h2 class="jobs-card__title">Lorem ipsum sit amet.</h2>
-                        <h4 class="jobs-card__subtitle">Lorem Ipsum sit dolor amet.</h4>
-                    </div>
-                </section>
-                <footer class="jobs-card__footer">
-                    <p class="jobs-card__location">
-                        <i class="fas fa-location-arrow"></i>&nbsp;São Paulo
-                    </p>
-                    <p class="jobs-card__date">
-                        <i class="fas fa-calendar"></i>&nbsp;26/05/2019
-                    </p>
-                </footer>
-            </article>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <article class="jobs-card">
-                <section class="jobs-card__header">
-                    <div class="jobs-card__image">
-                        <img src="{{ asset('site/assets/images/placeholder-job.png') }}" alt="Nome da Empresa" />
-                    </div>
-                    <div class="jobs-card__description">
-                        <a href="#" class="jobs-card__openings">10 vagas</a>
-                        <div class="jobs-card__favorite">
-                            Favoritar
-                            <button class="jobs-card__star">
-                                <i class="fas fa-star"></i>
-                            </button>
-                        </div>
-                        <h2 class="jobs-card__title">Lorem ipsum sit amet.</h2>
-                        <h4 class="jobs-card__subtitle">Lorem Ipsum sit dolor amet.</h4>
-                    </div>
-                </section>
-                <footer class="jobs-card__footer">
-                    <p class="jobs-card__location">
-                        <i class="fas fa-location-arrow"></i>&nbsp;São Paulo
-                    </p>
-                    <p class="jobs-card__date">
-                        <i class="fas fa-calendar"></i>&nbsp;26/05/2019
-                    </p>
-                </footer>
-            </article>
-        </div>
-    </div>
-    <div class="row  search-form__row">
-        <div class="col-xs-12 col-md-4">
-            <article class="jobs-card">
-                <section class="jobs-card__header">
-                    <div class="jobs-card__image">
-                        <img src="{{ asset('site/assets/images/placeholder-job.png') }}" alt="Nome da Empresa" />
-                    </div>
-                    <div class="jobs-card__description">
-                        <a href="#" class="jobs-card__openings">10 vagas</a>
-                        <div class="jobs-card__favorite">
-                            Favoritar
-                            <button class="jobs-card__star">
-                                <i class="fas fa-star"></i>
-                            </button>
-                        </div>
-                        <h2 class="jobs-card__title">Lorem ipsum sit amet.</h2>
-                        <h4 class="jobs-card__subtitle">Lorem Ipsum sit dolor amet.</h4>
-                    </div>
-                </section>
-                <footer class="jobs-card__footer">
-                    <p class="jobs-card__location">
-                        <i class="fas fa-location-arrow"></i>&nbsp;São Paulo
-                    </p>
-                    <p class="jobs-card__date">
-                        <i class="fas fa-calendar"></i>&nbsp;26/05/2019
-                    </p>
-                </footer>
-            </article>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <article class="jobs-card">
-                <section class="jobs-card__header">
-                    <div class="jobs-card__image">
-                        <img src="{{ asset('site/assets/images/placeholder-job.png') }}" alt="Nome da Empresa" />
-                    </div>
-                    <div class="jobs-card__description">
-                        <a href="#" class="jobs-card__openings">10 vagas</a>
-                        <div class="jobs-card__favorite">
-                            Favoritar
-                            <button class="jobs-card__star">
-                                <i class="fas fa-star"></i>
-                            </button>
-                        </div>
-                        <h2 class="jobs-card__title">Lorem ipsum sit amet.</h2>
-                        <h4 class="jobs-card__subtitle">Lorem Ipsum sit dolor amet.</h4>
-                    </div>
-                </section>
-                <footer class="jobs-card__footer">
-                    <p class="jobs-card__location">
-                        <i class="fas fa-location-arrow"></i>&nbsp;São Paulo
-                    </p>
-                    <p class="jobs-card__date">
-                        <i class="fas fa-calendar"></i>&nbsp;26/05/2019
-                    </p>
-                </footer>
-            </article>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <article class="jobs-card">
-                <section class="jobs-card__header">
-                    <div class="jobs-card__image">
-                        <img src="{{ asset('site/assets/images/placeholder-job.png') }}" alt="Nome da Empresa" />
-                    </div>
-                    <div class="jobs-card__description">
-                        <a href="#" class="jobs-card__openings">10 vagas</a>
-                        <div class="jobs-card__favorite">
-                            Favoritar
-                            <button class="jobs-card__star">
-                                <i class="fas fa-star"></i>
-                            </button>
-                        </div>
-                        <h2 class="jobs-card__title">Lorem ipsum sit amet.</h2>
-                        <h4 class="jobs-card__subtitle">Lorem Ipsum sit dolor amet.</h4>
-                    </div>
-                </section>
-                <footer class="jobs-card__footer">
-                    <p class="jobs-card__location">
-                        <i class="fas fa-location-arrow"></i>&nbsp;São Paulo
-                    </p>
-                    <p class="jobs-card__date">
-                        <i class="fas fa-calendar"></i>&nbsp;26/05/2019
-                    </p>
-                </footer>
-            </article>
-        </div>
+                    </section>
+                    <footer class="jobs-card__footer">
+                        <p class="jobs-card__location">
+                            <i class="fas fa-location-arrow"></i>&nbsp; {{ $v->cidade ?? null }} - {{ $v->estado ?? null }}
+                        </p>
+                        <p class="jobs-card__date">
+                            <i class="fas fa-calendar"></i>&nbsp; Publicado em: {{ date('d/m/Y', strtotime($v->created_at)) ?? null }}
+                        </p>
+                    </footer>
+                </article>
+            </div>
+            @endif
+        @endforeach
     </div>
 
-    <div class="row ">
+    {{-- <div class="row ">
         <div class="col-xs-12 hide show-md">
             <button class="jobs-card__see-more">Ver Mais</button>
         </div>
-    </div>
+    </div> --}}
+
 </section>
 
 @endsection

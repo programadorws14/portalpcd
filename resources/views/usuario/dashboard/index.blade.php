@@ -14,7 +14,7 @@
 			@else
 			<img src="{{ asset('site/assets/images/profile-image.png') }}" alt="" />
 			@endif
-			<h2 class="profile__title">Lorem Ipsum sit dolor amet</h2>
+			<h2 class="profile__title">{{ Auth::guard('usuario')->user()->nome ?? null }}</h2>
 			{{-- <p class="profile__username">@Loremipsum</p> --}}
 		</div>
 	</div>
@@ -149,7 +149,7 @@
 
 							<div class="campo">
 								<label for="telefone_celular">Telefone Celular</label>
-								<input type="text" name="telefone_celular" class="telefone" value="{{ Auth::guard('usuario')->user()->telefone_celular ?? null }}">
+								<input type="text" name="telefone_celular" class="celular" value="{{ Auth::guard('usuario')->user()->telefone_celular ?? null }}">
 							</div>
 
 							<div class="campo">

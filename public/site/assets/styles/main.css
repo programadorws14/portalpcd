@@ -733,7 +733,7 @@
         list-style: none; }
         .site-header .secondary-nav ul li:last-child:after {
           display: none; }
-        .site-header .secondary-nav ul li:after {
+        /* .site-header .secondary-nav ul li:after {
           right: -20px;
           position: absolute;
           top: 3px;
@@ -741,7 +741,7 @@
           content: "";
           width: 1px;
           height: 12px;
-          background-color: #999; }
+          background-color: #999; } */
         .site-header .secondary-nav ul li a {
           font-size: 1rem;
           text-transform: uppercase;
@@ -1186,7 +1186,7 @@ section.login .forms-area {
       section.login .forms-area form.default-form input:not([type="submit"])::placeholder {
         color: #b2b2b2; }
     section.login .forms-area form.default-form input[type="submit"],
-    section.login .forms-area form.default-form button {
+    section.login .forms-area form.default-form button, .botao-link {
       width: 250px;
       padding: 10px 0px;
       border-radius: 40px;
