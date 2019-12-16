@@ -4,6 +4,8 @@ use App\Municipio;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
+
 //Site
 Route::get('/', 'Site\HomeController@index')->name('site.home');
 Route::get('/vaga/{id}', 'Site\VagasController@show')->name('site.vagas.show');
@@ -24,6 +26,17 @@ Route::post('/login/usuario', 'Site\CadUsuarioController@store')->name('usuario.
 /**Verifica e-mail */
 Route::get('/dashboard/email/empresa/{email}', 'Site\LoginController@VerificaEmailEmpresa')->name('empres.verifica.email');
 Route::get('/dashboard/email/usuario/{email}', 'Site\LoginController@VerificaEmailUsuario')->name('usuario.verifica.email');
+
+
+Route::group(['prefix' => 'admin/'], function () {
+    Auth::routes();
+    Auth::routes(['register' => false]);
+    Route::get('/home', 'HomeController@index')->name('home');
+});
+
+
+
+
 
 
 /**Empresa */
