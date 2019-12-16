@@ -30,8 +30,9 @@ Route::get('/dashboard/email/usuario/{email}', 'Site\LoginController@VerificaEma
 
 Route::group(['prefix' => 'admin/'], function () {
     Auth::routes();
-    Auth::routes(['register' => false]);
-    Route::get('/home', 'HomeController@index')->name('home');
+    // Auth::routes(['register' => false]);
+    Route::get('/login', 'Admin\LoginController@index')->name('admin.home');
+    Route::post('/login', 'Admin\LoginController@store')->name('admin.store.login');
 });
 
 
