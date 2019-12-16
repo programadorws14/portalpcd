@@ -40,6 +40,8 @@ Route::group(['prefix' => 'empresa/'], function () {
     Route::get('dashboard/vaga/edit/{id}', 'Empresa\EmpresaVagaController@edit')->name('empresa.vaga.edit');
     Route::post('dashboard/vaga/update', 'Empresa\EmpresaVagaController@update')->name('empresa.vaga.update');
     Route::get('dashboard/vaga/delete/{id}', 'Empresa\EmpresaVagaController@delete')->name('empresa.vaga.delete');
+
+    Route::get('dashboard/exportar/candidatos/', 'Empresa\EmpresaVagaController@export')->name('exportar.candidatos.excel');
 });
 
 
@@ -62,4 +64,5 @@ Route::group(['prefix' => 'usuario/'], function () {
     Route::post('dashboard/edit/voluntario/update', 'Usuario\UsuarioController@UpdateVoluntario')->name('usuario.update.voluntario');
 
     Route::get('dashboard/candidatarse/vaga/{id}', 'Usuario\UsuarioController@candidatar')->name('usuario.candidatar.vaga');
+    Route::get('dashboard/cancelarcandidatura/vaga/{id}', 'Usuario\UsuarioController@cancelarCandidatura')->name('usuario.cancelar-candidatura.vaga');
 });

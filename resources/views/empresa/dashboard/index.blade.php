@@ -29,9 +29,11 @@
 							Vagas Cadastradas <i class="fas fa-chevron-down"></i>
 						</h2>
 						<ul>
-							<li>Marketing</li>
-							<li>Mídias Digitais</li>
-							<li>Coordenador MKT</li>
+							@if(count($vagas) >= 1)
+								@foreach($vagas as $vaga)
+									<li>{{ $vaga->titulo ?? 'N/I' }}</li>
+								@endforeach
+							@endif
 						</ul>
 					</section>
 					<section class="profile__section">
@@ -74,7 +76,7 @@
 										<div class="infos-vaga">
 											<span class="edit" onclick="modal_edit({{ $vaga->id }})"><i class="fas fa-edit"></i></span>
 											<span class="nome-vaga">{{ $vaga->titulo ?? 'N/I' }}</span>
-											<span class="n-candidatos">10 <i class="fas fa-user"></i></span>
+											<span class="n-candidatos">{{ count($vaga->candidaturas) }} <i class="fas fa-user"></i></span>
 											@if(!$vaga->pausar_vaga)
 												<span class="ativa">Ativa</span>
 											@else
@@ -88,7 +90,9 @@
 						</ul>
 						<div class="area-botao">
 							<button id="nova-vaga">Adicionar nova vaga</button>
+							<a href="{{ route('exportar.candidatos.excel') }}" style="background-color:forestgreen; color:#FFF; padding:10px 15px; border-radius:20px; text-decoration:none; text-transform:uppercase; font-weight:bold; font-size:13px;" class="cta ver-candidatos">EXCEL VAGA + CANDIDATO</a>
 						</div>
+								
 
 						<!---MODAL NOVA VAGA--->
 						@include('empresa.dashboard.modal_nova_vaga')

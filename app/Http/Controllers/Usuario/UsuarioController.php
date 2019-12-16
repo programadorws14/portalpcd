@@ -26,8 +26,8 @@ class UsuarioController extends Controller
         $experiencias = Experiencia::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
         $formacoes = Formacao::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
         $voluntarios = Voluntario::whereUsuarioId(Auth::guard('usuario')->user()->id)->get();
-
-        return view('usuario.dashboard.index', compact('links', 'experiencias', 'formacoes', 'voluntarios'));
+        $candidaturas = Candidatura::whereUsuarioId(Auth::guard('usuario')->user()->id)->with('empresa', 'vaga')->get();
+        return view('usuario.dashboard.index', compact('links', 'experiencias', 'formacoes', 'voluntarios', 'candidaturas'));
     }
 
     public function StoreProfile(request $request)
@@ -115,7 +115,6 @@ class UsuarioController extends Controller
         }
     }
 
-
     public function getExperiencia($id)
     {
         return Experiencia::whereId($id)->get();
@@ -166,13 +165,23 @@ class UsuarioController extends Controller
 
     public function candidatar($id_vaga)
     {
-        // try {
-        //     $data['vaga_id'] = $id_vaga;
-        //     $data['usuario_id'] = Auth::guard('usuario')->user()->id;
-        //     Candidatura::create($data);
-        //     return redirect()->back()->with('success', 'Candidatado com sucesso');
-        // } catch (Exception $e) {
-        //     return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
-        // }
+        try {
+            $data['vaga_id'] = $id_vaga;
+            $data['usuario_id'] = Auth::guard('usuario')->user()->id;
+            Candidatura::create($data);
+            return redirect()->back()->with('success', 'Candidatado com sucesso');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
+        }
+    }
+
+    public function cancelarCandidatura($id)
+    {
+        try {
+            Candidatura::find($id)->delete();
+            return redirect()->back()->with('success', 'Cancelamento Efetuado com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar experiencia' . $e->getMessage());
+        }
     }
 }

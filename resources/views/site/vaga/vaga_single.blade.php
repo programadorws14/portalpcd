@@ -21,13 +21,13 @@
                     <section class="profile__section">
                         <h2>
                             Detalhes do trabalho <i class="fas fa-chevron-down"></i>
-                        </h2>
+                        </h2>   
                         <ul>
                             <li>Vagas disponíveis: {{ $vaga->numero_vaga ?? null }}</li>
                             <li>Data de publicação: {{ date('d/m/Y H:i:s', strtotime($vaga->created_at)) ?? null }}</li>
                             <li>Local: {{ $vaga->cidade. ' | '. $vaga->estado ?? null }}</li>
                             <li>Tipo de emprego: {{ $vaga->tipo_emprego ?? null }}</li>
-                            <li>Salário: {{ ( $vaga->salario_de ? number_format($vaga->salario_de,2,",",".") : 'A Combinar' ) }}  {{ ( $vaga->salario_ate ? ' - '.number_format($vaga->salario_ate,2,",",".") : 'A Combinar' ) }} </li>
+                            <li>Salário: {{ ( $vaga->salario_de ? ' R$ '. number_format($vaga->salario_de,2,",",".") : 'A Combinar' ) }}  {{ ( $vaga->salario_ate ? ' - R$ '.number_format($vaga->salario_ate,2,",",".") : 'A Combinar' ) }} </li>
                         </ul>
                     </section>
                 </div>
@@ -56,7 +56,14 @@
                         <div class="col-md-12" style="margin:40px 0;">
                             <a class="botao-link" style="background:#00b7dd !important; text-decoration:none; color:#FFF; font-size:16px !important; padding:10px;" href="{{ route('site.login.candidato') }}">Logar para Candidatar-se</a>
                         </div>
+                        
+                    @elseif(!empty($cadastrado_vaga))
+                    <br />
+                        <span style="background:#0086a5; margin-top:15px; color:#FFF; padding:5px; border-radius:10px;"><b>{{ Auth::guard('usuario')->user()->nome }}</b>, você já está cadastrado nessa vaga!</span>
+                        <span style="display:block; margin-top:15px; "><b>Cadastro efetuado em:</b> {{ date('d/m/Y', strtotime($cadastrado_vaga->created_at)) }} </span>
+                        <br/>
                     @else
+                        <br/>
                         <div class="col-md-12" style="margin:40px 0;">
                             <a class="botao-link" style="text-decoration:none; color:#FFF; font-size:16px !important; padding:10px;" href="{{ route('usuario.candidatar.vaga', $vaga->id) }}">Candidatar-se</a>
                         </div>

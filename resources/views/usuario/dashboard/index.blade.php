@@ -32,7 +32,7 @@
 							<li>Coordenador MKT</li>
 						</ul>
 					</section>
-					<section class="profile__section">
+					{{-- <section class="profile__section">
 						<h2>
 							Preenchimento do Currículo <i class="fas fa-chevron-down"></i>
 						</h2>
@@ -50,8 +50,8 @@
 								<div class="progress-bar__percentage"></div>
 							</div>
 						</div>
-					</section>
-					<button class="update-resume" id="atualizar-cv">
+					</section> --}}
+					<button class="update-resume" id="atualizar-cv" style="margin-top:40px;">
 						<i class="fas fa-pencil-alt"></i> Atualizar Currículo
 					</button>
 				</div>
@@ -77,21 +77,25 @@
 
 					<div class="content vagas active" id="minhas-candidaturas">
 						<ul>
-							<li>
-								<div class="infos-vaga">
-									<span class="nome-vaga">Analista de Sistemas</span>
-									<span class="ativa">Ativa</span>
-								</div>
-								<a href="#" class="cta cancelar-candidatura">Abandonar vaga</a>
-								<a href="#" class="cta ver-vaga">Visualizar vaga</a>
-							</li>
-							<li>
-								<div class="infos-vaga">
-									<span class="nome-vaga">Analista de Sistemas</span>
-									<span class="encerrada">Encerrada</span>
-								</div>
-								<a href="#" class="cta ver-vaga">Visualizar vaga</a>
-							</li>
+							@if(count($candidaturas) >= 1)
+								@foreach ($candidaturas as $candidatura)
+									<li>
+										<div class="infos-vaga">
+											<span class="nome-vaga">{{ $candidatura->vaga->titulo ?? 'Não Informado' }}</span>
+											@if($candidatura->vaga->pausar_vaga == '')
+												<span class="ativa">Ativa</span>
+											@else
+												<span class="pausada">Pausada</span>
+											@endif
+										</div>
+										<a href="{{ route('usuario.cancelar-candidatura.vaga', $candidatura->id) }}" class="cta cancelar-candidatura">Abandonar vaga</a>
+										<a href="{{ route('site.vagas.show', $candidatura->vaga->id) }}" target="_blank" class="cta ver-vaga">Visualizar vaga</a>
+									</li>
+								@endforeach
+							@else
+								<span style="background:#0086a5; margin-top:15px; color:#FFF; padding:5px; border-radius:10px;"><b>Não há candidaturas!</b></span>
+							@endif
+
 						</ul>
 					</div>
 

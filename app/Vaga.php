@@ -32,4 +32,10 @@ class Vaga extends Model
     {
         return $this->hasOne(Empresa::class, 'id', 'empresa_id');
     }
+
+    public function candidaturas()
+    {
+        return $this->hasMany(Candidatura::class, 'vaga_id', 'id');
+    }
+
 }

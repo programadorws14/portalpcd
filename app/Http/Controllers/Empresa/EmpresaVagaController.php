@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Empresa;
 
 use App\Estado;
+use App\Exports\CandidaturasExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Municipio;
@@ -10,6 +11,7 @@ use App\Profissao;
 use App\Vaga;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EmpresaVagaController extends Controller
 {
@@ -144,4 +146,9 @@ class EmpresaVagaController extends Controller
     //     }
     // }
 
+    /**Expotar candidatos PDF */
+    public function export()
+    {
+        return Excel::download(new CandidaturasExport, 'candidatos.xlsx');
+    }
 }
