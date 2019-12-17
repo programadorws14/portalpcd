@@ -29,10 +29,28 @@ Route::get('/dashboard/email/usuario/{email}', 'Site\LoginController@VerificaEma
 
 
 Route::group(['prefix' => 'admin/'], function () {
-    Auth::routes();
-    // Auth::routes(['register' => false]);
-    Route::get('/login', 'Admin\LoginController@index')->name('admin.home');
+
+    Route::get('/login', 'Admin\LoginController@index')->name('admin.login');
     Route::post('/login', 'Admin\LoginController@store')->name('admin.store.login');
+    Route::post('/sair', 'Admin\LoginController@sair')->name('admin.sair');
+
+    /**Dashboard */
+    Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
+
+    /**Gerenciar Usuários*/
+    Route::get('/usuarios', 'Admin\GerenciarUsuariosController@index')->name('admin.gerenciar.usuarios');
+    Route::get('/usuario/create', 'Admin\GerenciarUsuariosController@create')->name('admin.gerenciar.create');
+    Route::post('/usuario/store', 'Admin\GerenciarUsuariosController@store')->name('admin.gerenciar.store');
+    Route::get('/usuario/edit/{id}', 'Admin\GerenciarUsuariosController@edit')->name('admin.gerenciar.edit');
+    Route::put('/usuario/edit/update/', 'Admin\GerenciarUsuariosController@update')->name('admin.gerenciar.update');
+    Route::get('/usuario/delete/{id}', 'Admin\GerenciarUsuariosController@deletar')->name('admin.gerenciar.deletar');
+
+    /**Gerenciar Empresas*/
+    Route::get('/empresas', 'Admin\GerenciarEmpresasController@index')->name('admin.gerenciar.empresas');
+    Route::get('/empresa/create', 'Admin\GerenciarEmpresasController@create')->name('admin.gerenciar.empresa.create');
+    Route::post('/empresa/store', 'Admin\GerenciarEmpresasController@store')->name('admin.gerenciar.empresa.store');
+    Route::get('/empresa/edit/{id}', 'Admin\GerenciarEmpresasController@edit')->name('admin.gerenciar.empresa.edit');
+    Route::put('/empresa/edit/update', 'Admin\GerenciarEmpresasController@update')->name('admin.gerenciar.empresa.update');
 });
 
 

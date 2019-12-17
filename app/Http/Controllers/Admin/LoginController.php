@@ -13,15 +13,15 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class LoginController extends Controller
 {
     public function index()
-    {   
-        if(Auth::check()){
+    {
+        if (Auth::check()) {
             return redirect()->route('admin.dashboard');
         }
         return view('admin.login.index');
     }
 
     public function store(request $request)
-    {   
+    {
 
         $data = $request->validate([
             'email' => 'required',
@@ -31,14 +31,15 @@ class LoginController extends Controller
         $data = $request->except('_token');
         $admin = Admin::whereEmail($data['email'])->first();
 
+
         if (Auth::check() || $admin && Hash::check($data['password'], $admin->password)) {
             Auth::guard('admin')->attempt($data);
             return redirect()->route('admin.dashboard');
-        }else{
+        } else {
             return redirect()->route('admin.login');
         }
     }
-    
+
     public function sair()
     {
         Auth::guard('admin')->logout();

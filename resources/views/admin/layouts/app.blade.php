@@ -24,6 +24,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+@routes
 </head>
 
 <body>
@@ -46,27 +47,21 @@
                             <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-home"></i></a>
                         </li>
 
-
-                        <!---- Variavel data['vagasPendentes'] está vindo do appServive boot--->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-truck-loading"></i> Empresas @if(count($data['empresasPendentes']) > 0)<span class="badge badge-danger">{{ count($data['empresasPendentes']) }}</span>@endif
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('admin.empresa.create') }}"> <i class="fas fa-plus"></i> Nova </a>
-                                <a class="dropdown-item" href="{{ route('admin.empresa.listar') }}""> <i class=" fas fa-building"></i> Lista </a>
-                                <a class="dropdown-item" href="{{ route('admin.empresa.pendente') }}"> <i class="fas fa-hourglass-end"></i> Pendentes @if(count($data['empresasPendentes']) > 0)<span class="badge badge-warning">{{ count($data['empresasPendentes']) }}</span>@endif </a>
-                                <a class="dropdown-item" href="{{ route('admin.empresa.recusadas') }}"> <i class="fas fa-times-circle"></i> Recusadas </a>
-                            </div>
+                        <li class="nav-item ">
+                            <a href="{{ route('admin.gerenciar.usuarios') }}" class="nav-link"><i class="fas fa-users"></i> Usuários</a>
                         </li>
+
+                        <li class="nav-item ">
+                            <a href="{{ route('admin.gerenciar.empresas') }}" class="nav-link"><i class="fas fa-truck-loading"></i> Empresas</a>
+                        </li>
+                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-address-book"></i> Vagas @if(count($data['vagasPendentes']) > 0)<span class="badge badge-danger">{{ count($data['vagasPendentes']) }}</span>@endif
-                            </a>
+                                <i class="fas fa-address-book"></i> Vagas </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('admin.vaga.listar') }}""> <i class=" fas fa-building"></i> Lista </a>
-                                <a class="dropdown-item" href="{{ route('admin.vaga.pendente') }}"> <i class="fas fa-hourglass-end"></i> Pendentes @if(count($data['vagasPendentes']) > 0)<span class="badge badge-warning">{{ count($data['vagasPendentes']) }}</span>@endif </a>
-                                <a class="dropdown-item" href="{{ route('admin.vaga.recusadas') }}"> <i class="fas fa-times-circle"></i> Recusadas </a>
+                                <a class="dropdown-item" href=""> <i class=" fas fa-building"></i> Lista </a>
+                                <a class="dropdown-item" href=""> <i class="fas fa-hourglass-end"></i> Pendentes </a>
+                                <a class="dropdown-item" href=""> <i class="fas fa-times-circle"></i> Recusadas </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -74,19 +69,11 @@
                                 <i class="fas fa-blog"></i> Blog
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('admin.blog.index') }}"> <i class="fas fa-file"></i> Posts</a>
-                                <a class="dropdown-item" href="{{ route('admin.blog.categoria.index') }}"> <i class="fas fa-tag"></i> Categorias</a>
+                                <a class="dropdown-item" href=""> <i class="fas fa-file"></i> Posts</a>
+                                <a class="dropdown-item" href=""> <i class="fas fa-tag"></i> Categorias</a>
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-cogs"></i> Config
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('admin.config.profissao.index') }}"> <i class="fas fa-id-badge"></i> Profissão</a>
-                                <a class="dropdown-item" href=""> <i class="fas fa-users"></i> Usuários</a>
-                            </div>
-                        </li>
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
