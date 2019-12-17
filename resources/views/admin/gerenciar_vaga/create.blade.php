@@ -1,10 +1,9 @@
 @extends('admin.layouts.app')
 @section('content')
 <div class="container-fluid">
-    <form action="{{ route('admin.gerenciar.vaga.update') }}" method="POST" enctype="multipart/form-data">
-        {{ method_field('PUT') }}
+    <form action="{{ route('admin.gerenciar.vaga.store') }}" method="POST" enctype="multipart/form-data">
         <div class="card">
-            <div class="card-header">Editar Vaga</div>
+            <div class="card-header">Cadastrar Vaga</div>
             <div class="card-body">
                 @if(Session('success'))
                 <div class="alert alert-success">

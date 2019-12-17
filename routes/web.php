@@ -51,6 +51,13 @@ Route::group(['prefix' => 'admin/'], function () {
     Route::post('/empresa/store', 'Admin\GerenciarEmpresasController@store')->name('admin.gerenciar.empresa.store');
     Route::get('/empresa/edit/{id}', 'Admin\GerenciarEmpresasController@edit')->name('admin.gerenciar.empresa.edit');
     Route::put('/empresa/edit/update', 'Admin\GerenciarEmpresasController@update')->name('admin.gerenciar.empresa.update');
+
+    /**Gerenciar Vagas */
+    Route::get('/vagas', 'Admin\GerenciarVagaController@index')->name('admin.gerenciar.vagas');
+    Route::get('/vaga/create', 'Admin\GerenciarVagaController@create')->name('admin.gerenciar.vaga.create');
+    Route::post('/vaga/store', 'Admin\GerenciarVagaController@store')->name('admin.gerenciar.vaga.store');
+    Route::get('/vaga/edit/{id}', 'Admin\GerenciarVagaController@edit')->name('admin.gerenciar.vaga.edit');
+    Route::put('/vaga/edit/update', 'Admin\GerenciarVagaController@update')->name('admin.gerenciar.vaga.update');
 });
 
 

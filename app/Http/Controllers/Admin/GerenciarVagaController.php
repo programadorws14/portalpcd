@@ -2,102 +2,62 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Estado;
+use App\Empresa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Municipio;
-use App\Profissao;
 use App\Vaga;
-use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class GerenciarVagaController extends Controller
 {
-    public function pendente()
+    public function index()
     {
-        $vagas = Vaga::whereAprovacaoUserId(null)->whereStatus(1)->with('user', 'estado', 'municipio')->get();
-        return view('admin.gerenciar_vaga.list_pendente',compact('vagas'));
+        $vagas = Vaga::with('empresa')->get();
+        return view('admin.gerenciar_vaga.index', compact('vagas'));
     }
 
-    public function detalhes($id)
+    public function create()
+    {   
+        $empresas = Empresa::all();
+        return view('admin.gerenciar_vaga.create', compact('empresas'));
+    }
+
+    public function store(request $request)
     {
         try {
-            $vaga = Vaga::with('user', 'estado', 'municipio')->find($id);
-            return view('admin.gerenciar_vaga.detalhes', compact('vaga'));
+            $data = $request->except('_token');
+            $data['pausar_vaga'] = (!empty($data['pausar_vaga']) && $data['pausar_vaga'] == 'Sim' ? 1 : '');
+            $data['salario_acombinar'] = (!empty($data['salario_acombinar'])  && $data['salario_acombinar'] == 'Sim' ? 1 : '');
+            $data['salario_de'] = (!empty($data['salario_de']) ? $data['salario_de'] : '');
+            $data['salario_ate'] = (!empty($data['salario_ate']) ? $data['salario_ate'] : '');
+
+            Vaga::create($data);
+            return redirect()->back()->with('success', 'Cadastrado com sucesso!');
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao cadastrar - ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Erro ao atualizar' . $e->getMessage());
         }
-    }
-
-    public function aceitar($id)
-    {
-         try {
-            $vaga = Vaga::find($id);
-            $vaga->status = 1;
-            $vaga->aprovacao_user_id = Auth::guard('admin')->user()->id;
-            $vaga->save();
-            return redirect()->back()->with('success', 'Aprovado com sucesso');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao aprovar - ' . $e->getMessage());
-        }
-    }
-
-    public function recusar($id)
-    {
-         try {
-            $vaga = Vaga::find($id);
-            $vaga->status = 3;
-            $vaga->aprovacao_user_id = Auth::guard('admin')->user()->id;
-            $vaga->save();
-            return redirect()->back()->with('success', 'Recusado com sucesso');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao aprovar - ' . $e->getMessage());
-        }
-    }
-
-    public function listar()
-    {
-        $vagas = Vaga::where('aprovacao_user_id', '!=', '')->where('status', '!=', 3)->where('status', '!=', 4)->with('user', 'estado', 'municipio')->get();
-        return view('admin.gerenciar_vaga.list',compact('vagas'));
-    }
-
-    public function recusadas()
-    {
-        $vagas = Vaga::whereStatus(3)->with('user', 'estado', 'municipio')->get();
-        return view('admin.gerenciar_vaga.recusadas', compact('vagas'));
     }
 
     public function edit($id)
-    {   
-        try {
-            $edit = Vaga::find($id);
-            $estados = Estado::all();
-            $municipios = Municipio::whereEstadoId($edit->estado_id)->get();
-            $profissoes = Profissao::all();
-            return view('admin.gerenciar_vaga.edit', compact('edit', 'estados', 'municipios', 'profissoes'));
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao editar - ' . $e->getMessage());
-        }
+    {
+        $vaga = Vaga::with('empresa')->find($id);
+        $empresas = Empresa::all();
+        return view('admin.gerenciar_vaga.edit', compact('vaga', 'empresas'));
     }
 
     public function update(request $request)
     {
         try {
-            $data = $request->except('_token');
-            $data['aprovacao_user_id'] =  Auth::guard('admin')->user()->id;
-            Vaga::whereId($data['id'])->update($data);
-            return redirect()->back()->with('success', 'Atualizado com sucesso!');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao editar - ' . $e->getMessage());
-        } 
-    }
+            $data = $request->except('_token', '_method');
+            $data['pausar_vaga'] = (!empty($data['pausar_vaga']) && $data['pausar_vaga'] == 'Sim' ? 1 : '');
+            $data['salario_acombinar'] = (!empty($data['salario_acombinar'])  && $data['salario_acombinar'] == 'Sim' ? 1 : '');
+            $data['salario_de'] = (!empty($data['salario_de']) ? $data['salario_de'] : '');
+            $data['salario_ate'] = (!empty($data['salario_ate']) ? $data['salario_ate'] : '');
 
-    public function delete($id)
-    {   
-        try {
-            Vaga::find($id)->delete();
-            return redirect()->back()->with('success', 'Deletado com sucesso!');
+            Vaga::whereId($data['id'])->update($data);
+            return redirect()->back()->with('success', 'Cadastrado com sucesso!');
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao cadastrar - ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Erro ao atualizar' . $e->getMessage());
         }
     }
 }

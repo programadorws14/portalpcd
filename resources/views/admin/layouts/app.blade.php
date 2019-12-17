@@ -24,7 +24,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-@routes
+    @routes
 </head>
 
 <body>
@@ -54,16 +54,11 @@
                         <li class="nav-item ">
                             <a href="{{ route('admin.gerenciar.empresas') }}" class="nav-link"><i class="fas fa-truck-loading"></i> Empresas</a>
                         </li>
-                        
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-address-book"></i> Vagas </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href=""> <i class=" fas fa-building"></i> Lista </a>
-                                <a class="dropdown-item" href=""> <i class="fas fa-hourglass-end"></i> Pendentes </a>
-                                <a class="dropdown-item" href=""> <i class="fas fa-times-circle"></i> Recusadas </a>
-                            </div>
+
+                        <li class="nav-item ">
+                            <a href="{{ route('admin.gerenciar.vagas') }}" class="nav-link"><i class="fas fa-address-book"></i> Vagas</a>
                         </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-blog"></i> Blog
@@ -73,7 +68,7 @@
                                 <a class="dropdown-item" href=""> <i class="fas fa-tag"></i> Categorias</a>
                             </div>
                         </li>
-                        
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
