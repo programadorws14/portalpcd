@@ -10,6 +10,11 @@ use Exception;
 class GerenciarUsuariosController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('AdminAuth');
+    }
+
     public function index()
     {
         $usuarios = Usuario::all();

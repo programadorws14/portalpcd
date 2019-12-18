@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -127,20 +126,39 @@
 
     @yield('content')
 
+    @if(Session('successNewsletter'))
+        <section class="newsletter-form" >
+            <div style="width:100%; display:block; text-align:center;">
+                <span>{{ Session('successNewsletter') }}</span>
+                <p>Você receberá as melhores vagas, e novidades!</p>
+            </div>
+        </section>
+    @elseif(Session('errorNewsletter'))
+        <section class="newsletter-form" >
+            <div style="width:100%; display:block; text-align:center;">
+                <span>Não foi possível cadastrar!</span>
+                <p>{{ Session('errorNewsletter') }}</p>
+            </div>
+        </section>
+    @endif
+    
+  
 
-    <section class="newsletter-form">
+    <section class="newsletter-form" id="newsletter"  @if(Session('successNewsletter') || Session('errorNewsletter')) style="margin-top:0 !important; @endif ">
+
         <div class="newsletter-form__icon"><i class="fas fa-envelope"></i></div>
         <h2 class="newsletter-form__title">
             Cadastre-se para receber todas as vagas e novidades
         </h2>
-        <form action="#">
+        <form action="{{ route('newsletter.store') }}" method="POST">
+            @csrf
             <div class="newsletter-form__wrapper newsletter-form__wrapper--user">
-                <input type="text" name="name" placeholder="Digite seu nome" />
+                <input type="text" name="nome" placeholder="Digite seu nome"  required/>
             </div>
             <div class="newsletter-form__wrapper newsletter-form__wrapper--email">
-                <input type="text" name="email" placeholder="Digite seu e-mail" />
+                <input type="text" name="email" placeholder="Digite seu e-mail" required />
             </div>
-            <button class="newsletter-form__submit">Cadastre-se</button>
+            <button type="submit" class="newsletter-form__submit">Cadastre-se</button>
         </form>
     </section>
     <section class="footer">

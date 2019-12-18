@@ -10,14 +10,20 @@ use Exception;
 
 class GerenciarVagaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('AdminAuth');
+    }
+    
     public function index()
     {
-        $vagas = Vaga::with('empresa')->get();
+        $vagas = Vaga::with('empresa', 'candidaturas', 'candidaturas.candidato_vaga')->get();
+        // dd($vagas);
         return view('admin.gerenciar_vaga.index', compact('vagas'));
     }
 
     public function create()
-    {   
+    {
         $empresas = Empresa::all();
         return view('admin.gerenciar_vaga.create', compact('empresas'));
     }

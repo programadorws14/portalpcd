@@ -5,12 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CategoriaBlog extends Model
+class Newsletter extends Model
 {
     use SoftDeletes;
-    protected $table = 'categorias';
+    protected $table = 'newsletters';
     protected $fillable = [
-        'descricao',
-        'slug'
+        'nome',
+        'email',
     ];
 }

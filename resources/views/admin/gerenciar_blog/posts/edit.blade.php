@@ -12,17 +12,18 @@
                 <b><i class="fas fa-minus"></i> {{ Session('error') }}</b>
             </div>
             @endif
-            <form action="{{ route('admin.blog.post.store') }}" method="POSt" enctype="multipart/form-data">
+            <form action="{{ route('admin.blog.update') }}" method="POSt" enctype="multipart/form-data">
+                {{ method_field('PUT') }}
                 <div class="card">
-                    <div class="card-header">Novo Post</div>
+                    <div class="card-header">Edita Postagem: <b>{{ $edit->titulo ?? null }}</b></div>
                     <div class="card-body">
                         <div class="row">
-                            @include('admin.blog.posts._form')
+                            @include('admin.gerenciar_blog.posts._form')
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-globe"></i> Publicar</button>
-                        <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Cancelar</a>
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Atualizar</button>
+                        <a href="{{ route('admin.blog') }}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Cancelar</a>
                     </div>
                 </div>
             </form>

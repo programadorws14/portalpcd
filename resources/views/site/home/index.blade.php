@@ -100,93 +100,39 @@
 
 <section class="blog-post__container  pcd-container">
     <div class="row blog-post__row">
-        <div class="col-xs-12 col-md-4">
-            <article class="blog-post">
-                <section class="blog-post__header">
-                    <div class="blog-post__image">
-                        <img src="{{ asset('site/assets/images/Bitmap.png') }}" alt="Imagem" />
-                    </div>
-                    <div class="blog-post__description">
-                        <div class="blog-post__date"><span>26 de Maio, 2019</span></div>
-                        <a href="#" class="blog-post__category">/categoria</a>
+        
+        @if (count($posts) > 0)
+            @foreach($posts as $post)
+                <div class="col-xs-12 col-md-4">
+                    <article class="blog-post">
+                        <section class="blog-post__header">
+                            <div class="blog-post__image">
+                                <img src="{{ asset($post->capa) }}" style="border-radius:100%;" width="130" height="130" alt="Imagem" />
+                            </div>
+                            <div class="blog-post__description">
+                            <div class="blog-post__date"><span>{{ date('d/m/Y', strtotime($post->created_at)) ?? null }}</span></div>
+                                <a href="#" class="blog-post__category">{{ $post->categoria->descricao ?? null }}</a>
 
-                        <h2 class="blog-post__title">Lorem Ipsum sit dolor amet</h2>
-                        <p class="blog-post__excerpt">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-                            auctor consectetur ante, quis aliquam erat pellentesque ut.
-                            Pellentesque placerat porttitor lacinia.
-                        </p>
+                                <h2 class="blog-post__title">{{ mb_strimwidth($post->titulo, 0, 38, "...") }}</h2>
+                                <p class="blog-post__excerpt">
+                                    {{ mb_strimwidth(strip_tags(trim($post->conteudo)), 0, 200, "...") }}
+                                </p>
 
-                        <a href="#" class="blog-post__read-more">Leia Mais...</a>
-                    </div>
-                </section>
-                <footer class="blog-post__tags">
-                    <ul>
-                        <li><a href="#" class="blog-post__tag">dicas</a></li>
-                        <li><a href="#" class="blog-post__tag">vagas</a></li>
-                        <li><a href="#" class="blog-post__tag">entrevistas</a></li>
-                    </ul>
-                </footer>
-            </article>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <article class="blog-post">
-                <section class="blog-post__header">
-                    <div class="blog-post__image">
-                        <img src="{{ asset('site/assets/images/Bitmap.png') }}" alt="Imagem" />
-                    </div>
-                    <div class="blog-post__description">
-                        <div class="blog-post__date"><span>26 de Maio, 2019</span></div>
-                        <a href="#" class="blog-post__category">/categoria</a>
+                                <a href="#" class="blog-post__read-more">Leia Mais...</a>
+                            </div>
+                        </section>
+                        <footer class="blog-post__tags">
+                            {{-- <ul>
+                                <li><a href="#" class="blog-post__tag">dicas</a></li>
+                                <li><a href="#" class="blog-post__tag">vagas</a></li>
+                                <li><a href="#" class="blog-post__tag">entrevistas</a></li>
+                            </ul> --}}
+                        </footer>
+                    </article>
+                </div>
+            @endforeach
+        @endif
 
-                        <h2 class="blog-post__title">Lorem Ipsum sit dolor amet</h2>
-                        <p class="blog-post__excerpt">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-                            auctor consectetur ante, quis aliquam erat pellentesque ut.
-                            Pellentesque placerat porttitor lacinia.
-                        </p>
-
-                        <a href="#" class="blog-post__read-more">Leia Mais...</a>
-                    </div>
-                </section>
-                <footer class="blog-post__tags">
-                    <ul>
-                        <li><a href="#" class="blog-post__tag">dicas</a></li>
-                        <li><a href="#" class="blog-post__tag">vagas</a></li>
-                        <li><a href="#" class="blog-post__tag">entrevistas</a></li>
-                    </ul>
-                </footer>
-            </article>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <article class="blog-post">
-                <section class="blog-post__header">
-                    <div class="blog-post__image">
-                        <img src="{{ asset('site/assets/images/Bitmap.png') }}" alt="Imagem" />
-                    </div>
-                    <div class="blog-post__description">
-                        <div class="blog-post__date"><span>26 de Maio, 2019</span></div>
-                        <a href="#" class="blog-post__category">/categoria</a>
-
-                        <h2 class="blog-post__title">Lorem Ipsum sit dolor amet</h2>
-                        <p class="blog-post__excerpt">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-                            auctor consectetur ante, quis aliquam erat pellentesque ut.
-                            Pellentesque placerat porttitor lacinia.
-                        </p>
-
-                        <a href="#" class="blog-post__read-more">Leia Mais...</a>
-                    </div>
-                </section>
-                <footer class="blog-post__tags">
-                    <ul>
-                        <li><a href="#" class="blog-post__tag">dicas</a></li>
-                        <li><a href="#" class="blog-post__tag">vagas</a></li>
-                        <li><a href="#" class="blog-post__tag">entrevistas</a></li>
-                    </ul>
-                </footer>
-            </article>
-        </div>
     </div>
 </section>
 @endsection

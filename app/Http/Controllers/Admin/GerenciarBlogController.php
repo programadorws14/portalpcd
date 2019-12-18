@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin;
+use App\Blog;
 use App\CategoriaBlog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,7 +11,7 @@ use App\PostBlog;
 use Exception;
 use Illuminate\Support\Carbon;
 
-class BlogController extends Controller
+class GerenciarBlogController extends Controller
 {
     public function __construct()
     {
@@ -19,30 +20,28 @@ class BlogController extends Controller
 
     public function index()
     {
-        $posts = PostBlog::with('categoria', 'autor')->get();
-        return view('admin.blog.index', compact('posts'));
+        $posts = Blog::with('categoria')->get();
+        return view('admin.gerenciar_blog.index', compact('posts'));
     }
 
     public function create()
     {
         $usuarios = Admin::select('id', 'nome')->get();
         $categorias = CategoriaBlog::select('id', 'descricao')->get();
-        return view('admin.blog.posts.create', compact('usuarios', 'categorias'));
+        return view('admin.gerenciar_blog.posts.create', compact('usuarios', 'categorias'));
     }
 
     public function store(request $request)
     {
         try {
             $data = $request->except('_token', 'capa');
-            $data['data_publicacao'] = Carbon::parse($data['data_publicacao'])->format('Y-m-d H:i:s');
-
             if (!empty($request->capa)) {
                 $newName = time() . '.' . $request->capa->getClientOriginalExtension();
                 if ($request->capa->move(public_path('posts/capa/'), $newName)) {
                     $data['capa'] = 'posts/capa/' . $newName;
                 }
             }
-            PostBlog::create($data);
+            Blog::create($data);
             return redirect()->back()->with('success', 'Cadastrado com sucesso!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Erro ao cadastrar - ' . $e->getMessage());
@@ -51,28 +50,25 @@ class BlogController extends Controller
 
     public function edit($id)
     {
-        $edit = PostBlog::find($id);
-        $usuarios = Admin::select('id', 'nome')->get();
+        $edit = Blog::find($id);
         $categorias = CategoriaBlog::select('id', 'descricao')->get();
-        return view('admin.blog.posts.edit', compact('edit', 'usuarios', 'categorias'));
+        return view('admin.gerenciar_blog.posts.edit', compact('edit', 'categorias'));
     }
 
     public function update(request $request)
     {
         try {
-
             $data = $request->except('_token', '_method', 'capa');
-            $data['data_publicacao'] = Carbon::parse($data['data_publicacao'])->format('Y-m-d H:i:s');
 
             if (!empty($request->capa)) {
                 $newName = time() . '.' . $request->capa->getClientOriginalExtension();
                 if ($request->capa->move(public_path('posts/capa/'), $newName)) {
-                    $edit = PostBlog::find($data['id']);
+                    $edit = Blog::find($data['id']);
                     unlink(public_path($edit->capa));
                     $data['capa'] = 'posts/capa/' . $newName;
                 }
             }
-            PostBlog::whereId($data['id'])->update($data);
+            Blog::whereId($data['id'])->update($data);
             return redirect()->back()->with('success', 'Atualizado com sucesso!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Erro ao cadastrar - ' . $e->getMessage());
@@ -82,12 +78,12 @@ class BlogController extends Controller
     public function delete($id)
     {
         try {
-            $post = PostBlog::find($id);
+            $post = Blog::find($id);
             if (!empty($post->capa)) {
                 unlink(public_path($post->capa));
             }
             $post->delete();
-            return redirect()->back()->with('success', 'Atualizado com sucesso!');
+            return redirect()->back()->with('success', 'Deletado com sucesso!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Erro ao cadastrar - ' . $e->getMessage());
         }

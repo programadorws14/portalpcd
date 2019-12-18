@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -59,13 +60,17 @@
                             <a href="{{ route('admin.gerenciar.vagas') }}" class="nav-link"><i class="fas fa-address-book"></i> Vagas</a>
                         </li>
 
+                        <li class="nav-item ">
+                            <a href="{{ route('admin.newsletter') }}" class="nav-link"><i class="fas fa-envelope"></i> Newsletter</a>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-blog"></i> Blog
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href=""> <i class="fas fa-file"></i> Posts</a>
-                                <a class="dropdown-item" href=""> <i class="fas fa-tag"></i> Categorias</a>
+                                <a class="dropdown-item" href="{{ route('admin.blog') }}"> <i class="fas fa-file"></i> Posts</a>
+                                <a class="dropdown-item" href="{{ route('admin.blog.categoria') }}"> <i class="fas fa-tag"></i> Categorias</a>
                             </div>
                         </li>
 
@@ -81,7 +86,7 @@
                                 <b><i class="fas fa-user"></i> {{ Auth::guard('admin')->user()->nome }} <span class="caret"></span></b>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#"> <i class="fas fa-lock"></i> Alterar Senha</a>
+                                <a class="dropdown-item" href="{{ route('admin.perfil') }}"> <i class="fas fa-lock"></i> Alterar Senha</a>
                                 <a class="dropdown-item" href="{{ route('admin.sair') }}" onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> Sair

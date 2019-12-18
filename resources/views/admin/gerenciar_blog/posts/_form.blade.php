@@ -2,8 +2,9 @@
 @if(!empty($edit))
 <input type="hidden" value="{{ $edit->id ?? null }}" name="id">
 @endif
+
 <div class="col-md-12">
-    <div class="input-group input-group-sm mb-4">
+    <div class="input-group mb-4">
         <div class="input-group-prepend">
             <div class="input-group-text">Capa</div>
         </div>
@@ -11,8 +12,8 @@
     </div>
 </div>
 
-<div class="col-md-12">
-    <div class="input-group input-group-sm mb-4">
+<div class="col-md-8">
+    <div class="input-group mb-4">
         <div class="input-group-prepend">
             <div class="input-group-text">Titulo</div>
         </div>
@@ -20,23 +21,8 @@
     </div>
 </div>
 
-<div class="col-md-12 mb-3">
-    <textarea type="text" class="editor form-control" rows="15" name="conteudo" placeholder="Conteúdo">@if(!empty($edit)) {{ $edit->conteudo }} @else {{ old('conteudo') }} @endif</textarea>
-</div>
-
 <div class="col-md-4">
-    <div class="input-group input-group-sm mb-4" style="margin:0 padding:0;">
-        <div class="input-group-prepend">
-            <div class="input-group-text">Data Publicação</div>
-        </div>
-        <input type="datetime-local" class="form-control" value="@if(!empty($edit)){{ date('Y-m-d\TH:i', strtotime($edit->data_publicacao)) }}@else {{ old('data_publicacao') }}@endif" name="data_publicacao">
-    </div>
-
-
-</div>
-
-<div class="col-md-4">
-    <div class="input-group input-group-sm mb-4">
+    <div class="input-group mb-4">
         <div class="input-group-prepend">
             <div class="input-group-text">Categoria</div>
         </div>
@@ -54,21 +40,9 @@
     </div>
 </div>
 
-<div class="col-md-4">
-    <div class="input-group input-group-sm mb-4">
-        <div class="input-group-prepend">
-            <div class="input-group-text">Autor</div>
-        </div>
-        <select class="form-control" name="autor_id">
-            <option value="">Selecione</option>
-            @foreach($usuarios as $usuario)
-            <option @if(Auth::guard('admin')->user()->id == $usuario->id) selected @endif value="{{ $usuario->id ?? null }}">{{ $usuario->nome ?? null }}</option>
-            @endforeach
-        </select>
-    </div>
+<div class="col-md-12 mb-3">
+    <textarea type="text" class="editor form-control" rows="15" name="conteudo" placeholder="Conteúdo">@if(!empty($edit)) {{ $edit->conteudo }} @else {{ old('conteudo') }} @endif</textarea>
 </div>
-
-
 
 @section('scripts')
 <script src="https://cdn.tiny.cloud/1/lqk0zhhopgun65yfm2oh7o5wgu8lyeqseadx1t24nughq8gz/tinymce/5/tinymce.min.js"></script>

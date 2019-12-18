@@ -17,7 +17,7 @@
         <form action="{{ route('admin.blog.categoria.store') }}" method="POST">
             <div class="card-body">
                 <div class="row">
-                    @include('admin.blog.categoria._form')
+                    @include('admin.gerenciar_blog.categoria._form')
                 </div>
             </div>
             <div class="card-footer">
@@ -27,6 +27,6 @@
     </div>
 </div>
 
-@include('admin.blog.categoria._list')
+@include('admin.gerenciar_blog.categoria._list')
 
 @endsection

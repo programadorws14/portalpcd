@@ -11,7 +11,6 @@ Route::get('/', 'Site\HomeController@index')->name('site.home');
 Route::get('/vaga/{id}', 'Site\VagasController@show')->name('site.vagas.show');
 Route::get('/vagas', 'Site\VagasController@vagas')->name('site.vagas');
 
-
 //Cadastro de empresas home
 Route::get('/login', 'Site\LoginController@index')->name('site.login');
 Route::get('/candidato/login', 'Site\LoginController@indexCandidato')->name('site.login.candidato');
@@ -27,12 +26,17 @@ Route::post('/login/usuario', 'Site\CadUsuarioController@store')->name('usuario.
 Route::get('/dashboard/email/empresa/{email}', 'Site\LoginController@VerificaEmailEmpresa')->name('empres.verifica.email');
 Route::get('/dashboard/email/usuario/{email}', 'Site\LoginController@VerificaEmailUsuario')->name('usuario.verifica.email');
 
+/**Newsletter SITE */
+Route::post('/newsletter', 'Site\NewsletterController@store')->name('newsletter.store');
+
 
 Route::group(['prefix' => 'admin/'], function () {
 
     Route::get('/login', 'Admin\LoginController@index')->name('admin.login');
     Route::post('/login', 'Admin\LoginController@store')->name('admin.store.login');
     Route::post('/sair', 'Admin\LoginController@sair')->name('admin.sair');
+    Route::get('/perfil', 'Admin\GerenciarPerfilController@index')->name('admin.perfil');
+    Route::post('/perfil/update', 'Admin\GerenciarPerfilController@update')->name('admin.update');
 
     /**Dashboard */
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
@@ -58,6 +62,26 @@ Route::group(['prefix' => 'admin/'], function () {
     Route::post('/vaga/store', 'Admin\GerenciarVagaController@store')->name('admin.gerenciar.vaga.store');
     Route::get('/vaga/edit/{id}', 'Admin\GerenciarVagaController@edit')->name('admin.gerenciar.vaga.edit');
     Route::put('/vaga/edit/update', 'Admin\GerenciarVagaController@update')->name('admin.gerenciar.vaga.update');
+
+    /**Gerenciar Newsletter */
+    Route::get('/newsletter', 'Admin\GerenciarNewsletterController@index')->name('admin.newsletter');
+    Route::get('/newsletter/exportar/newsletter', 'Admin\GerenciarNewsletterController@export')->name('admin.newsletter.excel');
+    Route::get('/newsletter/deletar/{id}', 'Admin\GerenciarNewsletterController@deletar')->name('admin.newsletter.deletar');
+
+    /**Gerenciar Blog */
+    Route::get('/blog', 'Admin\GerenciarBlogController@index')->name('admin.blog');
+    Route::get('/blog/create', 'Admin\GerenciarBlogController@create')->name('admin.blog.create');
+    Route::post('/blog/create', 'Admin\GerenciarBlogController@store')->name('admin.blog.store');
+    Route::get('/blog/edit/{id}', 'Admin\GerenciarBlogController@edit')->name('admin.blog.edit');
+    Route::put('/blog/edit/update', 'Admin\GerenciarBlogController@update')->name('admin.blog.update');
+    Route::get('/blog/delete/{id}', 'Admin\GerenciarBlogController@delete')->name('admin.blog.delete');
+
+    /**Gerenciar Categoria Blog */
+    Route::get('/blog/categoria', 'Admin\CategoriaBlogController@index')->name('admin.blog.categoria');
+    Route::post('/blog/categoria', 'Admin\CategoriaBlogController@store')->name('admin.blog.categoria.store');
+    Route::get('/blog/categoria/edit/{id}', 'Admin\CategoriaBlogController@edit')->name('admin.blog.categoria.edit');
+    Route::put('/blog/categoria/edit/update', 'Admin\CategoriaBlogController@update')->name('admin.blog.categoria.update');
+    Route::get('/blog/categoria/delete/{id}', 'Admin\CategoriaBlogController@delete')->name('admin.blog.categoria.delete');
 });
 
 

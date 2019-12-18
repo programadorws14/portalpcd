@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Auth;
 
 
 class GerenciarEmpresasController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('AdminAuth');
+    }
 
     public function index()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Blog;
 use App\Empresa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,6 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $vagas = Vaga::with('empresa')->wherePausarVaga('')->get();
-        return view('site.home.index', compact('vagas'));
+        $posts = Blog::all();
+        return view('site.home.index', compact('vagas', 'posts'));
     }
 }

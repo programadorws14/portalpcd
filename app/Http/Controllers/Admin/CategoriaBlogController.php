@@ -9,10 +9,15 @@ use Exception;
 
 class CategoriaBlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('AdminAuth');
+    }
+
     public function index()
-    {   
+    {
         $categorias = CategoriaBlog::all();
-        return view('admin.blog.categoria.index', compact('categorias'));
+        return view('admin.gerenciar_blog.categoria.index', compact('categorias'));
     }
 
     public function store(request $request)
@@ -32,14 +37,14 @@ class CategoriaBlogController extends Controller
         try {
             $categorias = CategoriaBlog::all();
             $edit = CategoriaBlog::find($id);
-            return view('admin.blog.categoria.edit', compact('edit', 'categorias'));
+            return view('admin.gerenciar_blog.categoria.edit', compact('edit', 'categorias'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Erro ao cadastrar - ' . $e->getMessage());
         }
     }
 
     public function update(request $request)
-    {       
+    {
         try {
             $data = $request->except('_token', '_method');
             $data['slug'] = $this->slug($data['descricao']);
@@ -162,13 +167,11 @@ class CategoriaBlogController extends Controller
             '=' => '',
             '+' => '',
         );
-    
+
         $string = strtr($string, $list);
         $string = preg_replace('/-{2,}/', '-', $string);
         $string = strtolower($string);
-    
+
         return $string;
     }
-
-
 }

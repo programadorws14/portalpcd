@@ -14,19 +14,19 @@
             </div>
             @endif
         </div>
-        <form action="{{ route('admin.blog.categoria.store') }}" method="POST">
+        <form action="{{ route('admin.blog.categoria.update') }}" method="POST">
             {{ method_field('PUT') }}
             <div class="card-body">
                 <div class="row">
-                    @include('admin.blog.categoria._form')
+                    @include('admin.gerenciar_blog.categoria._form')
                 </div>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</button>
-                <a href="{{ route('admin.blog.categoria.index') }}" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Cancelar</a>
+                <a href="" class="btn btn-danger btn-sm"><i class="fas fa-arrow-left"></i> Cancelar</a>
             </div>
         </form>
     </div>
 </div>
-@include('admin.blog.categoria._list')
+@include('admin.gerenciar_blog.categoria._list')
 @endsection
