@@ -12,8 +12,16 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $vagas = Vaga::with('empresa')->wherePausarVaga('')->get();
+        $vagas = Vaga::with('empresa')->wherePausarVaga('')->take(6)->get();
+        $estados = Vaga::select('estado')->groupBy('estado')->get();
         $posts = Blog::all();
-        return view('site.home.index', compact('vagas', 'posts'));
+        
+        return view('site.home.index', compact('vagas', 'posts', 'estados'));
+    }
+
+    public function filtroHome(request $request)
+    {
+        $data = $request->except('_token');
+        dd($data);
     }
 }

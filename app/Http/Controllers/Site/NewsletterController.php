@@ -11,7 +11,6 @@ class NewsletterController extends Controller
 {
     public function store(request $request)
     {
-
         try {
             $data = $request->except('_token');
             $verificaEmail = Newsletter::whereEmail($data['email'])->first();

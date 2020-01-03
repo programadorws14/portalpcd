@@ -213,6 +213,46 @@ $(document).ready(function () {
 });
 
 
+//Ver Mais Vagas - Botão Home Page
+$(document).ready(function () {
+	$('.jobs-card__see-more').click(function () {
+		let divjobs = $(".jobs-card").length;
+		carregarMais(divjobs);
+	});
+});
 
+function carregarMais(offset) {
+	$.get(route('site.home.carregar.mais', offset), function (data) {
+		if (data.length > 0) {
+			for (i = 0; i < data.length; i++) {
+				$('.cards-vermais').append(`<div class="col-xs-12 col-md-4" style="margin-top:25px;">
+				<article class="jobs-card">
+					<section class="jobs-card__header">
+						<div class="jobs-card__image">
+							<img src="`+ (data[i].empresa.logo_empresa == '' ? '/img/img-empresa.png' : data[i].empresa.logo_empresa) + `" width="90" height="90" alt="" />
+						</div>
+						<div class="jobs-card__description">
+							<h2 class="jobs-card__title"><a href="`+ route('site.vagas.show', data[i].id) + `">` + data[i].titulo.substr(0, 20) + `</a></h2>
+							<h4 class="jobs-card__subtitle">`+ data[i].descricao_vaga.substr(0, 65) + `</h4>
+						</div>
+					</section>
+					<footer class="jobs-card__footer">
+						<p class="jobs-card__location">
+							<i class="fas fa-location-arrow"></i>&nbsp; `+ data[i].cidade + ` - ` + data[i].estado + `
+						</p>
+						<p class="jobs-card__date">
+							<i class="fas fa-calendar"></i>&nbsp; Publicado em: ` + new Date(data[i].created_at).toLocaleDateString() + `
+						</p>
+					</footer>
+				</article>
+				</div>`).hide().fadeIn('slow');
+			}
+		}
 
+		if (data.length == 0) {
+			$('.jobs-card__see-more').fadeOut('fast');
+		}
+
+	});
+}
 

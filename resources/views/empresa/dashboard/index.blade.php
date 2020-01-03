@@ -87,6 +87,7 @@
 									</li>
 								@endforeach
 							@endif
+							{{ $vagas->links() }}
 						</ul>
 						<div class="area-botao">
 							<button id="nova-vaga">Adicionar nova vaga</button>

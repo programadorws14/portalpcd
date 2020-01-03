@@ -18,12 +18,14 @@ class VagasController extends Controller
         } else {
             $cadastrado_vaga = null;
         }
-        $vagas = Vaga::with('empresa')->wherePausarVaga('')->get();
+        $vagas = Vaga::with('empresa')->wherePausarVaga('')->orderBy('id', 'desc')->take(6)->get();
         return view('site.vaga.vaga_single', compact('vaga', 'vagas', 'cadastrado_vaga'));
     }
 
     public function vagas()
     {
-        return view('site.vaga.vagas');
+        $vagas = Vaga::with('empresa')->wherePausarVaga('')->orderBy('id', 'desc')->take(6)->get();
+        $estados = Vaga::select('estado')->groupBy('estado')->get();
+        return view('site.vaga.vagas', compact('vagas', 'estados'));
     }
 }

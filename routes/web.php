@@ -1,6 +1,7 @@
 <?php
 
 use App\Municipio;
+use App\Vaga;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -8,8 +9,18 @@ use Illuminate\Support\Facades\Route;
 
 //Site
 Route::get('/', 'Site\HomeController@index')->name('site.home');
+
+//Botão HOme carregar mais
+Route::get('/carregar/{offset}/', function ($offset) {
+    $vagas = Vaga::with('empresa')->wherePausarVaga('')->limit(6)->offset($offset)->get()->toArray();
+    return $vagas;
+})->name('site.home.carregar.mais');
+
 Route::get('/vaga/{id}', 'Site\VagasController@show')->name('site.vagas.show');
 Route::get('/vagas', 'Site\VagasController@vagas')->name('site.vagas');
+
+//Filtro home
+Route::post('/filtro', 'Site\HomeController@filtroHome')->name('site.fitro.home');
 
 //Cadastro de empresas home
 Route::get('/login', 'Site\LoginController@index')->name('site.login');

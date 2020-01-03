@@ -9,7 +9,11 @@
 <div class="wrapper container-fluid">
     <div class="row">
         <div class="col-xs-12 col-md-3 profile__info">
-            <img src="{{ asset('site/assets/images/profile-image.png') }}" alt="" />
+            @if(!empty($vaga->empresa->logo_empresa))
+            <img src="{{ asset($vaga->empresa->logo_empresa) }}" width="160" height="160" alt="{{ $vaga->empresa->nome ?? null }}"  style="border-radius:100%;"/>
+            @else
+            <img src="{{ asset('site/assets/images/profile-image.png') }}" width="160" height="160" alt="{{ $vaga->empresa->nome ?? null }}" style="border-radius:100%;" />
+            @endif
             <h2 class="profile__title">{{ $vaga->empresa->nome ?? null }}</h2>
             <p class="profile__username">{{ '/'. $vaga->empresa->nome_url ?? null }}</p>
         </div>

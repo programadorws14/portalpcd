@@ -23,7 +23,7 @@ class EmpresaController extends Controller
     public function index()
     {
         $ramos = Ramo::all();
-        $vagas = Vaga::whereEmpresaId(Auth::guard('empresa')->user()->id)->with('candidaturas')->get();
+        $vagas = Vaga::whereEmpresaId(Auth::guard('empresa')->user()->id)->with('candidaturas')->paginate(15);
         $links = LinksSociais::whereEmpresaId(Auth::guard('empresa')->user()->id)->get();
 
         return view('empresa.dashboard.index', compact('ramos', 'links', 'vagas'));
@@ -94,7 +94,7 @@ class EmpresaController extends Controller
         }
     }
 
-    
+
 
     /**PRIVATE */
     private function slug($string)

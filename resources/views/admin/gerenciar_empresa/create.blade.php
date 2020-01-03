@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" id="bntSubmit" class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>
-                        <a href="{{ route('admin.gerenciar.empresas') }}" class="btn btn-danger"><i class="fas fa-save"></i> Cancelar</a>
+                        <a href="{{ route('admin.gerenciar.empresas') }}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Cancelar</a>
                     </div>
                
                 </div>

@@ -21,10 +21,13 @@
             <section class="search-filter">
               <h2 class="search-filter__title">Selecione o Estado</h2>
               <ul data-simplebar data-simplebar-auto-hide="false">
-                <li>
-                  <label><input type="checkbox" name="1" id="1" /><span>Teste 1</span></label>
-                </li>
-
+                @if (count($estados) > 0)
+                    @foreach ($estados as $estado)
+                        <li>
+                          <label><input type="checkbox" name="{{ $estado->estado }}" id="1" /><span>{{ $estado->estado }}</span></label>
+                        </li>
+                    @endforeach
+                @endif
               </ul>
             </section>
             <section class="search-filter">

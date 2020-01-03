@@ -63,7 +63,7 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Data Fundação</div>
             </div>
-            <input type="date" class="form-control" value="{{ ( $empresa->data_fundacao ? date('Y-m-d', strtotime( $empresa->data_fundacao)) : old('data_fundacao') ) }}" name="data_fundacao">
+            <input type="date" class="form-control" value="{{ ( !empty($empresa->data_fundacao) ? date('Y-m-d', strtotime( $empresa->data_fundacao)) : old('data_fundacao') ) }}" name="data_fundacao">
         </div>
     </div>
     <div class="col-md-4">
