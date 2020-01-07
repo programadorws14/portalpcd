@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -71,6 +70,15 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('admin.blog') }}"> <i class="fas fa-file"></i> Posts</a>
                                 <a class="dropdown-item" href="{{ route('admin.blog.categoria') }}"> <i class="fas fa-tag"></i> Categorias</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-file-alt"></i> Páginas
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('admin.paginas.index') }}"> <i class="fas fa-file"></i> Página</a>
                             </div>
                         </li>
 

@@ -19,7 +19,6 @@ class LoginController extends Controller
             return redirect()->route('usuario.dashboard');
         }
 
-
         return view('site.login.index');
     }
 

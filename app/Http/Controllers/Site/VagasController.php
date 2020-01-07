@@ -24,8 +24,19 @@ class VagasController extends Controller
 
     public function vagas()
     {
-        $vagas = Vaga::with('empresa')->wherePausarVaga('')->orderBy('id', 'desc')->take(6)->get();
+        $estados_sel = (!empty($_GET['estado']) ? $_GET['estado'] : 0);
+        $pesquisa_texto = (!empty($_GET['pesquisa-text']) ? $_GET['pesquisa-text'] : '');
+
+        $vagas = Vaga::with('empresa')->wherePausarVaga('')->when($estados_sel, function ($query, $estados_sel) {
+                foreach($estados_sel as $sel){
+                $query->whereEstado($sel);
+                $query->orWhere('estado', $sel);
+                }
+        })->when($pesquisa_texto, function ($query, $pesquisa_texto) {
+            $query->Where('titulo', 'like', '%' . $pesquisa_texto . '%')->get();
+        })->get();
+
         $estados = Vaga::select('estado')->groupBy('estado')->get();
-        return view('site.vaga.vagas', compact('vagas', 'estados'));
+        return view('site.vaga.vagas', compact('vagas', 'estados', 'estados_sel', 'pesquisa_texto'));
     }
 }

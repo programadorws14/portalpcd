@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -40,19 +41,19 @@
                     <ul>
 
                         @if(Auth::guard('empresa')->user())
-                            <li><a href="{{ route('site.login') }}#bloc_cad_vaga_empresa">Cadastre Vaga</a></li>
-                            <li><a href="{{ route('empresa.dashboard') }}"><b>Meu Perfil</b></a></li>
+                        <li><a href="{{ route('site.login') }}#bloc_cad_vaga_empresa">Cadastre Vaga</a></li>
+                        <li><a href="{{ route('empresa.dashboard') }}"><b>Meu Perfil</b></a></li>
                         @elseif(Auth::guard('usuario')->user())
-                            <li><a href="{{ route('site.login') }}#bloc_cad_candidato">Cadastrar Curriculo</a></li>
-                            <li><a href="{{ route('usuario.dashboard') }}"><b>Meu Perfil</b></a></li>
+                        <li><a href="{{ route('site.login') }}#bloc_cad_candidato">Cadastrar Curriculo</a></li>
+                        <li><a href="{{ route('usuario.dashboard') }}"><b>Meu Perfil</b></a></li>
                         @else
-                            <li><a href="{{ route('site.login') }}#bloc_cad_vaga_empresa">Cadastre Vaga</a></li>
-                            <li><a href="{{ route('site.login') }}#bloc_cad_candidato">Cadastrar Curriculo</a></li>
+                        <li><a href="{{ route('site.login') }}#bloc_cad_vaga_empresa">Cadastre Vaga</a></li>
+                        <li><a href="{{ route('site.login') }}#bloc_cad_candidato">Cadastrar Curriculo</a></li>
                         @endif
 
                         <li>
                             @if(Auth::guard('empresa')->user() || Auth::guard('usuario')->user())
-                            
+
                             <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="#" class="login"><i class="fas fa-user-circle"></i>&nbsp;Sair</a>
                             <form id="logout-form" action="@if(Auth::guard('empresa')->check()) {{ route('empresa.sair') }} @else {{ route('usuario.sair') }}  @endif" method="POST" style="display: none;">
                                 @csrf
@@ -97,19 +98,18 @@
                     <a href="{{ route('site.login') }}#bloc_cad_vaga_empresa">
                         <li> Cadastrar Vaga</li>
                     </a>
-                <a href="{{ route('site.vagas') }}">
+                    <a href="{{ route('site.vagas') }}">
                         <li> Todas as Vagas</li>
                     </a>
-                    <a href="#">
-                        <li>Empresas</li>
-                    </a>
-                    <a href="#">
-                        <li>Blog</li>
-                    </a>
-                    <a href="#">
-                        <li>Sobre</li>
-                    </a>
 
+                    <!--Variavel pg está vindo  do AppServiceProvider-->
+                    @if(count($pg) > 0)
+                    @foreach($pg as $p)
+                    <a href="{{ route('site.pagina.show', $p->slug) }}">
+                        <li>{{ $p->titulo }}</li>
+                    </a>
+                    @endforeach
+                    @endif
                 </ul>
             </div>
         </nav>
@@ -117,9 +117,12 @@
         <nav class="main-menu hide show-md">
             <ul style="justify-content:normal !important;">
                 <li><a href="{{ route('site.vagas') }}">Todas as Vagas</a></li>
-                <li><a href="#">Empresas</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Sobre</a></li>
+                <!--Variavel pg está vindo  do AppServiceProvider-->
+                @if(count($pg) > 0)
+                @foreach($pg as $p)
+                <li><a href="{{ route('site.pagina.show', $p->slug) }}">{{ $p->titulo }}</a></li>
+                @endforeach
+                @endif
             </ul>
         </nav>
     </main>
@@ -127,24 +130,24 @@
     @yield('content')
 
     @if(Session('successNewsletter'))
-        <section class="newsletter-form" >
-            <div style="width:100%; display:block; text-align:center;">
-                <span>{{ Session('successNewsletter') }}</span>
-                <p>Você receberá as melhores vagas, e novidades!</p>
-            </div>
-        </section>
+    <section class="newsletter-form">
+        <div style="width:100%; display:block; text-align:center;">
+            <span>{{ Session('successNewsletter') }}</span>
+            <p>Você receberá as melhores vagas, e novidades!</p>
+        </div>
+    </section>
     @elseif(Session('errorNewsletter'))
-        <section class="newsletter-form" >
-            <div style="width:100%; display:block; text-align:center;">
-                <span>Não foi possível cadastrar!</span>
-                <p>{{ Session('errorNewsletter') }}</p>
-            </div>
-        </section>
+    <section class="newsletter-form">
+        <div style="width:100%; display:block; text-align:center;">
+            <span>Não foi possível cadastrar!</span>
+            <p>{{ Session('errorNewsletter') }}</p>
+        </div>
+    </section>
     @endif
-    
-  
 
-    <section class="newsletter-form" id="newsletter"  @if(Session('successNewsletter') || Session('errorNewsletter')) style="margin-top:0 !important; @endif ">
+
+
+    <section class="newsletter-form" id="newsletter" @if(Session('successNewsletter') || Session('errorNewsletter')) style="margin-top:0 !important; @endif ">
 
         <div class="newsletter-form__icon"><i class="fas fa-envelope"></i></div>
         <h2 class="newsletter-form__title">
@@ -153,7 +156,7 @@
         <form action="{{ route('newsletter.store') }}" method="POST">
             @csrf
             <div class="newsletter-form__wrapper newsletter-form__wrapper--user">
-                <input type="text" name="nome" placeholder="Digite seu nome"  required/>
+                <input type="text" name="nome" placeholder="Digite seu nome" required />
             </div>
             <div class="newsletter-form__wrapper newsletter-form__wrapper--email">
                 <input type="text" name="email" placeholder="Digite seu e-mail" required />

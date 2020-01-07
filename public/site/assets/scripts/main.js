@@ -256,3 +256,9 @@ function carregarMais(offset) {
 	});
 }
 
+$(document).ready(function () {
+	$("input[name='estado[]']").click(function () {
+		$("#form-pesquisa-filtro").submit();
+	});
+});
+

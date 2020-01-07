@@ -86,3 +86,12 @@
           .pagination ul{}
           .pagination ul li{}
           .pagination ul li a{}
+
+          .page{
+            margin-top:0px !important;
+          }
+
+          .page p
+          {
+            margin-bottom:20px !important;
+          }

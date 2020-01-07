@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 //Site
 Route::get('/', 'Site\HomeController@index')->name('site.home');
+Route::get('/page/{slug}', 'Site\PaginasController@show')->name('site.pagina.show');
 
 //Botão HOme carregar mais
 Route::get('/carregar/{offset}/', function ($offset) {
@@ -93,6 +94,14 @@ Route::group(['prefix' => 'admin/'], function () {
     Route::get('/blog/categoria/edit/{id}', 'Admin\CategoriaBlogController@edit')->name('admin.blog.categoria.edit');
     Route::put('/blog/categoria/edit/update', 'Admin\CategoriaBlogController@update')->name('admin.blog.categoria.update');
     Route::get('/blog/categoria/delete/{id}', 'Admin\CategoriaBlogController@delete')->name('admin.blog.categoria.delete');
+
+    /**Gerenciar Páginas Estáticas */
+    Route::get('/paginas/index', 'Admin\GerenciarPaginasController@index')->name('admin.paginas.index');
+    Route::get('/paginas/create', 'Admin\GerenciarPaginasController@create')->name('admin.paginas.create');
+    Route::post('/paginas/store', 'Admin\GerenciarPaginasController@store')->name('admin.paginas.store');
+    Route::get('/paginas/edit/{id}', 'Admin\GerenciarPaginasController@edit')->name('admin.paginas.edit');
+    Route::put('/paginas/edit/update', 'Admin\GerenciarPaginasController@update')->name('admin.paginas.update');
+    Route::get('/paginas/delete/{id}', 'Admin\GerenciarPaginasController@delete')->name('admin.paginas.delete');
 });
 
 
