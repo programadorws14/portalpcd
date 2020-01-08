@@ -24,16 +24,34 @@ class VagasController extends Controller
 
     public function vagas()
     {
+
         $estados_sel = (!empty($_GET['estado']) ? $_GET['estado'] : 0);
         $pesquisa_texto = (!empty($_GET['pesquisa-text']) ? $_GET['pesquisa-text'] : '');
 
-        $vagas = Vaga::with('empresa')->wherePausarVaga('')->when($estados_sel, function ($query, $estados_sel) {
-                foreach($estados_sel as $sel){
-                $query->whereEstado($sel);
-                $query->orWhere('estado', $sel);
+        // $vagas = Vaga::with('empresa')->wherePausarVaga('')->when($estados_sel && !$pesquisa_texto, function ($query, $estados_sel) {
+        //     foreach ($estados_sel as $sel) {
+        //         $query->whereEstado($sel);
+        //         $query->orWhere('estado', $sel);
+        //     }
+        // }, function ($query) use ($estados_sel, $pesquisa_texto) {
+        //     $query->where('titulo', 'like', '%' . $pesquisa_texto . '%');
+
+        //     if (!empty($estados_sel)) {
+        //         foreach ($estados_sel as $sel) {
+        //             $query->whereEstado($sel);
+        //             $query->orWhere('estado', $sel);
+        //         }
+        //     }
+        // })->get();
+
+        $vagas = Vaga::with('empresa')->wherePausarVaga('')->where(function ($query) use ($estados_sel, $pesquisa_texto) {
+            $query->where('titulo', 'like', '%' . $pesquisa_texto . '%');
+
+            if (!empty($estados_sel)) {
+                foreach ($estados_sel as $sel) {
+                    $query->whereIn('estado', $estados_sel);
                 }
-        })->when($pesquisa_texto, function ($query, $pesquisa_texto) {
-            $query->Where('titulo', 'like', '%' . $pesquisa_texto . '%')->get();
+            }
         })->get();
 
         $estados = Vaga::select('estado')->groupBy('estado')->get();

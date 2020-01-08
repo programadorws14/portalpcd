@@ -11,7 +11,7 @@
       <h1>Refine sua busca</h1>
       <form action="" method="GET">
         <div class="search-input">
-
+          
           <input type="text" name="pesquisa-text" placeholder="Buscar vagas..." />
 
           @if (!empty($estados_sel) && count($estados_sel) > 0)
