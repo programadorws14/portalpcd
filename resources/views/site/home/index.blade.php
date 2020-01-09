@@ -6,11 +6,10 @@
         <br />
         <strong>AQUI FICA MAIS PERTO DO SEU OBJETIVO</strong>
     </h1>
-    <form action="{{ route('site.fitro.home') }}" method="POST" class="search-form">
-        @csrf
+    <form action="{{ route('site.vagas') }}" method="get" class="search-form">
         <!-- <input type="text" name="job-title" placeholder="Digite o Cargo ou Área Profissional" /> -->
-        <select class="select2" name="vaga" placeholder="Vagas" place style="width:35%; height: auto !important;">
-            <option>Selecione a vaga</option>
+        <select class="select2" name="pesquisa-text" placeholder="Vagas" place style="width:35%; height: auto !important;">
+            <option value="">Selecione a vaga</option>
             @if (count($vagas) > 0)
                 @foreach ($vagas as $vaga)
                     <option value="{{ $vaga->titulo }}">{{ $vaga->titulo }}</option>
@@ -22,8 +21,8 @@
         <div class="search-form__breaker"></div>
 
         <!-- <input type="text" name="job-title" placeholder="Digite o Cargo ou Área Profissional" /> -->
-        <select class="select2" name="estado" placeholder="" style=" width:35%; height: auto !important;">
-            <option>Selecione o estado</option>
+        <select class="select2" name="estado[]" placeholder="" style=" width:35%; height: auto !important;">
+            <option value="">Selecione o estado</option>
             @if (count($estados) > 0)
                 @foreach ($estados as $estado)
                     <option value="{{ $estado->estado }}">{{ $estado->estado }}</option>

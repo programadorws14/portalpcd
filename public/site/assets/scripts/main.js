@@ -256,6 +256,57 @@ function carregarMais(offset) {
 	});
 }
 
+
+//Ver mais Vagas - botão na pagina todas as vagas
+$(document).ready(function () {
+	$('#carregarMaisVagas').click(function () {
+		var div = $(".openings-card").length;
+		CarrMaisVagas(div);
+	});
+});
+
+function CarrMaisVagas(offset) {
+
+
+	$.get(route('site.home.carregar.mais.vagas', offset), function (data) {
+
+		if (data.length > 0) {
+			for (i = 0; i < data.length; i++) {
+				$('.openings-card__container').append(`<article class="openings-card">
+				<section class="openings-card__header">
+				  <div class="openings-card__headerinfo">
+					<h4 class="openings-card__subtitle">
+					  <a href="`+ route('site.vagas.show', data[i].id) + `">` + data[i].empresa.nome + `</a>
+					</h4>
+					<h2 class="openings-card__title">
+					  <a href="`+ route('site.vagas.show', data[i].id) + `">` + data[i].titulo.substr(0, 20) + `</a>
+					</h2>
+					<!-- <h5>Auxiliar/Operacional</h5> -->
+				  </div>
+				  <a href="{{ route('site.vagas.show', $vaga->id) }}" class="openings-card__openings">Cadastre-se |` + data[i].numero_vagas + `</a>
+				</section>
+				<section class="openings-card__description">
+				  <h3>Descrição das Atividades:</h3>
+				  <p>`+ data[i].descricao_vaga.substr(0, 311) + `
+				  </p>
+				</section>
+				<footer class="openings-card__footer">
+				  <p class="openings-card__location">
+					<i class="fas fa-map-marker-alt"></i>&nbsp; `+ data[i].cidade + ` - ` + data[i].estado + `
+				  </p>
+				  <p class="openings-card__date">
+					<i class="fas fa-calendar"></i>&nbsp; Publicado em: ` + new Date(data[i].created_at).toLocaleDateString() + `
+				  </p>
+				</footer>
+			  </article>`).hide().fadeIn('slow');
+			}
+		}
+		if (data.length == 0) {
+			$('#carregarMaisVagas').fadeOut('fast');
+		}
+	});
+}
+
 $(document).ready(function () {
 	$("input[name='estado[]']").click(function () {
 		$("#form-pesquisa-filtro").submit();

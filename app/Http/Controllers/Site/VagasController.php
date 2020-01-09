@@ -24,35 +24,22 @@ class VagasController extends Controller
 
     public function vagas()
     {
+        $estados_sel = (!empty($_GET['estado']) && !in_array('', $_GET['estado']) ? $_GET['estado'] : null);
+        $pesquisa_texto = (!empty($_GET['pesquisa-text']) ? $_GET['pesquisa-text'] : null);
 
-        $estados_sel = (!empty($_GET['estado']) ? $_GET['estado'] : 0);
-        $pesquisa_texto = (!empty($_GET['pesquisa-text']) ? $_GET['pesquisa-text'] : '');
+        $vagas = Vaga::with('empresa')->Where(function ($query) use ($estados_sel, $pesquisa_texto) {
+            $query->wherePausarVaga('');
 
-        // $vagas = Vaga::with('empresa')->wherePausarVaga('')->when($estados_sel && !$pesquisa_texto, function ($query, $estados_sel) {
-        //     foreach ($estados_sel as $sel) {
-        //         $query->whereEstado($sel);
-        //         $query->orWhere('estado', $sel);
-        //     }
-        // }, function ($query) use ($estados_sel, $pesquisa_texto) {
-        //     $query->where('titulo', 'like', '%' . $pesquisa_texto . '%');
+            if (!is_null($pesquisa_texto)) {
+                $query->where('titulo', 'like', '%' . $pesquisa_texto . '%');
+            }
 
-        //     if (!empty($estados_sel)) {
-        //         foreach ($estados_sel as $sel) {
-        //             $query->whereEstado($sel);
-        //             $query->orWhere('estado', $sel);
-        //         }
-        //     }
-        // })->get();
-
-        $vagas = Vaga::with('empresa')->wherePausarVaga('')->where(function ($query) use ($estados_sel, $pesquisa_texto) {
-            $query->where('titulo', 'like', '%' . $pesquisa_texto . '%');
-
-            if (!empty($estados_sel)) {
+            if (!is_null($estados_sel)) {
                 foreach ($estados_sel as $sel) {
                     $query->whereIn('estado', $estados_sel);
                 }
             }
-        })->get();
+        })->take(5)->get();
 
         $estados = Vaga::select('estado')->groupBy('estado')->get();
         return view('site.vaga.vagas', compact('vagas', 'estados', 'estados_sel', 'pesquisa_texto'));

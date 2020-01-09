@@ -2,6 +2,8 @@
 
 use App\Municipio;
 use App\Vaga;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,11 +19,28 @@ Route::get('/carregar/{offset}/', function ($offset) {
     return $vagas;
 })->name('site.home.carregar.mais');
 
+Route::get("/mais-vagas/{offset}", function ($offset) {
+
+    $estados_sel = (!empty(session('estado')) && !in_array('', session('estado')) ? session('estado') : null);
+    $pesquisa_texto = (!empty(session('pesquisa-text')) ? session('pesquisa-text') : null);
+
+    $vagas = Vaga::with('empresa')->wherePausarVaga('')->where(function ($query) use ($estados_sel, $pesquisa_texto) {
+
+        if (!is_null($pesquisa_texto)) {
+            $query->where('titulo', 'like', '%' . $pesquisa_texto . '%');
+        }
+
+        if (!is_null($estados_sel)) {
+            foreach ($estados_sel as $sel) {
+                $query->whereIn('estado', $estados_sel);
+            }
+        }
+    })->limit(5)->offset($offset)->get()->toArray();
+    return $vagas;
+})->name('site.home.carregar.mais.vagas');
+
 Route::get('/vaga/{id}', 'Site\VagasController@show')->name('site.vagas.show');
 Route::get('/vagas', 'Site\VagasController@vagas')->name('site.vagas');
-
-//Filtro home
-Route::post('/filtro', 'Site\HomeController@filtroHome')->name('site.fitro.home');
 
 //Cadastro de empresas home
 Route::get('/login', 'Site\LoginController@index')->name('site.login');

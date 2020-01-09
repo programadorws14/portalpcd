@@ -1,5 +1,20 @@
 @extends('layouts.app')
 @section('content')
+
+@php
+
+Session::forget('estado');
+Session::forget('pesquisa-text');
+
+if(!empty($_GET['estado'])){
+  Session::put('estado', $_GET['estado']);
+}
+
+if(!empty($_GET['pesquisa-text'])){ 
+  Session::put('pesquisa-text', $_GET['pesquisa-text']);
+}
+@endphp
+
 <div class="wrapper container-fluid">
   <header class="section-heading">
     <h1>Encontre <strong>Sua Vaga</strong></h1>
@@ -12,7 +27,7 @@
       <form action="" method="GET">
         <div class="search-input">
           
-          <input type="text" name="pesquisa-text" placeholder="Buscar vagas..." />
+        <input type="text" name="pesquisa-text" placeholder="Buscar vagas..." value="{{ ( $pesquisa_texto ? $pesquisa_texto : '' ) }}" />
 
           @if (!empty($estados_sel) && count($estados_sel) > 0)
           @foreach ($estados_sel as $sel)
@@ -54,7 +69,7 @@
             @endif
           </ul>
         </section>
-        <section class="search-filter">
+        {{-- <section class="search-filter">
           <h2 class="search-filter__title">Selecione o Setor</h2>
           <ul data-simplebar data-simplebar-auto-hide="false">
             <li>
@@ -69,7 +84,7 @@
               <label><input type="checkbox" name="1" /><span>Teste 1</span></label>
             </li>
           </ul>
-        </section>
+        </section> --}}
       </form>
     </div>
 
@@ -109,11 +124,10 @@
         @endforeach
         @endif
 
-
       </section>
       <div class="row ">
         <div class="col-xs-12 hide show-md">
-          <button class="openings-card__see-more">Carregar Mais</button>
+        <button type="button" class="openings-card__see-more" id="carregarMaisVagas">Carregar Mais</button>
         </div>
       </div>
     </div>
