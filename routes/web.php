@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 //Site
 Route::get('/', 'Site\HomeController@index')->name('site.home');
 Route::get('/page/{slug}', 'Site\PaginasController@show')->name('site.pagina.show');
+Route::get('/blog/{slug}', 'Site\BlogController@show')->name('site.blog.show');
 
 //Botão HOme carregar mais
 Route::get('/carregar/{offset}/', function ($offset) {

@@ -7,11 +7,11 @@ Session::forget('estado');
 Session::forget('pesquisa-text');
 
 if(!empty($_GET['estado'])){
-  Session::put('estado', $_GET['estado']);
+Session::put('estado', $_GET['estado']);
 }
 
-if(!empty($_GET['pesquisa-text'])){ 
-  Session::put('pesquisa-text', $_GET['pesquisa-text']);
+if(!empty($_GET['pesquisa-text'])){
+Session::put('pesquisa-text', $_GET['pesquisa-text']);
 }
 @endphp
 
@@ -26,8 +26,8 @@ if(!empty($_GET['pesquisa-text'])){
       <h1>Refine sua busca</h1>
       <form action="" method="GET">
         <div class="search-input">
-          
-        <input type="text" name="pesquisa-text" placeholder="Buscar vagas..." value="{{ ( $pesquisa_texto ? $pesquisa_texto : '' ) }}" />
+
+          <input type="text" name="pesquisa-text" placeholder="Buscar vagas..." value="{{ ( $pesquisa_texto ? $pesquisa_texto : '' ) }}" />
 
           @if (!empty($estados_sel) && count($estados_sel) > 0)
           @foreach ($estados_sel as $sel)
@@ -122,14 +122,23 @@ if(!empty($_GET['pesquisa-text'])){
           </footer>
         </article>
         @endforeach
+        @else
+
+        <div class="col-xs-12 col-md-8 col-md-offset-1" style="text-align: center;">
+          <h3>Vagas não encontradas</h3>
+          <p>Ainda não encontramos vagas com as suas espeficiações</p>
+
+          <a href="{{ route('site.vagas') }}" style="text-decoration: none; font-weight:bold;" class="openings-card__see-more">Ver Vagas Disponíveis</a>
+        </div>
         @endif
 
-      </section>
-      <div class="row ">
-        <div class="col-xs-12 hide show-md">
-        <button type="button" class="openings-card__see-more" id="carregarMaisVagas">Carregar Mais</button>
+        @if(count($vagas) > 0)
+        <div class="row ">
+          <div class="col-xs-12 hide show-md">
+            <button type="button" class="openings-card__see-more" id="carregarMaisVagas">Carregar Mais</button>
+          </div>
         </div>
-      </div>
+        @endif
     </div>
   </div>
 </div>
