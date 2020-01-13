@@ -4,7 +4,7 @@
         <span></span>
     </div>
     
-    <div style=" width:900px !important; background:#FFF;"> 
+    <div style=" width:960px !important; background:#FFF;"> 
         <div class="dados boxCandVaga"></div>
     </div>
 </div>

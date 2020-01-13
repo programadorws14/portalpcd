@@ -340,26 +340,66 @@ function abrir_modal_ver_candidatos(id_vaga) {
 					<b>Sexo:</b> `+ (value.candidato_vaga.sexo ? value.candidato_vaga.sexo : 'Não Contém Informação') + `<br /><br />
 					<b>CPF:</b> `+ (value.candidato_vaga.cpf ? value.candidato_vaga.cpf : 'Não Contém Informação') + `<br /><br />
 					<b>Sobre:</b>`+ (value.candidato_vaga.texto_sobre_voce ? value.candidato_vaga.texto_sobre_voce : 'Não Contém Informação') + `<br /><br />
-					<b>Telefone Residencial:</b>  `+ (value.candidato_vaga.telefone_residencial ? value.candidato_vaga.telefone_residencial : 'Não Contém Informação') + `    |  <b>Telefone Comercial:</b>  ` + (value.candidato_vaga.telefone_comercial ? value.candidato_vaga.telefone_comercial : 'Não Contém Informação') + `  |   <b>Telefone Celular:</b>  ` + (value.candidato_vaga.telefone_celular ? value.candidato_vaga.telefone_celular : 'Não Contém Informação') + ` <br /><br />
+					<b>Telefone Residencial:</b>  `+ (value.candidato_vaga.telefone_residencial ? value.candidato_vaga.telefone_residencial : 'Não Contém Informação') + ` |  <b>Telefone Comercial:</b>  ` + (value.candidato_vaga.telefone_comercial ? value.candidato_vaga.telefone_comercial : 'Não Contém Informação') + `  |   <b>Telefone Celular:</b>  ` + (value.candidato_vaga.telefone_celular ? value.candidato_vaga.telefone_celular : 'Não Contém Informação') + ` <br /><br />
 					<b>CEP:</b> `+ (value.candidato_vaga.sexo ? value.candidato_vaga.sexo : 'Não Contém Informação') + `<br /><br />
 					<b>Rua: `+ (value.candidato_vaga.rua ? value.candidato_vaga.rua : 'Não Contém Informação') + `</b>
 					<b>Número:</b> `+ (value.candidato_vaga.numero ? value.candidato_vaga.numero : 'Não Contém Informação') + `  |  <b>Complemento: </b> ` + (value.candidato_vaga.complemento ? value.candidato_vaga.complemento : 'Não Contém Informação') + `
-					<b>Bairro: </b> `+ (value.candidato_vaga.bairro ? value.candidato_vaga.bairro : 'Não Contém Informação') + ` | <b>Estado:  ` + (value.candidato_vaga.estado ? value.candidato_vaga.estado : 'Não Contém Informação') + `</b><br /><br /><br />
+					<b>Bairro: </b> `+ (value.candidato_vaga.bairro ? value.candidato_vaga.bairro : 'Não Contém Informação') + ` | <b>Estado:</b> ` + (value.candidato_vaga.estado ? value.candidato_vaga.estado : 'Não Contém Informação') + `<br /><br />
 
-					<h4><b>Experiências</b></h4>
-					`
+					<h4 style="width:100%; background:#333; color:#FFF; padding:10px;"><b>Experiências</b></h4>
+					<br />
+					<div class="list-experiencias"></div>
+				
+					<br />
+					<h4 style="width:100%; background:#333; color:#FFF; padding:10px;"><b>Formação</b></h4>
+					<br />
+					<div class="list-formacaos"></div>
 
-						`
-					<hr ><br /><br /><br />
-					<h4><b>Formação</b></h4>
-
-
-
-					<hr ><br /><br /><br />
-					<h4><b>Voluntário</b></h4>
-
+					<h4 style="width:100%; background:#333; color:#FFF; padding:10px;"><b>Voluntário</b></h4>
+					<br />
+					<div class="list-voluntarios"></div>
 				</div>
 			</div>`);
+			
+				value.candidato_vaga.experiencias.forEach(function(valor, index){
+					$('.list-experiencias').append(`
+					<b>Nome Empresa:</b> `+ (valor.nome_empresa ? valor.nome_empresa : 'Não Informado') +`<br />
+					<b>Cargo: </b>  `+ (valor.cargo ? valor.cargo : 'Não Informado') +`<br />
+					<b>Data Início:</b>  ` + new Date(valor.data_inicio).toLocaleDateString() + `  |  <b>Data Término:</b> ` + new Date(valor.data_termino).toLocaleDateString() + ` <br />
+					<b>Cidade: </b>  `+ (valor.cidade ? valor.nome_empresa : 'Não Informado') +`<br />
+					<b>Descrição</b> `+ (valor.descricao ? valor.descricao : 'Não Informado') +`<br />
+					<br /><br />
+					<hr />
+					<br /><br />
+					`);
+				});
+
+				value.candidato_vaga.formacoes.forEach(function (valor, index){
+					$('.list-formacaos').append(`
+						<b>Nome Instituição:</b> `+ (valor.nome_instituicao ? valor.nome_instituicao : 'Não Informado') +`<br />
+						<b>Formação:</b>  `+ (valor.formacao ? valor.formacao : 'Não Informado') +`	<br />
+						` + new Date(valor.data_inicio).toLocaleDateString() + `  |  <b>Data Término:</b>  ` + new Date(valor.data_termino).toLocaleDateString() + ` <br />
+						<b>Descrição: </b> `+ (valor.descricao_formacao ? valor.descricao_formacao : 'Não Informado') +`<br />
+						<b>Recomendações: </b> `+ (valor.recomendacoes_premiacoes ? valor.recomendacoes_premiacoes : 'Não Informado') +`
+						<br /><br />
+						<hr />
+						<br /><br />
+					`);
+				});
+
+				value.candidato_vaga.voluntarios.forEach(function (voluntario, index) {
+					$('.list-voluntarios').append(`
+						<b>Nome Instituição:</b> `+ (voluntario.nome_instituicao_voluntario ? voluntario.nome_instituicao_voluntario : 'Não Informado') +`<br />
+						<b>Cargo Voluntário:</b>  `+ (voluntario.cargo_voluntario ? voluntario.cargo_voluntario : 'Não Informado') +`	<br />
+						<b>Data Início: </b>` + new Date(voluntario.data_inicio).toLocaleDateString() + `  |  <b>Data Término:</b>  ` + new Date(voluntario.data_termino).toLocaleDateString() + ` <br />
+						<b>Descrição: </b> `+ (voluntario.descricao ? voluntario.descricao : 'Não Informado') +`<br />
+						<b>Recomendações: </b> `+ (voluntario.recomendacoes_premiacoes ? voluntario.recomendacoes_premiacoes : 'Não Informado') +`
+						<br /><br />
+						<hr />
+						<br /><br />
+					`);
+				});
+
 			});
 		},
 		error: function () {

@@ -30,9 +30,9 @@
 						</h2>
 						<ul>
 							@if(count($vagas) >= 1)
-								@foreach($vagas as $vaga)
-									<li>{{ $vaga->titulo ?? 'N/I' }}</li>
-								@endforeach
+							@foreach($vagas as $vaga)
+							<li>{{ $vaga->titulo ?? 'N/I' }}</li>
+							@endforeach
 							@endif
 						</ul>
 					</section>
@@ -71,21 +71,24 @@
 					<div class="content vagas active">
 						<ul>
 							@if(count($vagas) > 0)
-								@foreach($vagas as $vaga)
-									<li>
-										<div class="infos-vaga">
-											<span class="edit" onclick="modal_edit({{ $vaga->id }})"><i class="fas fa-edit"></i></span>
-											<span class="nome-vaga">{{ $vaga->titulo ?? 'N/I' }}</span>
-											<span class="n-candidatos">{{ count($vaga->candidaturas) }} <i class="fas fa-user"></i></span>
-											@if(!$vaga->pausar_vaga)
-												<span class="ativa">Ativa</span>
-											@else
-												<span class="pausada">Pausada</span>
-											@endif
-										</div>
-										<a href="#" onclick="abrir_modal_ver_candidatos({{ $vaga->id }})" class="cta ver-candidatos">Ver candidatos</a>
-									</li>
-								@endforeach
+							@foreach($vagas as $vaga)
+							<li>
+								<div class="infos-vaga">
+									<span class="edit" onclick="modal_edit({{ $vaga->id }})"><i class="fas fa-edit"></i></span>
+									<span class="nome-vaga">{{ $vaga->titulo ?? 'N/I' }}</span>
+									<span class="n-candidatos">{{ count($vaga->candidaturas) }} <i class="fas fa-user"></i></span>
+									@if(!$vaga->pausar_vaga)
+									<span class="ativa">Ativa</span>
+									@else
+									<span class="pausada">Pausada</span>
+									@endif
+								</div>
+
+								@if(count($vaga->candidaturas) > 0)
+								<a href="#" onclick="abrir_modal_ver_candidatos({{ $vaga->id }})" class="cta ver-candidatos">Ver candidatos</a>
+								@endif
+							</li>
+							@endforeach
 							@endif
 							{{ $vagas->links() }}
 						</ul>
@@ -93,7 +96,7 @@
 							<button id="nova-vaga">Adicionar nova vaga</button>
 							<a href="{{ route('exportar.candidatos.excel') }}" style="background-color:forestgreen; color:#FFF; padding:10px 15px; border-radius:20px; text-decoration:none; text-transform:uppercase; font-weight:bold; font-size:13px;" class="cta ver-candidatos">EXCEL VAGA + CANDIDATO</a>
 						</div>
-								
+
 						<!---MODAL NOVA VAGA--->
 						@include('empresa.dashboard.modal_nova_vaga')
 
@@ -103,7 +106,7 @@
 						<!--- MODAL VER CANDIDATOS--->
 						@include('empresa.dashboard.modal_ver_candidatos')
 
-						
+
 					</div>
 
 					<div class="content meus-dados">

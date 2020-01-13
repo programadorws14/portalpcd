@@ -39,4 +39,14 @@ class Usuario extends Authenticatable
     {
         return $this->hasMany(Experiencia::class, 'usuario_id', 'id');
     }
+
+    public function formacoes()
+    {
+        return $this->hasMany(Formacao::class, 'usuario_id', 'id');
+    }
+
+    public function voluntarios()
+    {
+        return $this->hasMany(Voluntario::class, 'usuario_id', 'id');
+    }
 }
