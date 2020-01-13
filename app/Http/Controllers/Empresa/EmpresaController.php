@@ -95,6 +95,13 @@ class EmpresaController extends Controller
     }
 
 
+    public function getVaga($id)
+    {
+        $vagas = Vaga::with('candidaturas', 'candidaturas.candidato_vaga', 'candidaturas.candidato_vaga.experiencias')->find($id)->toArray();
+     
+        return $vagas;
+    }
+
 
     /**PRIVATE */
     private function slug($string)

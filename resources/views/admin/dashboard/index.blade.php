@@ -3,7 +3,27 @@
 @section('content')
 <div class="container-fluid mb-5">
     <div class="row justify-content-center">
-        <div class="col-md-3">
+        <div class="col-xs-12 col-md-4" >
+            <div class="card text-white mb-3" style="background:#c98620;">
+                <div class="card-header"><b>ADMIN</b></div>
+                <div class="card-body">
+                    <h1 class="card-title"><i class="fas fa-cogs"></i> {{ count($countAdmin) ?? 'N/I' }}</h1>
+                    <p class="card-text">Cadastradas</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4" >
+            <div class="card text-white mb-3" style="background:#96056d">
+                <div class="card-header"><b>NEWSLETTER</b></div>
+                <div class="card-body">
+                    <h1 class="card-title"><i class="fas fa-envelope"></i> {{ count($countNews) ?? 'N/I' }}</h1>
+                    <p class="card-text">Cadastradas</p>
+                </div>
+            </div>
+        </div>
+
+         <div class="col-xs-12 col-md-4"  >
             <div class="card text-white bg-primary mb-3">
                 <div class="card-header"><b>EMPRESAS</b></div>
                 <div class="card-body">
@@ -13,7 +33,7 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+         <div class="col-xs-12 col-md-4" >
             <div class="card text-white bg-secondary mb-3">
                 <div class="card-header"><b>USUÁRIOS</b></div>
                 <div class="card-body">
@@ -23,7 +43,7 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+         <div class="col-xs-12 col-md-4" >
             <div class="card text-white bg-success mb-3">
                 <div class="card-header"><b>VAGAS</b></div>
                 <div class="card-body">
@@ -33,7 +53,7 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+         <div class="col-xs-12 col-md-4" >
             <div class="card text-white bg-dark mb-3">
                 <div class="card-header"><b>POSTS</b></div>
                 <div class="card-body">
@@ -212,8 +232,9 @@
                                             <td class="align-middle p-2">{{ $post->categoria->descricao ?? 'N/I' }}</td>
                                             <td class="align-middle p-2">{{ date('d/m/Y', strtotime($post->created_at)) ?? 'N/I' }}</td>
                                             <td class="align-middle p-2">
-                                                <a href="{{ route('admin.blog.categoria.edit', $vaga->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                <a href="{{ route('admin.blog.categoria.delete', $vaga->id) }}" onClick="return confirm('Deseja mesmo deletar ?')" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                                <a href="{{ route('site.blog.show', $post->slug) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i></a>
+                                                <a href="{{ route('admin.blog.edit', $post->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                <a href="{{ route('admin.blog.delete', $post->id) }}" onClick="return confirm('Deseja mesmo deletar ?')" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

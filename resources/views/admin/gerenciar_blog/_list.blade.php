@@ -21,7 +21,7 @@
                 <td class="align-middle">{{ $post->titulo ?? null }}</td>
                 <td class="align-middle">{{ $post->categoria->descricao ?? null }}</td>
                 <td class="align-middle">
-                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i></a>
+                    <a href="{{ route('site.blog.show', $post->slug) }}" target="_blank" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i></a>
                     <a href="{{ route('admin.blog.edit', $post->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                     <a href="{{ route('admin.blog.delete', $post->id) }}" onClick="return confirm('Deseja mesmo deletar ?')" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                 </td>

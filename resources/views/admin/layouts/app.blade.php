@@ -52,6 +52,10 @@
                         </li>
 
                         <li class="nav-item ">
+                            <a href="{{ route('admin.gerenciar.admin') }}" class="nav-link"><i class="fas fa-cogs"></i> Administradores</a>
+                        </li>
+
+                        <li class="nav-item ">
                             <a href="{{ route('admin.gerenciar.empresas') }}" class="nav-link"><i class="fas fa-truck-loading"></i> Empresas</a>
                         </li>
 

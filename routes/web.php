@@ -81,6 +81,15 @@ Route::group(['prefix' => 'admin/'], function () {
     Route::put('/usuario/edit/update/', 'Admin\GerenciarUsuariosController@update')->name('admin.gerenciar.update');
     Route::get('/usuario/delete/{id}', 'Admin\GerenciarUsuariosController@deletar')->name('admin.gerenciar.deletar');
 
+    /**Gerenciar Admin*/
+    Route::get('/admin', 'Admin\GerenciarAdminController@index')->name('admin.gerenciar.admin');
+    Route::get('/admin/create', 'Admin\GerenciarAdminController@create')->name('admin.gerenciar.admin.create');
+    Route::post('/admin/store', 'Admin\GerenciarAdminController@store')->name('admin.gerenciar.admin.store');
+    Route::get('/admin/edit/{id}', 'Admin\GerenciarAdminController@edit')->name('admin.gerenciar.admin.edit');
+    Route::put('/admin/edit/update/', 'Admin\GerenciarAdminController@update')->name('admin.gerenciar.admin.update');
+    Route::get('/admin/delete/{id}', 'Admin\GerenciarAdminController@deletar')->name('admin.gerenciar.admin.deletar');
+
+
     /**Gerenciar Empresas*/
     Route::get('/empresas', 'Admin\GerenciarEmpresasController@index')->name('admin.gerenciar.empresas');
     Route::get('/empresa/create', 'Admin\GerenciarEmpresasController@create')->name('admin.gerenciar.empresa.create');
@@ -145,6 +154,7 @@ Route::group(['prefix' => 'empresa/'], function () {
     Route::get('dashboard/vaga/delete/{id}', 'Empresa\EmpresaVagaController@delete')->name('empresa.vaga.delete');
 
     Route::get('dashboard/exportar/candidatos/', 'Empresa\EmpresaVagaController@export')->name('exportar.candidatos.excel');
+    Route::get('/getVaga/{id}', 'Empresa\EmpresaController@getVaga')->name('empresa.vaga.get');
 });
 
 

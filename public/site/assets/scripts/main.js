@@ -194,7 +194,6 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-
 	$('.dashboard-dados #new, .dashboard-dados .infos .edit').click(function () {
 		let openModal = $(this).attr('data-modal');
 
@@ -220,6 +219,7 @@ $(document).ready(function () {
 		carregarMais(divjobs);
 	});
 });
+
 
 function carregarMais(offset) {
 	$.get(route('site.home.carregar.mais', offset), function (data) {
@@ -313,3 +313,72 @@ $(document).ready(function () {
 	});
 });
 
+
+function abrir_modal_ver_candidatos(id_vaga) {
+
+	$('#shadow').fadeIn();
+	$('.modal-ver-candidato').fadeIn();
+
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+	$.ajax({
+		type: 'GET',
+		url: (route('empresa.vaga.get', id_vaga)),
+		success: function (data) {
+			$("#boxCandidatosVaga").empty();
+			data['candidaturas'].forEach(function (value, indice) {
+				console.log(value);
+				$(".boxCandVaga").append(`<div class="boxCandidatosVaga">
+				<span><b><i class="fas fa-user"></i> `+ value.candidato_vaga.nome + `</b></span> | <span>` + (value.candidato_vaga.telefone_residencial ? value.candidato_vaga.telefone_residencial : 'Não Contém') + ` | ` + (value.candidato_vaga.telefone_comercial ? value.candidato_vaga.telefone_comercial : 'Não Contém') + ` | ` + (value.candidato_vaga.telefone_celular ? value.candidato_vaga.telefone_celular : 'Não Contém') + `</span> | <span>` + value.candidato_vaga.email + `</span> <a href="#" onclick="mostrarInformacoesCandidato(` + value.id + `)"  class="verMaisCandidatos" title="Veja Mais"><b class="btn-veja-mais-info-candidatos" style="padding:4px; background:#000; color:#FFF;">+</b></a>
+				
+				<div class="MostraInformacoes" id="toggle_`+ value.id + `" style="display:none;">
+					<b>Data Nascimento:</b> ` + new Date(value.candidato_vaga.data_nascimento).toLocaleDateString() + `<br /><br />
+					<b>Sexo:</b> `+ (value.candidato_vaga.sexo ? value.candidato_vaga.sexo : 'Não Contém Informação') + `<br /><br />
+					<b>CPF:</b> `+ (value.candidato_vaga.cpf ? value.candidato_vaga.cpf : 'Não Contém Informação') + `<br /><br />
+					<b>Sobre:</b>`+ (value.candidato_vaga.texto_sobre_voce ? value.candidato_vaga.texto_sobre_voce : 'Não Contém Informação') + `<br /><br />
+					<b>Telefone Residencial:</b>  `+ (value.candidato_vaga.telefone_residencial ? value.candidato_vaga.telefone_residencial : 'Não Contém Informação') + `    |  <b>Telefone Comercial:</b>  ` + (value.candidato_vaga.telefone_comercial ? value.candidato_vaga.telefone_comercial : 'Não Contém Informação') + `  |   <b>Telefone Celular:</b>  ` + (value.candidato_vaga.telefone_celular ? value.candidato_vaga.telefone_celular : 'Não Contém Informação') + ` <br /><br />
+					<b>CEP:</b> `+ (value.candidato_vaga.sexo ? value.candidato_vaga.sexo : 'Não Contém Informação') + `<br /><br />
+					<b>Rua: `+ (value.candidato_vaga.rua ? value.candidato_vaga.rua : 'Não Contém Informação') + `</b>
+					<b>Número:</b> `+ (value.candidato_vaga.numero ? value.candidato_vaga.numero : 'Não Contém Informação') + `  |  <b>Complemento: </b> ` + (value.candidato_vaga.complemento ? value.candidato_vaga.complemento : 'Não Contém Informação') + `
+					<b>Bairro: </b> `+ (value.candidato_vaga.bairro ? value.candidato_vaga.bairro : 'Não Contém Informação') + ` | <b>Estado:  ` + (value.candidato_vaga.estado ? value.candidato_vaga.estado : 'Não Contém Informação') + `</b><br /><br /><br />
+
+					<h4><b>Experiências</b></h4>
+					`
+
+						`
+					<hr ><br /><br /><br />
+					<h4><b>Formação</b></h4>
+
+
+
+					<hr ><br /><br /><br />
+					<h4><b>Voluntário</b></h4>
+
+				</div>
+			</div>`);
+			});
+		},
+		error: function () {
+			console.log(data);
+		}
+	});
+}
+
+
+function mostrarInformacoesCandidato(id_toggle) {
+	$("#toggle_" + id_toggle).toggle("slow");
+}
+
+
+$(document).ready(function () {
+	$('#shadow, .close-modal-ver-candidatos').click(function () {
+		$('#shadow').fadeOut();
+		$('.modal-ver-candidato').fadeOut('fast', function () {
+			$(".boxCandVaga").empty();
+		});
+	});
+});

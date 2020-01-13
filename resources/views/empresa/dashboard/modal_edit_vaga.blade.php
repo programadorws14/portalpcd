@@ -4,8 +4,6 @@
 		<span></span>
 	</div>
 
-
-
 	<form action="{{ route('empresa.vaga.update') }}" id="form-edit-vaga" class="dados" method="POST">
 		@csrf
 

@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class Usuario extends Authenticatable
 {
@@ -33,4 +34,9 @@ class Usuario extends Authenticatable
         'cidade',
         'estado',
     ];
+
+    public function experiencias()
+    {
+        return $this->hasMany(Experiencia::class, 'usuario_id', 'id');
+    }
 }

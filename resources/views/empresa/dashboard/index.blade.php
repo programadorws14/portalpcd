@@ -70,7 +70,7 @@
 				<div class="content-aba">
 					<div class="content vagas active">
 						<ul>
-							@if(count($vagas) >= 1)
+							@if(count($vagas) > 0)
 								@foreach($vagas as $vaga)
 									<li>
 										<div class="infos-vaga">
@@ -83,7 +83,7 @@
 												<span class="pausada">Pausada</span>
 											@endif
 										</div>
-										<a href="#" onclick="abrir_modal_editar({{ $vaga->id }})" class="cta ver-candidatos">Ver candidatos</a>
+										<a href="#" onclick="abrir_modal_ver_candidatos({{ $vaga->id }})" class="cta ver-candidatos">Ver candidatos</a>
 									</li>
 								@endforeach
 							@endif
@@ -94,13 +94,16 @@
 							<a href="{{ route('exportar.candidatos.excel') }}" style="background-color:forestgreen; color:#FFF; padding:10px 15px; border-radius:20px; text-decoration:none; text-transform:uppercase; font-weight:bold; font-size:13px;" class="cta ver-candidatos">EXCEL VAGA + CANDIDATO</a>
 						</div>
 								
-
 						<!---MODAL NOVA VAGA--->
 						@include('empresa.dashboard.modal_nova_vaga')
 
 						<!--- MODAL EDIT--->
 						@include('empresa.dashboard.modal_edit_vaga')
 
+						<!--- MODAL VER CANDIDATOS--->
+						@include('empresa.dashboard.modal_ver_candidatos')
+
+						
 					</div>
 
 					<div class="content meus-dados">

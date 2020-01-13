@@ -20,7 +20,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" id="bntSubmit" class="btn btn-info"><i class="fas fa-edit"></i> Editar</button>
-                        <a href="{{ route('admin.gerenciar.usuarios') }}" class="btn btn-danger"><i class="fas fa-save"></i> Cancelar</a>
+                        <a href="{{ route('admin.gerenciar.usuarios') }}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Cancelar</a>
                     </div>
                
                 </div>
