@@ -12,6 +12,7 @@ use App\Vaga;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class EmpresaVagaController extends Controller
 {
@@ -147,8 +148,9 @@ class EmpresaVagaController extends Controller
     // }
 
     /**Expotar candidatos PDF */
-    public function export()
+    public function export($id = null)
     {
-        return Excel::download(new CandidaturasExport, 'candidatos.xlsx');
+        $id_vaga = ($id ? $id : null);
+        return Excel::download(new CandidaturasExport($id_vaga), 'candidatos.xlsx');
     }
 }

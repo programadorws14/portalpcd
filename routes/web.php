@@ -135,9 +135,6 @@ Route::group(['prefix' => 'admin/'], function () {
 
 
 
-
-
-
 /**Empresa */
 Route::group(['prefix' => 'empresa/'], function () {
 
@@ -153,11 +150,11 @@ Route::group(['prefix' => 'empresa/'], function () {
     Route::post('dashboard/vaga/update', 'Empresa\EmpresaVagaController@update')->name('empresa.vaga.update');
     Route::get('dashboard/vaga/delete/{id}', 'Empresa\EmpresaVagaController@delete')->name('empresa.vaga.delete');
 
-    Route::get('dashboard/exportar/candidatos/', 'Empresa\EmpresaVagaController@export')->name('exportar.candidatos.excel');
+    Route::get('dashboard/exportar/candidatos/{id?}', 'Empresa\EmpresaVagaController@export')->name('exportar.candidatos.excel');
     Route::get('/getVaga/{id}', 'Empresa\EmpresaController@getVaga')->name('empresa.vaga.get');
 });
 
-
+/**Usuário */
 Route::group(['prefix' => 'usuario/'], function () {
 
     Route::post('login', 'Usuario\LoginController@login')->name('usuario.login');

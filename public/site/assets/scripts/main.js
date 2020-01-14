@@ -211,7 +211,6 @@ $(document).ready(function () {
 	});
 });
 
-
 //Ver Mais Vagas - Botão Home Page
 $(document).ready(function () {
 	$('.jobs-card__see-more').click(function () {
@@ -219,7 +218,6 @@ $(document).ready(function () {
 		carregarMais(divjobs);
 	});
 });
-
 
 function carregarMais(offset) {
 	$.get(route('site.home.carregar.mais', offset), function (data) {
@@ -248,14 +246,11 @@ function carregarMais(offset) {
 				</div>`).hide().fadeIn('slow');
 			}
 		}
-
 		if (data.length == 0) {
 			$('.jobs-card__see-more').fadeOut('fast');
 		}
-
 	});
 }
-
 
 //Ver mais Vagas - botão na pagina todas as vagas
 $(document).ready(function () {
@@ -331,7 +326,8 @@ function abrir_modal_ver_candidatos(id_vaga) {
 		success: function (data) {
 			$("#boxCandidatosVaga").empty();
 			data['candidaturas'].forEach(function (value, indice) {
-				console.log(value);
+
+				//Adiciona  os candidatos dentro da boxCanVaga  após a pesquisa no banco
 				$(".boxCandVaga").append(`<div class="boxCandidatosVaga">
 				<span><b><i class="fas fa-user"></i> `+ value.candidato_vaga.nome + `</b></span> | <span>` + (value.candidato_vaga.telefone_residencial ? value.candidato_vaga.telefone_residencial : 'Não Contém') + ` | ` + (value.candidato_vaga.telefone_comercial ? value.candidato_vaga.telefone_comercial : 'Não Contém') + ` | ` + (value.candidato_vaga.telefone_celular ? value.candidato_vaga.telefone_celular : 'Não Contém') + `</span> | <span>` + value.candidato_vaga.email + `</span> <a href="#" onclick="mostrarInformacoesCandidato(` + value.id + `)"  class="verMaisCandidatos" title="Veja Mais"><b class="btn-veja-mais-info-candidatos" style="padding:4px; background:#000; color:#FFF;">+</b></a>
 				
@@ -360,40 +356,46 @@ function abrir_modal_ver_candidatos(id_vaga) {
 					<div class="list-voluntarios"></div>
 				</div>
 			</div>`);
-			
-				value.candidato_vaga.experiencias.forEach(function(valor, index){
+
+				//Adiciona o botão de Extrair Excel da vaga
+				$('#candidatos_excel_vaga').attr('href', route('exportar.candidatos.excel', value.vaga_id));
+
+				//Faz o foreach adicionando as experiencias do usuário
+				value.candidato_vaga.experiencias.forEach(function (valor, index) {
 					$('.list-experiencias').append(`
-					<b>Nome Empresa:</b> `+ (valor.nome_empresa ? valor.nome_empresa : 'Não Informado') +`<br />
-					<b>Cargo: </b>  `+ (valor.cargo ? valor.cargo : 'Não Informado') +`<br />
+					<b>Nome Empresa:</b> `+ (valor.nome_empresa ? valor.nome_empresa : 'Não Informado') + `<br />
+					<b>Cargo: </b>  `+ (valor.cargo ? valor.cargo : 'Não Informado') + `<br />
 					<b>Data Início:</b>  ` + new Date(valor.data_inicio).toLocaleDateString() + `  |  <b>Data Término:</b> ` + new Date(valor.data_termino).toLocaleDateString() + ` <br />
-					<b>Cidade: </b>  `+ (valor.cidade ? valor.nome_empresa : 'Não Informado') +`<br />
-					<b>Descrição</b> `+ (valor.descricao ? valor.descricao : 'Não Informado') +`<br />
+					<b>Cidade: </b>  `+ (valor.cidade ? valor.nome_empresa : 'Não Informado') + `<br />
+					<b>Descrição</b> `+ (valor.descricao ? valor.descricao : 'Não Informado') + `<br />
 					<br /><br />
 					<hr />
 					<br /><br />
 					`);
 				});
 
-				value.candidato_vaga.formacoes.forEach(function (valor, index){
+				//Faz o foreach adicionando as formacoes do usuário
+				value.candidato_vaga.formacoes.forEach(function (valor, index) {
 					$('.list-formacaos').append(`
-						<b>Nome Instituição:</b> `+ (valor.nome_instituicao ? valor.nome_instituicao : 'Não Informado') +`<br />
-						<b>Formação:</b>  `+ (valor.formacao ? valor.formacao : 'Não Informado') +`	<br />
+						<b>Nome Instituição:</b> `+ (valor.nome_instituicao ? valor.nome_instituicao : 'Não Informado') + `<br />
+						<b>Formação:</b>  `+ (valor.formacao ? valor.formacao : 'Não Informado') + `	<br />
 						` + new Date(valor.data_inicio).toLocaleDateString() + `  |  <b>Data Término:</b>  ` + new Date(valor.data_termino).toLocaleDateString() + ` <br />
-						<b>Descrição: </b> `+ (valor.descricao_formacao ? valor.descricao_formacao : 'Não Informado') +`<br />
-						<b>Recomendações: </b> `+ (valor.recomendacoes_premiacoes ? valor.recomendacoes_premiacoes : 'Não Informado') +`
+						<b>Descrição: </b> `+ (valor.descricao_formacao ? valor.descricao_formacao : 'Não Informado') + `<br />
+						<b>Recomendações: </b> `+ (valor.recomendacoes_premiacoes ? valor.recomendacoes_premiacoes : 'Não Informado') + `
 						<br /><br />
 						<hr />
 						<br /><br />
 					`);
 				});
 
+				//Faz o foreach voluntarios as experiencias do usuário
 				value.candidato_vaga.voluntarios.forEach(function (voluntario, index) {
 					$('.list-voluntarios').append(`
-						<b>Nome Instituição:</b> `+ (voluntario.nome_instituicao_voluntario ? voluntario.nome_instituicao_voluntario : 'Não Informado') +`<br />
-						<b>Cargo Voluntário:</b>  `+ (voluntario.cargo_voluntario ? voluntario.cargo_voluntario : 'Não Informado') +`	<br />
+						<b>Nome Instituição:</b> `+ (voluntario.nome_instituicao_voluntario ? voluntario.nome_instituicao_voluntario : 'Não Informado') + `<br />
+						<b>Cargo Voluntário:</b>  `+ (voluntario.cargo_voluntario ? voluntario.cargo_voluntario : 'Não Informado') + `	<br />
 						<b>Data Início: </b>` + new Date(voluntario.data_inicio).toLocaleDateString() + `  |  <b>Data Término:</b>  ` + new Date(voluntario.data_termino).toLocaleDateString() + ` <br />
-						<b>Descrição: </b> `+ (voluntario.descricao ? voluntario.descricao : 'Não Informado') +`<br />
-						<b>Recomendações: </b> `+ (voluntario.recomendacoes_premiacoes ? voluntario.recomendacoes_premiacoes : 'Não Informado') +`
+						<b>Descrição: </b> `+ (voluntario.descricao ? voluntario.descricao : 'Não Informado') + `<br />
+						<b>Recomendações: </b> `+ (voluntario.recomendacoes_premiacoes ? voluntario.recomendacoes_premiacoes : 'Não Informado') + `
 						<br /><br />
 						<hr />
 						<br /><br />
@@ -408,12 +410,12 @@ function abrir_modal_ver_candidatos(id_vaga) {
 	});
 }
 
-
+//Cria o Tooggle quando clica no sinal de mais  na listagens dos candidados da vaga - modal
 function mostrarInformacoesCandidato(id_toggle) {
 	$("#toggle_" + id_toggle).toggle("slow");
 }
 
-
+//Quand fecha a modal de candidatos da vaga, limpa a box para não ter duplicações
 $(document).ready(function () {
 	$('#shadow, .close-modal-ver-candidatos').click(function () {
 		$('#shadow').fadeOut();
