@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <form action="{{ route('admin.gerenciar.store') }}" method="POST" enctype="multipart/form-data">
             <div class="card">
-                <div class="card-header">Cadastrar Usuário</div>
+                <div class="card-header">Cadastrar Candidato</div>
                     <div class="card-body">
                         @if(Session('success'))
                         <div class="alert alert-success">
@@ -14,6 +14,16 @@
                             <b><i class="fas fa-minus"></i> {{ Session('error') }}</b>
                         </div>
                         @endif
+                        @if($errors->has('cv'))
+                            <div class="alert alert-danger">
+                                <b><i class="fas fa-times-circle"></i> {{ $errors->first('cv') }}</b>
+                            </div>
+                        @endif
+                        @if($errors->has('laudo'))
+                        <div class="alert alert-danger">
+                            <b><i class="fas fa-times-circle"></i> {{ $errors->first('laudo') }}</b>
+                        </div>
+                    @endif
                         @include('admin.gerenciar_usuario._form')
                     </div>
                     <div class="card-footer">

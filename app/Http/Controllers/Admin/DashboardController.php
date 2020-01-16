@@ -29,8 +29,7 @@ class DashboardController extends Controller
         $empresas = Empresa::take(10)->orderBy('id', 'desc')->get();
         $usuarios = Usuario::take(10)->orderBy('id', 'desc')->get();
         $vagas = Vaga::take(10)->orderBy('id', 'desc')->with('empresa', 'candidaturas')->get();
-        $posts = Blog::take(10)->orderBy('id', 'desc')->with('categoria')->get();
 
-        return view('admin.dashboard.index', compact('countEmp', 'countUsu', 'countVag', 'countPos', 'countAdmin', 'countNews', 'empresas', 'usuarios', 'vagas', 'posts'));
+        return view('admin.dashboard.index', compact('countEmp', 'countUsu', 'countVag', 'countPos', 'countAdmin', 'countNews', 'empresas', 'usuarios', 'vagas'));
     }
 }

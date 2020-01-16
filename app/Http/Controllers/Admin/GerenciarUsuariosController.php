@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Usuario;
 use Exception;
+use Illuminate\Support\Facades\Validator;
 
 class GerenciarUsuariosController extends Controller
 {
@@ -28,8 +29,11 @@ class GerenciarUsuariosController extends Controller
 
     public function store(request $request)
     {
+
+
+
         try {
-            $data = $request->except('_token');
+            $data = $request->except('_token', 'cv', 'laudo');
             $data['password'] = bcrypt($data['password']);
 
             if (!empty($request->foto)) {
@@ -38,10 +42,53 @@ class GerenciarUsuariosController extends Controller
                     $data['foto'] = 'img_usuario/fotoperfil/' . $newName;
                 }
             }
+
+            if (!empty($request->cv)) {
+                $validarCV = Validator::make(
+                    $request->all(),
+                    [
+                        'cv' => 'mimes:pdf,doc,txt',
+                    ],
+                    [
+                        'cv.mimes' => 'Você precisa enviar o Curriculum nos formatos TXT, PDF, WORD',
+                    ]
+                );
+
+                if ($validarCV->fails()) {
+                    return redirect()->back()->withErrors($validarCV->errors())->withInput($request->all());
+                }
+
+                $newNameCV = time() . '.' . $request->cv->getClientOriginalExtension();
+                if ($request->cv->move(public_path('curriculum/'), $newNameCV)) {
+                    $data['cv'] = 'curriculum/' . $newNameCV;
+                }
+            }
+
+            if (!empty($request->laudo)) {
+                $validarLaudo = Validator::make(
+                    $request->all(),
+                    [
+                        'laudo' => 'mimes:pdf,doc,txt',
+                    ],
+                    [
+                        'laudo.mimes' => 'Você precisa enviar o laudo nos formatos TXT, PDF, WORD',
+                    ]
+                );
+
+                if ($validarLaudo->fails()) {
+                    return redirect()->back()->withErrors($validarCV->errors())->withInput($request->all());
+                }
+
+                $newNameLaudo = time() . '.' . $request->laudo->getClientOriginalExtension();
+                if ($request->laudo->move(public_path('laudo/'), $newNameLaudo)) {
+                    $data['laudo'] = 'laudo/' . $newNameLaudo;
+                }
+            }
+
             Usuario::create($data);
             return redirect()->back()->with('success', 'Cadastrado com sucesso!');
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao atualizar' . $e->getMessage());
+            return redirect()->back()->with('error', 'Erro ao Criar' . $e->getMessage());
         }
     }
 
@@ -59,7 +106,58 @@ class GerenciarUsuariosController extends Controller
     {
         try {
             $data = $request->except('_token', '_method');
+            $user = Usuario::find($data['id']);
+
             $data['password'] = bcrypt($data['password']);
+
+            if (!empty($request->cv)) {
+                $validarCV = Validator::make(
+                    $request->all(),
+                    [
+                        'cv' => 'mimes:pdf,doc,txt',
+                    ],
+                    [
+                        'cv.mimes' => 'Você precisa enviar o Curriculum nos formatos TXT, PDF, WORD',
+                    ]
+                );
+
+                if ($validarCV->fails()) {
+                    return redirect()->back()->withErrors($validarCV->errors())->withInput($request->all());
+                }
+
+
+                $newNameCV = time() . '.' . $request->cv->getClientOriginalExtension();
+                if ($request->cv->move(public_path('curriculum/'), $newNameCV)) {
+                    $data['cv'] = 'curriculum/' . $newNameCV;
+                    if (!empty($user->cv) && file_exists(public_path($user->cv))) {
+                        unlink(public_path($user->cv));
+                    }
+                }
+            }
+
+            if (!empty($request->laudo)) {
+                $validarLaudo = Validator::make(
+                    $request->all(),
+                    [
+                        'laudo' => 'mimes:pdf,doc,txt',
+                    ],
+                    [
+                        'laudo.mimes' => 'Você precisa enviar o laudo nos formatos TXT, PDF, WORD',
+                    ]
+                );
+
+                if ($validarLaudo->fails()) {
+                    return redirect()->back()->withErrors($validarCV->errors())->withInput($request->all());
+                }
+
+                $newNameLaudo = time() . '.' . $request->laudo->getClientOriginalExtension();
+                if ($request->laudo->move(public_path('laudo/'), $newNameLaudo)) {
+                    $data['laudo'] = 'laudo/' . $newNameLaudo;
+                    if (!empty($user->laudo) && file_exists(public_path($user->laudo))) {
+                        unlink(public_path($user->laudo));
+                    }
+                }
+            }
 
             if ($data['password']) {
                 $data['password'] = bcrypt($data['password']);

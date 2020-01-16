@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Usuários</div>
+                <div class="card-header">Candidatos</div>
                 <div class="card-body">
                     <a href="{{ route('admin.gerenciar.create') }}" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Novo</a>
                     @if(Session('success'))

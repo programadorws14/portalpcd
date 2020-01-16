@@ -4,7 +4,7 @@
         <form action="{{ route('admin.gerenciar.update') }}" method="POST" enctype="multipart/form-data">
             {{ method_field('PUT') }}
             <div class="card">
-                <div class="card-header">Editar Usuário</div>
+                <div class="card-header">Editar Candidato</div>
                     <div class="card-body">
                         @if(Session('success'))
                         <div class="alert alert-success">

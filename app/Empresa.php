@@ -22,6 +22,7 @@ class Empresa extends Authenticatable
         'password',
         'telefone',
         'cnpj',
+        'nome_socios',
         'ramo_atuacao',
         'tamanho_empresa',
         'data_fundacao',

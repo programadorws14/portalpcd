@@ -56,6 +56,22 @@
 					</button>
 				</div>
 			</section>
+			
+			<div style="margin:30px auto; text-align:center;">
+				@if(is_null(Auth::guard('usuario')->user()->status_laudo))
+					<span style="border-radius:10px; background:orange; font-size:13px; font-weight:bold; color:#FFF; padding:5px;">Laudo em Analise</span>
+				@elseif(Auth::guard('usuario')->user()->status_laudo == 1)
+					<span style="border-radius:10px; background:green; font-size:13px; font-weight:bold; color:#FFF; padding:5px;">Laudo Aprovado</span>
+				@else
+					<span style="border-radius:10px; background:red; font-size:13px; font-weight:bold; color:#FFF; padding:5px;">Laudo Reprovado</span>
+				@endif
+
+				@if(!is_null(Auth::guard('usuario')->user()->cv))
+					<a href="{{ asset(Auth::guard('usuario')->user()->cv) }}" style="text-decoration:none;" download="download"><span style="border-radius:10px; background:#069; font-size:13px; font-weight:bold; color:#FFF; padding:5px;">Ver CV</span></a>
+				@endif
+				
+				
+			</div>
 		</div>
 		<div class="col-md-8 col-md-offset-1 col-xs-12">
 			<section class="dashboard-dados negative">
@@ -169,6 +185,17 @@
 								</div>
 							</div>
 
+							<div class="campo">
+								<label for="cv">Curriculum (PDF, DOC, TXT)</label>
+								<input type="file" name="cv">
+							</div>
+
+							<div class="campo">
+								<label for="laudo">Laudo (PDF, DOC, TXT)</label>
+								<input type="file" name="laudo">
+							</div>
+
+							
 							@if(!empty($links))
 							@foreach($links as $link)
 							<div class="links_social" id="{{ $link->id }}">

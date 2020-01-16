@@ -49,6 +49,14 @@
     <div class="col-md-4">
         <div class="input-group mb-4">
             <div class="input-group-prepend">
+                <div class="input-group-text">Sócios</div>
+            </div>
+            <input type="text" class="form-control" placeholder="Ex: Marcos, João, Maria" value="{{ $empresa->nome_socios ?? old('nome_socios') }}" name="nome_socios">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group mb-4">
+            <div class="input-group-prepend">
                 <div class="input-group-text">Tamanho</div>
             </div>
             <select name="tamanho_empresa" class="form-control">

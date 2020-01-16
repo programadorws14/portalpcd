@@ -6,8 +6,10 @@
             <div class="card">
                 <div class="card-header">Newsletter</div>
                 <div class="card-body">
+                    @if(count($newsletters) > 0)
                     <a href="{{ route('admin.newsletter.excel') }}" class="btn btn-success mb-3"><i class="fas fa-download"></i> Download Excel</a>
-
+                    @endif
+                    
                     @if(Session('success'))
                     <div class="alert alert-success">
                         <b><i class="fas fa-check"></i> {{ Session('success') }}</b>

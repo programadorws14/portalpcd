@@ -33,6 +33,9 @@ class CreateUsuariosTable extends Migration
             $table->string('bairro')->nullable();
             $table->string('cidade')->nullable();
             $table->string('estado')->nullable();
+            $table->string('cv')->nullable();
+            $table->string('laudo')->nullable();
+            $table->bigInteger('status_laudo')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

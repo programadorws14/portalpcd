@@ -30,7 +30,7 @@
 <body>
     <div id="app">
         @if(!empty(Auth::guard('admin')->user()))
-        <nav class="navbar navbar-expand-md  bg-primary menu">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary menu">
             <div class="container-fluid">
                 <a class="navbar-brand" href="">
                     <img src="{{ asset('img/logo.jpg') }}" class="rounded-circle img-fluid" width="50" title="{{ config('app.name', 'Laravel') }}">
@@ -44,11 +44,14 @@
                     <ul class="navbar-nav mr-auto">
 
                         <li class="nav-item ">
-                            <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-home"></i></a>
+                            <a href="{{ route('admin.dashboard') }}" class="nav-link float-left"><i class="fas fa-home"></i> Início</a>
+                            <div class="d-block d-sm-none d-none d-sm-block d-md-none">
+                                <a href="{{ url('/') }}" target="_blank" style="float:right;" class="btn btn-secondary btn-sm float-right"><i class="fas fa-satellite"></i> Ver o Site</a>
+                            </div>
                         </li>
 
                         <li class="nav-item ">
-                            <a href="{{ route('admin.gerenciar.usuarios') }}" class="nav-link"><i class="fas fa-users"></i> Usuários</a>
+                            <a href="{{ route('admin.gerenciar.usuarios') }}" class="nav-link"><i class="fas fa-users"></i> Candidatos</a>
                         </li>
 
                         <li class="nav-item ">
@@ -90,8 +93,8 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item ">
-                            <a href="{{ url('/') }}" target="_blank" class="btn btn-secondary "><i class="fas fa-satellite"></i></a>
+                        <li class="nav-item d-none d-md-block d-lg-none d-none d-lg-block d-xl-none d-none d-xl-block">
+                            <a href="{{ url('/') }}" target="_blank" class="btn btn-secondary "><i class="fas fa-satellite"></i> Ver o Site</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link Fdropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

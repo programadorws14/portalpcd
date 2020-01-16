@@ -9,6 +9,6 @@
         <div class="input-group-prepend">
             <div class="input-group-text">Descrição</div>
         </div>
-        <input type="text" class="form-control" value="@if(!empty($edit)) {{ $edit->descricao }} @else {{ old('descricao') }} @endif" name="descricao">
+    <input type="text" class="form-control" value="{{ (!empty($edit->descricao) ? $edit->descricao : old('descricao')) }}" name="descricao" required="required">
     </div>
 </div>

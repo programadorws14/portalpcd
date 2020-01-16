@@ -17,7 +17,7 @@
         <div class="input-group-prepend">
             <div class="input-group-text">Titulo</div>
         </div>
-        <input type="text" class="form-control" value="@if(!empty($edit)) {{ $edit->titulo }} @else {{ old('titulo') }} @endif" name="titulo">
+        <input type="text" class="form-control" value="{{ ( !empty($edit->titulo) ? $edit->titulo : old('titulo') ) }}" name="titulo" required>
     </div>
 </div>
 
@@ -26,7 +26,7 @@
         <div class="input-group-prepend">
             <div class="input-group-text">Categoria</div>
         </div>
-        <select class="form-control" name="categoria_id">
+        <select class="form-control" name="categoria_id" required>
             <option value="">Selecione</option>
             @foreach($categorias as $categoria)
             <option @if(!empty($edit) && $edit->categoria_id == $categoria->id)

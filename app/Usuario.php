@@ -33,6 +33,9 @@ class Usuario extends Authenticatable
         'bairro',
         'cidade',
         'estado',
+        'cv',
+        'laudo',
+        'status_laudo',
     ];
 
     public function experiencias()
