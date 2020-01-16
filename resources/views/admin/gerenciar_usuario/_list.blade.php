@@ -61,7 +61,11 @@
                                     Celular: {{ $usuario->telefone_celular ?? 'N/I' }} <br /></b>  </span><hr />
                                 <span><i class="fas fa-info-circle"></i> Sobre o Candidato: <b>{{ $usuario->texto_sobre_voce ?? null }}</b> </span><hr />
                                 <span><i class="fas fa-thermometer-half"></i> Status Laudo <b>Ótimo</b> </span><hr />
-                                <button class="btn btn-info btn-sm" style="color:#333 !important; font-weight:bold;"><i class="fas fa-file-pdf"></i> Download Curriculum</button>
+                                
+                                @if(!is_null($usuario->cv))
+                                    <a href="{{ asset($usuario->cv) }}" download="download" class="btn btn-info btn-sm" style="color:#333 !important; text-decoration:none; font-weight:bold;"><i class="fas fa-file-pdf"></i> Download Curriculum</a>
+                                @endif
+
                                 <br />
                                 <br />
                             </div>
