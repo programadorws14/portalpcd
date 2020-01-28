@@ -31,7 +31,7 @@
     <hr />
 </header>
 
-<section class="submit-cv-cta  pcd-container">
+{{-- <section class="submit-cv-cta  pcd-container">
     <div class="submit-cv-cta__description">
         <h1>MAIS DE 25.000.000 VAGAS CADASTRADAS</h1>
         <h2>
@@ -39,7 +39,7 @@
         </h2>
     </div>
     <a href="#">Cadastre Aqui</a>
-</section>
+</section> --}}
 
 <section class="cadastro-vagas-curriculo">
     <div class="cadastro-vagas-curriculo-container">
@@ -49,19 +49,32 @@
                 <h2 class="card-sub-title">Para candidatar-se a essa vaga anuncie seu CV</h2>
 
                 <ul>
-                    <li>Lorem, ipsum.</li>
-                    <li>Lorem, ipsum.</li>
-                    <li>Lorem, ipsum.</li>
-                    <li>Lorem, ipsum.</li>
+                    <li>Cadastre-se grátis</li>
+                    <li>Cadastro simples</li>
+                    <li>Milhares de vagas PCD</li>
                 </ul>
             </div>
             <div class="card" id="bloc_cad_candidato">
                 <h2 class="card-title">Cadastro candidato</h2>
+
+                @if(Session('success_candidato'))
+                <div class="alert alert-success" style="color:green; font-size:14px;">
+                    <b><i class="fas fa-check"></i> {{ Session('success') }}</b>
+                </div>
+                @elseif(Session('error_candidato'))
+                <div class="alert alert-danger" style="color:red; font-size:14px;">
+                    <b><i class="fas fa-minus"></i> {{ Session('error') }}</b>
+                </div>
+                @endif
+
                 <form action="{{ route('usuario.create.store') }}" method="POST">
                     @csrf
+
+                    <small style="font-size:13px; color:red; width:100%; display:none; margin:10px 0;" id="msgErroEmailCandidato"></small>
+
                     <input type="text" placeholder="Digite seu nome*" name="nome" required>
                     <input type="text" placeholder="Digite seu sobrenome*" required>
-                    <input type="email" placeholder="Digite seu email*" name="email" required>
+                    <input type="email" placeholder="Digite seu email*" id="emailCandidato" name="email" required>
                     <input type="password" placeholder="Digite sua senha*" name="password" required>
                     <input type="text" placeholder="Digite seu CEP*" name="cep" id="cep_candidato" required>
                     <input type="hidden" name="rua" value="" id="rua_candidato" />
@@ -72,9 +85,9 @@
 
                     <input type="text" placeholder="Digite seu cargo desejado*" required>
                     <div class="area-botao">
-                        <input type="submit" value="Continuar">
+                        <input type="submit" value="Continuar" id="atualizarPerfilCandidato">
                     </div>
-                    <p>Ao clicar em continuar, você aceita as <a href="#">Condições Legais</a> e a <a href="#">Política de Privacidade</a> da Busca PcD.</p>
+                    {{-- <p>Ao clicar em continuar, você aceita as <a href="#">Condições Legais</a> e a <a href="#">Política de Privacidade</a> da Busca PcD.</p> --}}
                 </form>
             </div>
         </div>
@@ -86,13 +99,13 @@
     <hr />
 </header>
 
-<section class="submit-cv-cta  pcd-container">
+{{-- <section class="submit-cv-cta  pcd-container">
     <div class="submit-cv-cta__description">
         <h1>MAIS DE 25.000.000 DE CHANCES</h1>
         <h1>DE CONTRATAR O CANDIDATO CERTO</h1>
     </div>
     <a href="#">Cadastre Aqui</a>
-</section>
+</section> --}}
 
 <section class="cadastro-vagas-curriculo" >
     <div class="cadastro-vagas-curriculo-container">
@@ -123,7 +136,7 @@
                     <div class="area-botao">
                         <input type="submit" value="Anunciar vaga" id="atualizarPerfil">
                     </div>
-                    <p>Ao clicar em continuar, você aceita as <a href="#">Condições Legais</a> e a <a href="#">Política de Privacidade</a> da Busca PcD.</p>
+                    {{-- <p>Ao clicar em continuar, você aceita as <a href="#">Condições Legais</a> e a <a href="#">Política de Privacidade</a> da Busca PcD.</p> --}}
                 </form>
             </div>
             <div class="card">
@@ -135,10 +148,9 @@
                     <div class="r">
                         <h3>São Paulo: 8.308.581 candidatos</h3>
                         <ul>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
+                            <li>Cadastre-se grátis</li>
+                            <li>Cadastro simples</li>
+                            <li>Milhares de vagas PCD</li>
                         </ul>
                         <button>BUSCAR CANDIDATOS</button>
                     </div>
@@ -158,14 +170,42 @@
             $.get(route('empres.verifica.email', email), function(data) {
                 if (data.status == 'sucesso') {
                     $("#emailPerfil").css('border', '1px solid red')
-                    $("#msgErroEmail").html('E-mail já existe, tente outro').fadeIn('slow');
+                    $("#msgErroEmail").html('E-mail já existe, tente outro').fadeIn('fast');
                     $("#atualizarPerfil").prop('disabled', true);
                 } else if (data.status == 'error') {
                     $("#emailPerfil").css('border', '1px solid #eeeeee')
-                    $("#msgErroEmail").fadeOut('slow');
+                    $("#msgErroEmail").fadeOut('fast');
                     $("#atualizarPerfil").prop('disabled', false);
                 }
             });
+        }else{
+            $("#emailPerfil").css('border', '1px solid #eeeeee')
+            $("#msgErroEmail").fadeOut('fast');
+            $("#atualizarPerfil").prop('disabled', false);
+        }
+    });
+
+    $("#emailCandidato").change(function() {
+        var email = $("#emailCandidato").val();
+        if (email != '') {
+            $.get(route('usuario.verifica.email', email), function(data) {
+
+                console.log(data);
+
+                if (data.status == 'sucesso') {
+                    $("#emailCandidato").css('border', '1px solid red')
+                    $("#msgErroEmailCandidato").html('E-mail já existe, tente outro').fadeIn('fast');
+                    $("#atualizarPerfilCandidato").prop('disabled', true);
+                } else if (data.status == 'error') {
+                    $("#emailCandidato").css('border', '1px solid #eeeeee')
+                    $("#msgErroEmailCandidato").fadeOut('fast');
+                    $("#atualizarPerfilCandidato").prop('disabled', false);
+                }
+            });
+        }else{
+            $("#emailCandidato").css('border', '1px solid #eeeeee')
+            $("#msgErroEmailCandidato").fadeOut('fast');
+            $("#atualizarPerfilCandidato").prop('disabled', false);
         }
     });
 

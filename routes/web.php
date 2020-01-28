@@ -133,8 +133,6 @@ Route::group(['prefix' => 'admin/'], function () {
     Route::get('/paginas/delete/{id}', 'Admin\GerenciarPaginasController@delete')->name('admin.paginas.delete');
 });
 
-
-
 /**Empresa */
 Route::group(['prefix' => 'empresa/'], function () {
 

@@ -15,12 +15,9 @@ class CadUsuarioController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
-        $data['password'] = bcrypt($data['password']);
-
-        //Login
         $login['email'] = $data['email'];
         $login['password'] = $data['password'];
-
+        $data['password'] = bcrypt($data['password']);
 
         try {
             Usuario::create($data);
@@ -29,10 +26,10 @@ class CadUsuarioController extends Controller
                 Auth::guard('usuario')->attempt($login);
                 return redirect()->route('usuario.dashboard');
             } else {
-                return redirect()->route('site.login');
+                return redirect()->route('usuario.login');
             }
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao cadastrar - ' . $e->getMessage());
+            return redirect()->back()->with('error_candidato', 'Erro ao cadastrar - ' . $e->getMessage());
         }
     }
 }

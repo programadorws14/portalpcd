@@ -18,7 +18,7 @@ class LoginController extends Controller
         } elseif (!empty(Auth::guard('usuario')->user())) {
             return redirect()->route('usuario.dashboard');
         }
-
+        
         return view('site.login.index');
     }
 
@@ -97,5 +97,4 @@ class LoginController extends Controller
         }
         return view('site.login.index_empresa');
     }
-    
 }
